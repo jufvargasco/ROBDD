@@ -10,15 +10,68 @@
 #include <list>
 #include <vector>
 #include <unordered_map>
+#include <map>
 #include <set>
 #include <string>
 #include "ManagerInterface.h"
 
 namespace ClassProject {
-
-
-
 }
+/**
+	 * \brief struct uTableVal
+	 *
+	 * This data structure contains the values corresponding to the unique table of the BDD
+	 * including Label, High, Low, and top variable
+	 */
+struct uTableVal {
+
+    std::string label;
+    BDD_ID highV;
+    BDD_ID lowV;
+    BDD_ID * topVar;
+
+    uTableVal(std::string _label, BDD_ID _highV, BDD_ID _lowV, BDD_ID * _topVar)
+    {
+        label = _label;
+        highV = _highV;
+        lowV = _lowV;
+        topVar = _topVar;
+    }
+};
+
+class Manager : public ManagerInterface {
+public:
+    /**
+	 * \brief Constructor
+	 *
+	 * This constructor creates the unique table to store the values of the ROBDD.
+     * It also adds the values of '0' and '1' to the table, where the ID of '0' corresponds to 0 and the ID of '1' is 1
+	 */
+    Manager();
+    /**
+	 * \return the ID of the node representing True.
+	 */
+    const BDD_ID &True();
+    /**
+	 * \return the ID of the node representing False.
+	 */
+    const BDD_ID &False();
+    /**
+	 * \return true if x is a leaf node.
+	 */
+    bool isConstant (const BDD_ID f);
+    /**
+	 * \return true if x is a variable.
+	 */
+    bool isVariable (const BDD_ID x);
+    /**
+	 * Creates a new variable for the BDD.
+	 */
+    BDD_ID createVar (const std::string &label);
+
+private:
+    std::map<BDD_ID ,uTableVal*> uniqTable;
+};
 #endif
 
 // Local Variables:

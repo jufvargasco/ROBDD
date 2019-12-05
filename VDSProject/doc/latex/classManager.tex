@@ -1,0 +1,127 @@
+\hypertarget{classManager}{}\section{Manager Class Reference}
+\label{classManager}\index{Manager@{Manager}}
+
+
+Inheritance diagram for Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{classManager__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{classManager__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classManager_a1658ff9f18e38ccd9cb8b0b371b9c20b}{Manager} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+const B\+D\+D\+\_\+\+ID \& \hyperlink{classManager_a0c15aff167a7019502b66100c4ec0a33}{True} ()
+\item 
+const B\+D\+D\+\_\+\+ID \& \hyperlink{classManager_ae9bae01509e6063313024cd85a8eb569}{False} ()
+\item 
+bool \hyperlink{classManager_a98fe06b67d8114f1404a7b19dddc935b}{is\+Constant} (const B\+D\+D\+\_\+\+ID f)
+\item 
+bool \hyperlink{classManager_af026f76f68823bb9083f161b5db9e58b}{is\+Variable} (const B\+D\+D\+\_\+\+ID x)
+\item 
+B\+D\+D\+\_\+\+ID \hyperlink{classManager_a9fb480d8af44c75ee2b35b85f7038e68}{create\+Var} (const std\+::string \&label)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Manager@{Manager}!Manager@{Manager}}
+\index{Manager@{Manager}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{Manager()}{Manager()}}]{\setlength{\rightskip}{0pt plus 5cm}Manager\+::\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classManager_a1658ff9f18e38ccd9cb8b0b371b9c20b}{}\label{classManager_a1658ff9f18e38ccd9cb8b0b371b9c20b}
+
+
+Constructor. 
+
+This constructor creates the unique table to store the values of the R\+O\+B\+DD. It also adds the values of \textquotesingle{}0\textquotesingle{} and \textquotesingle{}1\textquotesingle{} to the table, where the ID of \textquotesingle{}0\textquotesingle{} corresponds to 0 and the ID of \textquotesingle{}1\textquotesingle{} is 1 
+
+\subsection{Member Function Documentation}
+\index{Manager@{Manager}!create\+Var@{create\+Var}}
+\index{create\+Var@{create\+Var}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{create\+Var(const std\+::string \&label)}{createVar(const std::string &label)}}]{\setlength{\rightskip}{0pt plus 5cm}B\+D\+D\+\_\+\+ID Manager\+::create\+Var (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{label}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classManager_a9fb480d8af44c75ee2b35b85f7038e68}{}\label{classManager_a9fb480d8af44c75ee2b35b85f7038e68}
+Creates a new variable for the B\+DD. 
+
+Implements \hyperlink{classManagerInterface}{Manager\+Interface}.
+
+\index{Manager@{Manager}!False@{False}}
+\index{False@{False}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{False()}{False()}}]{\setlength{\rightskip}{0pt plus 5cm}const B\+D\+D\+\_\+\+ID \& Manager\+::\+False (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classManager_ae9bae01509e6063313024cd85a8eb569}{}\label{classManager_ae9bae01509e6063313024cd85a8eb569}
+\begin{DoxyReturn}{Returns}
+the ID of the node representing False. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classManagerInterface}{Manager\+Interface}.
+
+\index{Manager@{Manager}!is\+Constant@{is\+Constant}}
+\index{is\+Constant@{is\+Constant}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{is\+Constant(const B\+D\+D\+\_\+\+I\+D f)}{isConstant(const BDD_ID f)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Manager\+::is\+Constant (
+\begin{DoxyParamCaption}
+\item[{const B\+D\+D\+\_\+\+ID}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classManager_a98fe06b67d8114f1404a7b19dddc935b}{}\label{classManager_a98fe06b67d8114f1404a7b19dddc935b}
+\begin{DoxyReturn}{Returns}
+true if x is a leaf node. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classManagerInterface}{Manager\+Interface}.
+
+\index{Manager@{Manager}!is\+Variable@{is\+Variable}}
+\index{is\+Variable@{is\+Variable}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{is\+Variable(const B\+D\+D\+\_\+\+I\+D x)}{isVariable(const BDD_ID x)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Manager\+::is\+Variable (
+\begin{DoxyParamCaption}
+\item[{const B\+D\+D\+\_\+\+ID}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classManager_af026f76f68823bb9083f161b5db9e58b}{}\label{classManager_af026f76f68823bb9083f161b5db9e58b}
+\begin{DoxyReturn}{Returns}
+true if x is a variable. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classManagerInterface}{Manager\+Interface}.
+
+\index{Manager@{Manager}!True@{True}}
+\index{True@{True}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{True()}{True()}}]{\setlength{\rightskip}{0pt plus 5cm}const B\+D\+D\+\_\+\+ID \& Manager\+::\+True (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classManager_a0c15aff167a7019502b66100c4ec0a33}{}\label{classManager_a0c15aff167a7019502b66100c4ec0a33}
+\begin{DoxyReturn}{Returns}
+the ID of the node representing True. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classManagerInterface}{Manager\+Interface}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/juanvar/\+T\+U\+K/\+V\+D\+S/project/git/vdscp\+\_\+04/\+V\+D\+S\+Project/src/Manager.\+h\item 
+/home/juanvar/\+T\+U\+K/\+V\+D\+S/project/git/vdscp\+\_\+04/\+V\+D\+S\+Project/src/Manager.\+cpp\end{DoxyCompactItemize}

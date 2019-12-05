@@ -8,6 +8,11 @@
 #include "gtest/gtest.h"
 #include "../Manager.h"
 
+TEST(managerTest,True_Test){
+    Manager mg1;
+    ASSERT_EQ(mg1.True(), 1); // Check the BDD_ID of True is 1
+}
+
 
 #endif //VDS_PROJECT_TESTS_H
 

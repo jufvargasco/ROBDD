@@ -1,9 +1,7 @@
 // A minimalistic BDD library, following Wolfgang Kunz lecture slides
-//
-// Written by Markus Wedler 2014
 
-#ifndef mwBDD_H
-#define mwBDD_H
+#ifndef mwIBDD_H
+#define mwIBDD_H
 
 #include <cassert>
 #include <iostream>
@@ -12,13 +10,19 @@
 #include <unordered_map>
 #include <set>
 #include <string>
-#include "ManagerInterface.h"
 
-namespace ClassProject {
+typedef int BDD_ID;
 
+class ManagerInterface{
+public:
+    ManagerInterface();
 
-
-}
+    virtual const BDD_ID &True() = 0;
+    virtual const BDD_ID &False() = 0;
+    virtual bool isConstant (const BDD_ID f) = 0;
+    virtual bool isVariable (const BDD_ID x) = 0;
+    virtual BDD_ID createVar (const std::string &label) = 0;
+};
 #endif
 
 // Local Variables:
