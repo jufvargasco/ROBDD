@@ -28,9 +28,9 @@ struct uTableVal {
     std::string label;
     BDD_ID highV;
     BDD_ID lowV;
-    BDD_ID * topVar;
+    BDD_ID topVar;
 
-    uTableVal(std::string _label, BDD_ID _highV, BDD_ID _lowV, BDD_ID * _topVar)
+    uTableVal(std::string _label, BDD_ID _highV, BDD_ID _lowV, BDD_ID  _topVar)
     {
         label = _label;
         highV = _highV;
@@ -68,6 +68,14 @@ public:
 	 * Creates a new variable for the BDD.
 	 */
     BDD_ID createVar (const std::string &label);
+    /**
+     * Returns an entry from the uniqTable
+     */
+    uTableVal *getuTableVal(BDD_ID id);
+    /**
+     * Returns true if the unique table is completely empty
+     */
+    bool tableEmpty();
 
 private:
     std::map<BDD_ID ,uTableVal*> uniqTable;

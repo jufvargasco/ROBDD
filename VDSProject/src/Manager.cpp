@@ -4,6 +4,7 @@
 
 Manager::Manager(){
 
+
 }
 
 const BDD_ID &Manager::True() {
@@ -25,5 +26,12 @@ BDD_ID Manager::createVar (const std::string &label){
 
 }
 
+uTableVal *Manager::getuTableVal(BDD_ID id) {
+    return uniqTable[id];
+}
+
+bool Manager::tableEmpty() {
+    return uniqTable.empty();
+}
 
     
