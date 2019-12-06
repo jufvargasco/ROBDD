@@ -30,5 +30,11 @@ TEST(managerTest, Constructor_Test) {
     ASSERT_EQ(i->topVar, 1);
 }
 
+TEST(managerTest,False_Test){
+    Manager mg1;
+    ASSERT_EQ(mg1.False(), 0); // Check the BDD_ID of False is 0
+}
+
+
 #endif //VDS_PROJECT_TESTS_H
 
