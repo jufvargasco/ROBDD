@@ -36,6 +36,15 @@ TEST(managerTest,False_Test){
     ASSERT_EQ(mg1.False(), 0); // Check the BDD_ID of False is 0
 }
 
+TEST(managerTest,createVar_Test){
+    Manager mg1;
+    BDD_ID id = mg1.createVar("a");
+    uTableVal *a = mg1.getuTableVal(id);
+    ASSERT_EQ(a->label, "a");
+    ASSERT_EQ(a->highV, 1);
+    ASSERT_EQ(a->lowV, 0);
+    ASSERT_EQ(a->topVar, 2);
+}
 
 #endif //VDS_PROJECT_TESTS_H
 

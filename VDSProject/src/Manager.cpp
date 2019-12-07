@@ -17,15 +17,15 @@ const BDD_ID &Manager::False() {
     return _false;
 }
 
+BDD_ID Manager::createVar (const std::string &label){
+    return 0;
+}
+
 bool Manager::isConstant(const BDD_ID f) {
 
 }
 
 bool Manager::isVariable (const BDD_ID x){
-
-}
-
-BDD_ID Manager::createVar (const std::string &label){
 
 }
 
