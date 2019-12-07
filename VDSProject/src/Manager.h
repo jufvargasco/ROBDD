@@ -83,6 +83,8 @@ public:
 
 private:
     std::map<BDD_ID ,uTableVal*> uniqTable;
+    const BDD_ID _true = 1;
+    const BDD_ID _false = 0;
 };
 #endif
 

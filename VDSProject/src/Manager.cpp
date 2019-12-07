@@ -5,16 +5,16 @@
 Manager::Manager(){
     auto *o = new uTableVal("0", 0, 0, 0);
     auto *i = new uTableVal("1", 1, 1, 1);
-    uniqTable.insert(std::pair <BDD_ID, uTableVal*> (0, o));
-    uniqTable.insert(std::pair <BDD_ID, uTableVal*> (1, i));
+    uniqTable.insert(std::pair <BDD_ID, uTableVal*> (_false, o));
+    uniqTable.insert(std::pair <BDD_ID, uTableVal*> (_true, i));
 
 }
 
 const BDD_ID &Manager::True() {
-
+    return _true;
 }
 const BDD_ID &Manager::False() {
-
+    return _false;
 }
 
 bool Manager::isConstant(const BDD_ID f) {
