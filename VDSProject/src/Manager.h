@@ -49,6 +49,10 @@ public:
 	 */
     Manager();
     /**
+     * Destructor
+     */
+     ~Manager();
+    /**
 	 * \return the ID of the node representing True.
 	 */
     const BDD_ID &True();

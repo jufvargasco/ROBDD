@@ -3,7 +3,10 @@
 #include "Manager.h"
 
 Manager::Manager(){
-
+    auto *o = new uTableVal("0", 0, 0, 0);
+    auto *i = new uTableVal("1", 1, 1, 1);
+    uniqTable.insert(std::pair <BDD_ID, uTableVal*> (0, o));
+    uniqTable.insert(std::pair <BDD_ID, uTableVal*> (1, i));
 
 }
 
@@ -32,6 +35,10 @@ uTableVal *Manager::getuTableVal(BDD_ID id) {
 
 bool Manager::tableEmpty() {
     return uniqTable.empty();
+}
+
+Manager::~Manager() {
+    uniqTable.clear();
 }
 
     

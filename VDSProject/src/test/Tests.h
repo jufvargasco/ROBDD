@@ -15,11 +15,11 @@ TEST(managerTest,True_Test){
 
 TEST(managerTest, Constructor_Test) {
     Manager mg1;
-
+    //Manager mg2;
     ASSERT_EQ(mg1.tableEmpty(), false);
     uTableVal *o = mg1.getuTableVal(0);
     uTableVal *i = mg1.getuTableVal(1);
-    EXPECT_ANY_THROW(o->label);
+    //EXPECT_ANY_THROW(o->label);
     ASSERT_EQ(o->label, "0");
     ASSERT_EQ(o->highV, 0);
     ASSERT_EQ(o->lowV, 0);
