@@ -18,7 +18,10 @@ const BDD_ID &Manager::False() {
 }
 
 BDD_ID Manager::createVar (const std::string &label){
-    return 0;
+    BDD_ID  new_id = (uniqTable.rbegin()->first) + 1;
+    auto *var = new uTableVal(label, 1, 0, new_id);
+    uniqTable.insert(std::pair <BDD_ID, uTableVal*> (new_id, var));
+    return new_id;
 }
 
 bool Manager::isConstant(const BDD_ID f) {

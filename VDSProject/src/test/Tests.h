@@ -39,6 +39,7 @@ TEST(managerTest,False_Test){
 TEST(managerTest,createVar_Test){
     Manager mg1;
     BDD_ID id = mg1.createVar("a");
+    ASSERT_EQ(id, 2);
     uTableVal *a = mg1.getuTableVal(id);
     ASSERT_EQ(a->label, "a");
     ASSERT_EQ(a->highV, 1);
