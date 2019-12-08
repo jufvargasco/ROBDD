@@ -34,7 +34,7 @@ bool Manager::isConstant(const BDD_ID x) {
 }
 
 bool Manager::isVariable (const BDD_ID x){
-
+    return false;
 }
 
 uTableVal *Manager::getuTableVal(BDD_ID id) {
