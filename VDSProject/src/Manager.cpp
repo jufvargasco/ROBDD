@@ -25,16 +25,12 @@ BDD_ID Manager::createVar (const std::string &label){
 }
 
 bool Manager::isConstant(const BDD_ID x) {
-    if ((x==0)||(x==1)){
-        return true;
-    }
-    else{
-        return false;
-    }
+    return (x == 0) || (x == 1);
 }
 
 bool Manager::isVariable (const BDD_ID x){
-    return false;
+    uTableVal *data = uniqTable[x];
+    return (data->lowV == 0) && (data->highV == 1);
 }
 
 uTableVal *Manager::getuTableVal(BDD_ID id) {
