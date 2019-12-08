@@ -40,7 +40,27 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     } else if (i==0){
         return e;
     }
-    return 0;
+    // Repeated case --> after being able of creating one
+    // Get top variable
+    uTableVal *f = getuTableVal(i);
+    uTableVal *g = getuTableVal(t);
+    uTableVal *h = getuTableVal(e);
+    BDD_ID top_var = f->topVar;
+    if ((g->topVar < top_var) && (g->topVar > 1)){
+        top_var = g->topVar;
+    }
+    if ((h->topVar < top_var) && (h->topVar > 1)){
+        top_var = h->topVar;
+    }
+    BDD_ID r_high = ite(f->highV,t,e);   // Change t,e after implementing cofactor functions
+    BDD_ID r_low = ite(f->lowV,t,e);     // Change t,e after implementing cofactor functions
+    if (r_high == r_low) {
+        return r_high;
+    }
+    BDD_ID r = find_or_add_uTable(top_var,r_high,r_low);
+    auto *ite_key = new cTableKey(i,t,e);
+    compTable.insert(std::pair <cTableKey* ,BDD_ID> (ite_key, r));
+    return r;
 }
 
 uTableVal *Manager::getuTableVal(BDD_ID id) {
@@ -53,6 +73,20 @@ bool Manager::utableEmpty() {
 
 bool Manager::ctableEmpty() {
     return compTable.empty();
+}
+
+BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_ID low){
+    auto it = uniqTable.begin();
+    while(it != uniqTable.end()){
+        if((it->second->topVar==x)&&(it->second->highV==high)&&(it->second->lowV==low)){
+            return it->first;
+        } else {
+            auto *new_val = new uTableVal("", high, low, x);
+            BDD_ID  new_id = (uniqTable.rbegin()->first) + 1;
+            uniqTable.insert(std::pair <BDD_ID, uTableVal*> (new_id, new_val));
+            return new_id;
+        }
+    }
 }
 
 Manager::~Manager() {

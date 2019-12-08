@@ -108,6 +108,10 @@ public:
      * Returns true if the computed table is completely empty
      */
     bool ctableEmpty();
+    /**
+     * Compares ite result with unique table and updates if needed
+     */
+    BDD_ID find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_ID low);
 
 private:
     std::map<BDD_ID ,uTableVal*> uniqTable;
