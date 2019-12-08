@@ -24,8 +24,13 @@ BDD_ID Manager::createVar (const std::string &label){
     return new_id;
 }
 
-bool Manager::isConstant(const BDD_ID f) {
-    return false;
+bool Manager::isConstant(const BDD_ID x) {
+    if ((x==0)||(x==1)){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 bool Manager::isVariable (const BDD_ID x){
