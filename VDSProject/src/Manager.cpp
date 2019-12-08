@@ -24,13 +24,17 @@ BDD_ID Manager::createVar (const std::string &label){
     return new_id;
 }
 
-bool Manager::isConstant(const BDD_ID x) {
-    return (x == 0) || (x == 1);
+bool Manager::isConstant(const BDD_ID f) {
+    return (f == 0) || (f == 1);
 }
 
 bool Manager::isVariable (const BDD_ID x){
     uTableVal *data = uniqTable[x];
     return (data->lowV == 0) && (data->highV == 1);
+}
+
+BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
+    return 0;
 }
 
 uTableVal *Manager::getuTableVal(BDD_ID id) {

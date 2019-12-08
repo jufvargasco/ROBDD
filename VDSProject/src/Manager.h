@@ -75,6 +75,10 @@ public:
     /**
      * Returns an entry from the uniqTable
      */
+    BDD_ID ite (const BDD_ID i, const BDD_ID t, const BDD_ID e);
+    /**
+     * Returns an entry from the uniqTable
+     */
     uTableVal *getuTableVal(BDD_ID id);
     /**
      * Returns true if the unique table is completely empty

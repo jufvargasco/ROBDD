@@ -22,6 +22,7 @@ public:
     virtual bool isConstant (const BDD_ID f) = 0;
     virtual bool isVariable (const BDD_ID x) = 0;
     virtual BDD_ID createVar (const std::string &label) = 0;
+    virtual BDD_ID ite (const BDD_ID i, const BDD_ID t, const BDD_ID e) = 0;
 };
 #endif
 

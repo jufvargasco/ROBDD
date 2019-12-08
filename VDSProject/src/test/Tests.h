@@ -61,5 +61,12 @@ TEST(managerTest,isVariable_Test){
     ASSERT_EQ(mg1.isVariable(id),true);
 }
 
+TEST(managerTest,ite_Test){
+    Manager mg1;
+    // Terminal case
+    ASSERT_EQ(mg1.ite(1,2,3),2);
+    ASSERT_EQ(mg1.ite(0,2,3),3);
+}
+
 #endif //VDS_PROJECT_TESTS_H
 
