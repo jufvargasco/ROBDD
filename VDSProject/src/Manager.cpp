@@ -34,7 +34,12 @@ bool Manager::isVariable (const BDD_ID x){
 }
 
 BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
-    return 0;
+    // Terminal case
+    if(i==1){
+        return t;
+    } else if (i==0){
+        return e;
+    }
 }
 
 uTableVal *Manager::getuTableVal(BDD_ID id) {
