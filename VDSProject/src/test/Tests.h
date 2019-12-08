@@ -47,5 +47,12 @@ TEST(managerTest,createVar_Test){
     ASSERT_EQ(a->topVar, 2);
 }
 
+TEST(managerTest,isConstant_Test){
+    Manager mg1;
+    ASSERT_EQ(mg1.isConstant(0),true);
+    BDD_ID id = mg1.createVar("a");
+    ASSERT_EQ(mg1.isConstant(id),false);
+}
+
 #endif //VDS_PROJECT_TESTS_H
 
