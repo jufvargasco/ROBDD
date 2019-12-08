@@ -39,6 +39,26 @@ struct uTableVal {
     }
 };
 
+/**
+	 * \brief struct cTableKey
+	 *
+	 * This data structure contains the values corresponding to the computed table of the BDD.
+	 * Includes the three parameters of the ite() function.
+	 */
+struct cTableKey {
+
+    BDD_ID i;
+    BDD_ID t;
+    BDD_ID e;
+
+    cTableKey(BDD_ID _i, BDD_ID _t, BDD_ID _e)
+    {
+        i = _i;
+        t = _t;
+        e = _e;
+    }
+};
+
 class Manager : public ManagerInterface {
 public:
     /**
@@ -83,10 +103,16 @@ public:
     /**
      * Returns true if the unique table is completely empty
      */
-    bool tableEmpty();
+    bool utableEmpty();
+    /**
+     * Returns true if the computed table is completely empty
+     */
+    bool ctableEmpty();
 
 private:
     std::map<BDD_ID ,uTableVal*> uniqTable;
+    // Use of the ite values as key to use the find function with them
+    std::map<cTableKey* ,BDD_ID> compTable;
     const BDD_ID _true = 1;
     const BDD_ID _false = 0;
 };

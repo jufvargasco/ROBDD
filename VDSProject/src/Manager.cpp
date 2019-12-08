@@ -40,18 +40,24 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     } else if (i==0){
         return e;
     }
+    return 0;
 }
 
 uTableVal *Manager::getuTableVal(BDD_ID id) {
     return uniqTable[id];
 }
 
-bool Manager::tableEmpty() {
+bool Manager::utableEmpty() {
     return uniqTable.empty();
+}
+
+bool Manager::ctableEmpty() {
+    return compTable.empty();
 }
 
 Manager::~Manager() {
     uniqTable.clear();
+    compTable.clear();
 }
 
     

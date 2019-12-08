@@ -12,7 +12,7 @@
 TEST(managerTest, Constructor_Test) {
     Manager mg1;
     //Manager mg2;
-    ASSERT_EQ(mg1.tableEmpty(), false);
+    ASSERT_EQ(mg1.utableEmpty(), false);
     uTableVal *o = mg1.getuTableVal(0);
     uTableVal *i = mg1.getuTableVal(1);
     ASSERT_EQ(o->label, "0");
@@ -66,6 +66,17 @@ TEST(managerTest,ite_Test){
     // Terminal case
     ASSERT_EQ(mg1.ite(1,2,3),2);
     ASSERT_EQ(mg1.ite(0,2,3),3);
+    // Initial ITE (e.g.:or(a,b))
+    BDD_ID a = mg1.createVar("a");  // ID2
+    BDD_ID b = mg1.createVar("b");  // ID3
+    BDD_ID OR_ID = mg1.ite(a,1,b);
+    ASSERT_EQ(mg1.ctableEmpty(), false);
+    uTableVal *result = mg1.getuTableVal(OR_ID);
+    ASSERT_EQ(result->highV, 1);
+    ASSERT_EQ(result->lowV, 3);
+    ASSERT_EQ(result->topVar, 2);
+    // Repeated case
+
 }
 
 #endif //VDS_PROJECT_TESTS_H
