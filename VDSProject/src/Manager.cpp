@@ -81,17 +81,32 @@ bool Manager::ctableEmpty() {
 }
 
 BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_ID low){
-    auto it = uniqTable.begin();
-    while(it != uniqTable.end()){
-        if((it->second->topVar==x)&&(it->second->highV==high)&&(it->second->lowV==low)){
-            return it->first;
-        } else {
-            auto *new_val = new uTableVal("", high, low, x);
-            BDD_ID  new_id = (uniqTable.rbegin()->first) + 1;
-            uniqTable.insert(std::pair <BDD_ID, uTableVal*> (new_id, new_val));
-            return new_id;
-        }
+
+    for(auto it : uniqTable) {
+        if ((it.second->topVar == x) && (it.second->highV == high) && (it.second->lowV == low))
+            return it.first;
     }
+
+    auto *new_val = new uTableVal("", high, low, x);
+    BDD_ID  new_id = (uniqTable.rbegin()->first) + 1;
+    uniqTable.insert(std::pair <BDD_ID, uTableVal*> (new_id, new_val));
+    return new_id;
+
+}
+
+BDD_ID Manager::coFactorFalse(const BDD_ID f, BDD_ID x) {
+
+    uTableVal *f_tableEntry = getuTableVal(f);
+
+    if (isConstant(f) || isConstant(x) || f_tableEntry->topVar > x)
+        return f;
+    if (f_tableEntry->topVar == x)
+        return f_tableEntry->lowV;
+
+    BDD_ID tru = coFactorFalse (f_tableEntry->highV, x);
+    BDD_ID fal = coFactorFalse (f_tableEntry->lowV, x);
+    return ite(f_tableEntry->topVar, tru, fal);
+
 }
 
 Manager::~Manager() {
@@ -99,8 +114,6 @@ Manager::~Manager() {
     compTable.clear();
 }
 
-BDD_ID Manager::coFactorFalse(const BDD_ID f, BDD_ID x) {
-    return 0;
-}
 
-    
+
+
