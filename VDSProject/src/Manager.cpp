@@ -113,7 +113,16 @@ BDD_ID Manager::coFactorFalse(const BDD_ID f, BDD_ID x) {
 
 BDD_ID Manager::coFactorTrue(const BDD_ID f, BDD_ID x) {
 
-    return 0;
+    uTableVal *f_tableEntry = getuTableVal(f);
+
+    if (isConstant(f) || isConstant(x) || f_tableEntry->topVar > x)
+        return f;
+    if (f_tableEntry->topVar == x)
+        return f_tableEntry->highV;
+
+    BDD_ID tru = coFactorTrue (f_tableEntry->highV, x);
+    BDD_ID fal = coFactorTrue (f_tableEntry->lowV, x);
+    return ite(f_tableEntry->topVar, tru, fal);
 }
 
 Manager::~Manager() {

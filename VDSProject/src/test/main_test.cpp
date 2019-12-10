@@ -156,9 +156,9 @@ TEST_F(ManagerTest,coFactorTruefx_Test) {
 
     ASSERT_EQ(mg1->coFactorTrue(1, b), 1); /** Test terminal case: f is constant*/
     ASSERT_EQ(mg1->coFactorTrue(f, 0), f); /** Test terminal case: x is constant*/
-    ASSERT_EQ(mg1->coFactorFalse(f, a), mg1->getuTableVal(f)->highV); /** Test case: top variable of f is equal to x*/
+    ASSERT_EQ(mg1->coFactorTrue(f, a), mg1->getuTableVal(f)->highV); /** Test case: top variable of f is equal to x*/
 
-    ASSERT_EQ(mg1->coFactorFalse(f, b), a); /** Test case of and function in reference with variable b*/
-    ASSERT_EQ(mg1->coFactorFalse(g, b), 1); /** Test case of or function in reference with variable b*/
+    ASSERT_EQ(mg1->coFactorTrue(f, b), a); /** Test case of and function in reference with variable b*/
+    ASSERT_EQ(mg1->coFactorTrue(g, b), 1); /** Test case of or function in reference with variable b*/
 }
 
