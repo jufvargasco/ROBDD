@@ -10,5 +10,5 @@ include_directories(${CMAKE_SOURCE_DIR}/src/test/)
 link_directories(${CMAKE_SOURCE_DIR}/src/test/)
 
 #add_subdirectory(src)
-add_executable(VDSProject src/main.cpp src/ManagerInterface.cpp src/Manager.cpp src/test/Tests.h)
+add_executable(VDSProject src/main.cpp src/ManagerInterface.cpp src/Manager.cpp src/test/main_test.cpp)
 target_link_libraries(VDSProject gtest gtest_main)

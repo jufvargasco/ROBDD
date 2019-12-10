@@ -33,6 +33,10 @@ bool Manager::isVariable (const BDD_ID x){
     return (data->lowV == 0) && (data->highV == 1);
 }
 
+BDD_ID Manager::topVar (const BDD_ID f){
+    return 0;
+}
+
 BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     // Terminal case
     if(i==1){
