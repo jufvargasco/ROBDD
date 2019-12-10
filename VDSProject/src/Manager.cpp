@@ -99,4 +99,8 @@ Manager::~Manager() {
     compTable.clear();
 }
 
+BDD_ID Manager::coFactorFalse(const BDD_ID f, BDD_ID x) {
+    return 0;
+}
+
     

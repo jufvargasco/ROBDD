@@ -122,3 +122,22 @@ TEST_F(ManagerTest,ite_initial_Test){
  * Test for repeated case ITE (e.g.:or(a,b))
  */
 
+
+/**
+ * Test for coFactorFalse(f,x)
+ */
+TEST_F(ManagerTest,coFactorFalsefx_Test) {
+    BDD_ID a = mg1->createVar("a");     // ID2
+    BDD_ID b = mg1->createVar("b");     // ID3
+    BDD_ID f = mg1->ite(a, b, 0);          // ID4, and
+    BDD_ID g = mg1->ite(a, 1, b);           // ID5, or
+
+    ASSERT_EQ(mg1->coFactorFalse(1, b), 1);
+    ASSERT_EQ(mg1->coFactorFalse(f, 0), f);
+    ASSERT_EQ(mg1->coFactorFalse(f, a), mg1->getuTableVal(f)->lowV);
+
+    ASSERT_EQ(mg1->coFactorFalse(f, b), 0);
+    ASSERT_EQ(mg1->coFactorFalse(g, b), a);
+
+}
+
