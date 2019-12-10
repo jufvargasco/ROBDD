@@ -96,6 +96,10 @@ BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_
 
 }
 
+BDD_ID Manager::coFactorFalse(const BDD_ID f) {
+
+}
+
 BDD_ID Manager::coFactorFalse(const BDD_ID f, BDD_ID x) {
 
     uTableVal *f_tableEntry = getuTableVal(f);
