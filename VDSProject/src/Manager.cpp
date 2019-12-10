@@ -44,6 +44,8 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
         return t;
     } else if (i==0){
         return e;
+    } else if (this->isVariable(i) && t==1 && e==0){
+        return i;
     }
     // Repeated case --> after being able of creating one
     // Get top variable
