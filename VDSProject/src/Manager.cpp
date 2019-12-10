@@ -111,6 +111,11 @@ BDD_ID Manager::coFactorFalse(const BDD_ID f, BDD_ID x) {
 
 }
 
+BDD_ID Manager::coFactorTrue(const BDD_ID f, BDD_ID x) {
+
+    return 0;
+}
+
 Manager::~Manager() {
     uniqTable.clear();
     compTable.clear();

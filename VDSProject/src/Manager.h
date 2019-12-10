@@ -109,7 +109,7 @@ public:
     /**
      * \returns the positive cofactor of the function defined by f with respect to function x.
 	 */
-    //virtual BDD_ID coFactorTrue (const BDD_ID f, BDD_ID x) = 0;
+    BDD_ID coFactorTrue (const BDD_ID f, BDD_ID x);
     /**
      * \returns the negative cofactor of the function defined by f with respect to function x.
 	 */

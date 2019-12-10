@@ -132,17 +132,33 @@ TEST_F(ManagerTest,ite_initial_Test){
  * Test for coFactorFalse(f,x)
  */
 TEST_F(ManagerTest,coFactorFalsefx_Test) {
-    BDD_ID a = mg1->createVar("a");     // ID2
-    BDD_ID b = mg1->createVar("b");     // ID3
-    BDD_ID f = mg1->ite(a, b, 0);          // ID4, and
-    BDD_ID g = mg1->ite(a, 1, b);           // ID5, or
+    BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
+    BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
+    BDD_ID f = mg1->ite(a, b, 0);          // BBB_ID= 4, HighV= b, LowV= 0, TopVar= a, Name = "and"
+    BDD_ID g = mg1->ite(a, 1, b);          // BBB_ID= 5, HighV= 1, LowV= b, TopVar= a, Name = "or"
 
-    ASSERT_EQ(mg1->coFactorFalse(1, b), 1);
-    ASSERT_EQ(mg1->coFactorFalse(f, 0), f);
-    ASSERT_EQ(mg1->coFactorFalse(f, a), mg1->getuTableVal(f)->lowV);
+    ASSERT_EQ(mg1->coFactorFalse(1, b), 1); /** Test terminal case: f is constant*/
+    ASSERT_EQ(mg1->coFactorFalse(f, 0), f); /** Test terminal case: x is constant*/
+    ASSERT_EQ(mg1->coFactorFalse(f, a), mg1->getuTableVal(f)->lowV); /** Test case: top variable of f is equal to x*/
 
-    ASSERT_EQ(mg1->coFactorFalse(f, b), 0);
-    ASSERT_EQ(mg1->coFactorFalse(g, b), a);
+    ASSERT_EQ(mg1->coFactorFalse(f, b), 0); /** Test case of and function in reference with variable b*/
+    ASSERT_EQ(mg1->coFactorFalse(g, b), a); /** Test case of or function in reference with variable b*/
+}
 
+/**
+ * Test for coFactorFalse(f,x)
+ */
+TEST_F(ManagerTest,coFactorTruefx_Test) {
+    BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
+    BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
+    BDD_ID f = mg1->ite(a, b, 0);          // BBB_ID= 4, HighV= b, LowV= 0, TopVar= a, Name = "and"
+    BDD_ID g = mg1->ite(a, 1, b);          // BBB_ID= 5, HighV= 1, LowV= b, TopVar= a, Name = "or"
+
+    ASSERT_EQ(mg1->coFactorTrue(1, b), 1); /** Test terminal case: f is constant*/
+    ASSERT_EQ(mg1->coFactorTrue(f, 0), f); /** Test terminal case: x is constant*/
+    ASSERT_EQ(mg1->coFactorFalse(f, a), mg1->getuTableVal(f)->highV); /** Test case: top variable of f is equal to x*/
+
+    ASSERT_EQ(mg1->coFactorFalse(f, b), a); /** Test case of and function in reference with variable b*/
+    ASSERT_EQ(mg1->coFactorFalse(g, b), 1); /** Test case of or function in reference with variable b*/
 }
 
