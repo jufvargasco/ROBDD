@@ -99,11 +99,16 @@ TEST_F(ManagerTest,topVar_Test){
     *  Tests for ITE function
     ************************************************************************/
 /**
- * Test for terminal case
+ * Test for terminal cases
+ * Creates variables a (f) and b (g)
  */
 TEST_F(ManagerTest,ite_terminal_Test){
-    ASSERT_EQ(mg1->ite(1,2,3),2);
-    ASSERT_EQ(mg1->ite(0,2,3),3);
+    BDD_ID a = mg1->createVar("a");  // ID2
+    BDD_ID b = mg1->createVar("b");  // ID3
+    ASSERT_EQ(mg1->ite(1,2,3),2); /** ITE(1,f,g) = f */
+    ASSERT_EQ(mg1->ite(2,1,0),2); /** ITE(f,1,0) = f */
+    ASSERT_EQ(mg1->ite(0,2,3),3); /** ITE(0,g,f) = f */
+    ASSERT_EQ(mg1->ite(3,2,2),2); /** ITE(g,f,f) = f */
 }
 /**
  * Test for initial ITE (e.g.:or(a,b))
