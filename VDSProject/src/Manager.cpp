@@ -50,12 +50,12 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     uTableVal *f = getuTableVal(i);
     uTableVal *g = getuTableVal(t);
     uTableVal *h = getuTableVal(e);
-    BDD_ID top_var = f->topVar;
-    if ((g->topVar < top_var) && (g->topVar > 1)){
-        top_var = g->topVar;
+    BDD_ID top_var = this->topVar(i);
+    if ((this->topVar(t) < top_var) && (this->topVar(t) > 1)){
+        top_var = this->topVar(t);
     }
-    if ((h->topVar < top_var) && (h->topVar > 1)){
-        top_var = h->topVar;
+    if ((this->topVar(e) < top_var) && (this->topVar(e) > 1)){
+        top_var = this->topVar(e);
     }
     BDD_ID r_high = ite(f->highV,t,e);   // Change t,e after implementing cofactor functions
     BDD_ID r_low = ite(f->lowV,t,e);     // Change t,e after implementing cofactor functions
