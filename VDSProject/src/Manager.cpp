@@ -111,6 +111,12 @@ BDD_ID Manager::coFactorFalse(const BDD_ID f, BDD_ID x) {
 
 }
 
+
+BDD_ID Manager::coFactorFalse(const BDD_ID f) {
+    return 0;
+}
+
+
 BDD_ID Manager::coFactorTrue(const BDD_ID f, BDD_ID x) {
 
     uTableVal *f_tableEntry = getuTableVal(f);

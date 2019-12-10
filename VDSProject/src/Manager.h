@@ -121,7 +121,7 @@ public:
     /**
      * \returns the negative cofactor of the function defined by node f.
 	 */
-    //virtual BDD_ID coFactorFalse (const BDD_ID f) = 0;
+    BDD_ID coFactorFalse (const BDD_ID f);
     /**
      * \returns a BDD node that represents the correlating "and" function
 	 */
