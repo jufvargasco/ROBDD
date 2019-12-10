@@ -34,7 +34,8 @@ bool Manager::isVariable (const BDD_ID x){
 }
 
 BDD_ID Manager::topVar (const BDD_ID f){
-    return 0;
+    uTableVal *data = uniqTable[f];
+    return data->topVar;
 }
 
 BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
