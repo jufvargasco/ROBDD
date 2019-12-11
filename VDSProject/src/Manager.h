@@ -141,7 +141,7 @@ public:
     /**
      * \returns a BDD node that represents the correlating "nand" function
 	 */
-    //BDD_ID nand2 (const BDD_ID a, const BDD_ID b);
+    BDD_ID nand2 (const BDD_ID a, const BDD_ID b);
     /**
      * \returns a BDD node that represents the correlating "nor" function
 	 */

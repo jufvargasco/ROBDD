@@ -360,3 +360,41 @@ TEST_F(ManagerTest,neg_Test) {
     ASSERT_EQ(result->lowV, result_neg->highV);
 
 }
+
+/**
+* Test for AND2
+*/
+TEST_F(ManagerTest,nand2_Test) {
+    BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
+    BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
+    BDD_ID c = mg1->createVar("c");     // BBB_ID= 4, HighV= 1, LowV= 0, TopVar= c, Name = "c"
+    BDD_ID f = mg1->ite(b, mg1->neg(c), 1);          // BBB_ID= 6, HighV= c, LowV= 0, TopVar= b, Name = "nand" (b*c)'
+    // Previous line : neg(c) : BBB_ID= 5, HighV= 0, LowV= 1, TopVar= b, Name = "neg" c'
+    BDD_ID nand_op = mg1->nand2(b,c);           // BBB_ID= 7, HighV= c, LowV= 0, TopVar= b, Name = "nand2" (b*c)'
+    // After checking the computed table, the previous row should return 6
+    BDD_ID neg_a = mg1->neg(a); //Addition of neg (a)
+
+    uTableVal *result = mg1->getuTableVal(f);
+    uTableVal *result_nand = mg1->getuTableVal(nand_op);
+
+    ASSERT_EQ(result->topVar, result_nand->topVar);
+    ASSERT_EQ(result->highV, result_nand->highV);
+    ASSERT_EQ(result->lowV, result_nand->lowV);
+
+    BDD_ID nand_op1 = mg1->nand2(0,0);
+    ASSERT_EQ(nand_op1,1);
+    BDD_ID nand_op2 = mg1->nand2(0,1);
+    ASSERT_EQ(nand_op2,1);
+    BDD_ID nand_op3 = mg1->nand2(1,0);
+    ASSERT_EQ(nand_op3,1);
+    BDD_ID nand_op4 = mg1->nand2(1,1);
+    ASSERT_EQ(nand_op4,0);
+    BDD_ID nand_op5 = mg1->nand2(a,1);
+    ASSERT_EQ(nand_op5,neg_a);
+    BDD_ID nand_op6 = mg1->nand2(a,0);
+    ASSERT_EQ(nand_op6,1);
+    BDD_ID nand_op7 = mg1->nand2(a,a);
+    ASSERT_EQ(nand_op7,neg_a);
+    BDD_ID nand_op8 = mg1->nand2(a,neg_a);
+    ASSERT_EQ(nand_op8,1);
+}

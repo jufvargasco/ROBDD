@@ -151,6 +151,10 @@ BDD_ID Manager::neg (const BDD_ID a){
     return this->ite(a,0,1);
 }
 
+BDD_ID Manager::nand2 (const BDD_ID a, const BDD_ID b){
+    return 0;
+}
+
 Manager::~Manager() {
     uniqTable.clear();
     compTable.clear();
