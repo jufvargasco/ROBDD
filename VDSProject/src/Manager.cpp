@@ -135,7 +135,9 @@ BDD_ID Manager::coFactorTrue(const BDD_ID f) {
     return this->coFactorTrue(f, this->topVar(f));
 }
 
-
+BDD_ID Manager::and2 (const BDD_ID a, const BDD_ID b){
+    return 0;
+}
 
 Manager::~Manager() {
     uniqTable.clear();

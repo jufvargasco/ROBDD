@@ -64,10 +64,12 @@ TEST_F(ManagerTest,createVar_Test){
     ASSERT_EQ(a->lowV, 0);
     ASSERT_EQ(a->topVar, 2);
 }
-
+/**
+ * Test for repeated label when creating a variable
+ * Checks whether a runtime exception is thrown when the label already exists
+ */
 TEST_F(ManagerTest,createVar_repeated_label)
 {
-    Manager f;
     try {
         BDD_ID id2 = mg1->createVar("a");
         BDD_ID id3 = mg1->createVar("a");
@@ -77,7 +79,6 @@ TEST_F(ManagerTest,createVar_repeated_label)
         EXPECT_EQ(err.what(),std::string("This label already exists in the unique Table"));
     }
 }
-
 /**
  * Test for isConstant function
  * Checks the function with the leaf node "0", expected value= True
@@ -151,9 +152,6 @@ TEST_F(ManagerTest,ite_initial_Test){
 
 
 }
-/**
- * Test for repeated case ITE (e.g.:or(a,b))
- */
 
 
 /**
@@ -229,5 +227,24 @@ TEST_F(ManagerTest,coFactorTruef_Test) {
     ASSERT_EQ(mg1->coFactorTrue(f), c); /** Test case of and function, expected value: c*/
     ASSERT_EQ(mg1->coFactorTrue(g), 1); /** Test case of or function, expected value: 1*/
     ASSERT_EQ(mg1->coFactorTrue(h), 1); /** Test case of a+(b*c) function,  expected value 1*/
+}
+
+/**
+* Test for AND2
+*/
+TEST_F(ManagerTest,and2_Test) {
+    BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
+    BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
+    BDD_ID c = mg1->createVar("c");     // BBB_ID= 4, HighV= 1, LowV= 0, TopVar= c, Name = "c"
+    BDD_ID f = mg1->ite(b, c, 0);          // BBB_ID= 5, HighV= c, LowV= 0, TopVar= b, Name = "and" b*c
+    BDD_ID and_op = mg1->and2(b,c);           // BBB_ID= 6, HighV= c, LowV= 0, TopVar= b, Name = "and2" b*c
+
+    uTableVal *result = mg1->getuTableVal(f);
+    uTableVal *result_and = mg1->getuTableVal(and_op);
+
+    ASSERT_EQ(result->topVar, result_and->topVar);
+    ASSERT_EQ(result->highV, result_and->highV);
+    ASSERT_EQ(result->lowV, result_and->lowV);
+
 }
 

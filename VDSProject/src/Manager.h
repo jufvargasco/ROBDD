@@ -125,7 +125,7 @@ public:
     /**
      * \returns a BDD node that represents the correlating "and" function
 	 */
-    //BDD_ID and2 (const BDD_ID a, const BDD_ID b);
+    BDD_ID and2 (const BDD_ID a, const BDD_ID b);
     /**
      * \returns a BDD node that represents the correlating "or" function
 	 */
