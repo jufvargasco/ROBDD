@@ -143,6 +143,10 @@ BDD_ID Manager::or2 (const BDD_ID a, const BDD_ID b){
     return this->ite(a,1,b);
 }
 
+BDD_ID Manager::neg (const BDD_ID a){
+    return 0;
+}
+
 Manager::~Manager() {
     uniqTable.clear();
     compTable.clear();

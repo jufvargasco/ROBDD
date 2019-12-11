@@ -79,7 +79,7 @@ public:
     /**
      * \returns a BDD node that represents the correlating "neg" function
 	 */
-    //virtual BDD_ID neg (const BDD_ID a) = 0;
+    virtual BDD_ID neg (const BDD_ID a) = 0;
     /**
      * \returns a BDD node that represents the correlating "nand" function
 	 */

@@ -245,6 +245,21 @@ TEST_F(ManagerTest,and2_Test) {
     ASSERT_EQ(result->topVar, result_and->topVar);
     ASSERT_EQ(result->highV, result_and->highV);
     ASSERT_EQ(result->lowV, result_and->lowV);
+
+    BDD_ID and_op1 = mg1->and2(0,0);
+    ASSERT_EQ(and_op1,0);
+    BDD_ID and_op2 = mg1->and2(0,1);
+    ASSERT_EQ(and_op2,0);
+    BDD_ID and_op3 = mg1->and2(1,0);
+    ASSERT_EQ(and_op3,0);
+    BDD_ID and_op4 = mg1->and2(1,1);
+    ASSERT_EQ(and_op4,1);
+    BDD_ID and_op5 = mg1->and2(a,1);
+    ASSERT_EQ(and_op5,a);
+    BDD_ID and_op6 = mg1->and2(a,0);
+    ASSERT_EQ(and_op6,0);
+    BDD_ID and_op7 = mg1->and2(a,a);
+    ASSERT_EQ(and_op7,a);
 }
 
 /**
@@ -258,6 +273,37 @@ TEST_F(ManagerTest,or2_Test) {
 
     uTableVal *result = mg1->getuTableVal(g);
     uTableVal *result_and = mg1->getuTableVal(or_op);
+
+    ASSERT_EQ(result->topVar, result_and->topVar);
+    ASSERT_EQ(result->highV, result_and->highV);
+    ASSERT_EQ(result->lowV, result_and->lowV);
+
+    BDD_ID or_op1 = mg1->or2(0,0);
+    ASSERT_EQ(or_op1,0);
+    BDD_ID or_op2 = mg1->or2(0,1);
+    ASSERT_EQ(or_op2,1);
+    BDD_ID or_op3 = mg1->or2(1,0);
+    ASSERT_EQ(or_op3,1);
+    BDD_ID or_op4 = mg1->or2(1,1);
+    ASSERT_EQ(or_op4,1);
+    BDD_ID or_op5 = mg1->or2(a,1);
+    ASSERT_EQ(or_op5,1);
+    BDD_ID or_op6 = mg1->or2(a,0);
+    ASSERT_EQ(or_op6,a);
+    BDD_ID or_op7 = mg1->or2(a,a);
+    ASSERT_EQ(or_op7,a);
+}
+
+/**
+* Test for NEG
+*/
+TEST_F(ManagerTest,neg_Test) {
+    BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
+    BDD_ID f = mg1->ite(a, 0, 1);
+    BDD_ID neg_a = mg1->neg(a);
+
+    uTableVal *result = mg1->getuTableVal(f);
+    uTableVal *result_and = mg1->getuTableVal(neg_a);
 
     ASSERT_EQ(result->topVar, result_and->topVar);
     ASSERT_EQ(result->highV, result_and->highV);

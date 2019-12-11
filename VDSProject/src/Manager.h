@@ -137,7 +137,7 @@ public:
     /**
      * \returns a BDD node that represents the correlating "neg" function
 	 */
-    //BDD_ID neg (const BDD_ID a);
+    BDD_ID neg (const BDD_ID a);
     /**
      * \returns a BDD node that represents the correlating "nand" function
 	 */
