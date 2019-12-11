@@ -64,6 +64,20 @@ TEST_F(ManagerTest,createVar_Test){
     ASSERT_EQ(a->lowV, 0);
     ASSERT_EQ(a->topVar, 2);
 }
+
+TEST_F(ManagerTest,createVar_repeated_label)
+{
+    Manager f;
+    try {
+        BDD_ID id2 = mg1->createVar("a");
+        BDD_ID id3 = mg1->createVar("a");
+        FAIL() << "Expected std::runtime_error";
+    }
+    catch(std::runtime_error const & err) {
+        EXPECT_EQ(err.what(),std::string("This label already exists in the unique Table"));
+    }
+}
+
 /**
  * Test for isConstant function
  * Checks the function with the leaf node "0", expected value= True
