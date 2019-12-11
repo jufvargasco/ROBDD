@@ -238,6 +238,7 @@ TEST_F(ManagerTest,and2_Test) {
     BDD_ID c = mg1->createVar("c");     // BBB_ID= 4, HighV= 1, LowV= 0, TopVar= c, Name = "c"
     BDD_ID f = mg1->ite(b, c, 0);          // BBB_ID= 5, HighV= c, LowV= 0, TopVar= b, Name = "and" b*c
     BDD_ID and_op = mg1->and2(b,c);           // BBB_ID= 6, HighV= c, LowV= 0, TopVar= b, Name = "and2" b*c
+    BDD_ID neg_a = mg1->neg(a); //Addition of neg (a)
 
     uTableVal *result = mg1->getuTableVal(f);
     uTableVal *result_and = mg1->getuTableVal(and_op);
@@ -260,6 +261,8 @@ TEST_F(ManagerTest,and2_Test) {
     ASSERT_EQ(and_op6,0);
     BDD_ID and_op7 = mg1->and2(a,a);
     ASSERT_EQ(and_op7,a);
+    BDD_ID and_op8 = mg1->and2(a,neg_a);
+    ASSERT_EQ(and_op8,0);
 }
 
 /**
@@ -270,13 +273,14 @@ TEST_F(ManagerTest,or2_Test) {
     BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
     BDD_ID g = mg1->ite(a, 1, b);          // BBB_ID= 4, HighV= 1, LowV= b, TopVar= a, Name = "or" a+b
     BDD_ID or_op = mg1->or2(a,b);           // BBB_ID= 5, HighV= c, LowV= 0, TopVar= b, Name = "or2" a+b
+    BDD_ID neg_a = mg1->neg(a); //Addition of neg (a)
 
     uTableVal *result = mg1->getuTableVal(g);
-    uTableVal *result_and = mg1->getuTableVal(or_op);
+    uTableVal *result_or = mg1->getuTableVal(or_op);
 
-    ASSERT_EQ(result->topVar, result_and->topVar);
-    ASSERT_EQ(result->highV, result_and->highV);
-    ASSERT_EQ(result->lowV, result_and->lowV);
+    ASSERT_EQ(result->topVar, result_or->topVar);
+    ASSERT_EQ(result->highV, result_or->highV);
+    ASSERT_EQ(result->lowV, result_or->lowV);
 
     BDD_ID or_op1 = mg1->or2(0,0);
     ASSERT_EQ(or_op1,0);
@@ -292,6 +296,8 @@ TEST_F(ManagerTest,or2_Test) {
     ASSERT_EQ(or_op6,a);
     BDD_ID or_op7 = mg1->or2(a,a);
     ASSERT_EQ(or_op7,a);
+    BDD_ID or_op8 = mg1->or2(a,neg_a);
+    ASSERT_EQ(or_op8,1);
 }
 
 /**
@@ -303,10 +309,16 @@ TEST_F(ManagerTest,neg_Test) {
     BDD_ID neg_a = mg1->neg(a);
 
     uTableVal *result = mg1->getuTableVal(f);
-    uTableVal *result_and = mg1->getuTableVal(neg_a);
+    uTableVal *result_neg = mg1->getuTableVal(neg_a);
 
-    ASSERT_EQ(result->topVar, result_and->topVar);
-    ASSERT_EQ(result->highV, result_and->highV);
-    ASSERT_EQ(result->lowV, result_and->lowV);
+    ASSERT_EQ(result->topVar, result_neg->topVar);
+    ASSERT_EQ(result->highV, result_neg->highV);
+    ASSERT_EQ(result->lowV, result_neg->lowV);
+
+    result = mg1->getuTableVal(a);
+    ASSERT_EQ(result->topVar, result_neg->topVar);
+    ASSERT_EQ(result->highV, result_neg->lowV);
+    ASSERT_EQ(result->lowV, result_neg->highV);
+
 }
 
