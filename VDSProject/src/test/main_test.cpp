@@ -301,6 +301,42 @@ TEST_F(ManagerTest,or2_Test) {
 }
 
 /**
+* Test for XOR2
+*/
+TEST_F(ManagerTest,xor_Test) {
+    BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
+    BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
+    BDD_ID g = mg1->ite(a, mg1->neg(b), b);          // BBB_ID= 4, HighV= 1, LowV= b, TopVar= a, Name = "xor" a+'b
+    BDD_ID xor_op = mg1->xor2(a,b);           // BBB_ID= 5, HighV= c, LowV= 0, TopVar= b, Name = "xor2" a+'b
+    BDD_ID neg_a = mg1->neg(a); //Addition of neg (a)
+
+    uTableVal *result = mg1->getuTableVal(g);
+    uTableVal *result_or = mg1->getuTableVal(xor_op);
+
+    ASSERT_EQ(result->topVar, result_or->topVar);
+    ASSERT_EQ(result->highV, result_or->highV);
+    ASSERT_EQ(result->lowV, result_or->lowV);
+
+    BDD_ID xor_op1 = mg1->or2(0,0);
+    ASSERT_EQ(xor_op1,0);
+    BDD_ID xor_op2 = mg1->or2(0,1);
+    ASSERT_EQ(xor_op2,1);
+    BDD_ID xor_op3 = mg1->or2(1,0);
+    ASSERT_EQ(xor_op3,1);
+    BDD_ID xor_op4 = mg1->or2(1,1);
+    ASSERT_EQ(xor_op4,0);
+    BDD_ID xor_op5 = mg1->or2(a,1);
+    ASSERT_EQ(xor_op5,1);
+    BDD_ID xor_op6 = mg1->or2(a,0);
+    ASSERT_EQ(xor_op6,a);
+    BDD_ID xor_op7 = mg1->or2(a,a);
+    ASSERT_EQ(xor_op7,0);
+    BDD_ID xor_op8 = mg1->or2(a,neg_a);
+    ASSERT_EQ(xor_op8,1);
+
+}
+
+/**
 * Test for NEG
 */
 TEST_F(ManagerTest,neg_Test) {
@@ -321,4 +357,3 @@ TEST_F(ManagerTest,neg_Test) {
     ASSERT_EQ(result->lowV, result_neg->highV);
 
 }
-

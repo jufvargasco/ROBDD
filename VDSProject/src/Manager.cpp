@@ -52,7 +52,7 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
         return i;
     }
     // Repeated case --> after being able of creating one
-//    // Get top variable
+    // Get top variable
     BDD_ID top_var = this->topVar(i);
     if ((this->topVar(t) < top_var) && (this->topVar(t) > 1)){
         top_var = this->topVar(t);
@@ -141,6 +141,11 @@ BDD_ID Manager::and2 (const BDD_ID a, const BDD_ID b){
 
 BDD_ID Manager::or2 (const BDD_ID a, const BDD_ID b){
     return this->ite(a,1,b);
+}
+
+BDD_ID Manager::xor2 (const BDD_ID a, const BDD_ID b){
+    return 0;
+    //return this->ite(a,neg(b),b);
 }
 
 BDD_ID Manager::neg (const BDD_ID a){

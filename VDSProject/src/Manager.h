@@ -133,7 +133,7 @@ public:
     /**
      * \returns a BDD node that represents the correlating "xor" function
 	 */
-    //BDD_ID xor2 (const BDD_ID a, const BDD_ID b);
+    BDD_ID xor2 (const BDD_ID a, const BDD_ID b);
     /**
      * \returns a BDD node that represents the correlating "neg" function
 	 */
