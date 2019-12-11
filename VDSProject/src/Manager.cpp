@@ -156,7 +156,7 @@ BDD_ID Manager::nand2 (const BDD_ID a, const BDD_ID b){
 }
 
 BDD_ID Manager::nor2 (const BDD_ID a, const BDD_ID b){
-    return 0;
+    return this->ite(a, 0, neg(b));
 }
 
 Manager::~Manager() {
