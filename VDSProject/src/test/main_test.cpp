@@ -111,17 +111,31 @@ TEST_F(ManagerTest,ite_terminal_Test){
     ASSERT_EQ(mg1->ite(3,2,2),2); /** ITE(g,f,f) = f */
 }
 /**
- * Test for initial ITE (e.g.:or(a,b))
+ * Test for initial ITE (e.g.:and(b,c), or(a,b))
  */
 TEST_F(ManagerTest,ite_initial_Test){
-    BDD_ID a = mg1->createVar("a");  // ID2
-    BDD_ID b = mg1->createVar("b");  // ID3
-    BDD_ID OR_ID = mg1->ite(a,1,b);
+    BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
+    BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
+    BDD_ID c = mg1->createVar("c");     // BBB_ID= 4, HighV= 1, LowV= 0, TopVar= c, Name = "c"
+    BDD_ID f = mg1->ite(b, c, 0);          // BBB_ID= 5, HighV= c, LowV= 0, TopVar= b, Name = "and"
+    BDD_ID g = mg1->ite(a, 1, b);          // BBB_ID= 6, HighV= 1, LowV= b, TopVar= a, Name = "or"
+    BDD_ID h = mg1->ite(a, 1, f);          // BBB_ID= 7, HighV= 1, LowV= d, TopVar= a, Name = "or / and"
+
     ASSERT_EQ(mg1->ctableEmpty(), false);
-    uTableVal *result = mg1->getuTableVal(OR_ID);
+    uTableVal *result = mg1->getuTableVal(f);
+    ASSERT_EQ(result->highV, c);
+    ASSERT_EQ(result->lowV, 0);
+    ASSERT_EQ(result->topVar, b);
+    result = mg1->getuTableVal(g);
     ASSERT_EQ(result->highV, 1);
-    ASSERT_EQ(result->lowV, 3);
-    ASSERT_EQ(result->topVar, 2);
+    ASSERT_EQ(result->lowV, b);
+    ASSERT_EQ(result->topVar, a);
+    result = mg1->getuTableVal(h);
+    ASSERT_EQ(result->highV, 1);
+    ASSERT_EQ(result->lowV, f);
+    ASSERT_EQ(result->topVar, a);
+
+
 }
 /**
  * Test for repeated case ITE (e.g.:or(a,b))

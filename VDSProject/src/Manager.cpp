@@ -48,10 +48,7 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
         return i;
     }
     // Repeated case --> after being able of creating one
-    // Get top variable
-    uTableVal *f = getuTableVal(i);
-    uTableVal *g = getuTableVal(t);
-    uTableVal *h = getuTableVal(e);
+//    // Get top variable
     BDD_ID top_var = this->topVar(i);
     if ((this->topVar(t) < top_var) && (this->topVar(t) > 1)){
         top_var = this->topVar(t);
@@ -59,8 +56,9 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     if ((this->topVar(e) < top_var) && (this->topVar(e) > 1)){
         top_var = this->topVar(e);
     }
-    BDD_ID r_high = ite(f->highV,t,e);   // Change t,e after implementing cofactor functions
-    BDD_ID r_low = ite(f->lowV,t,e);     // Change t,e after implementing cofactor functions
+    BDD_ID r_high = ite(coFactorTrue(i,top_var),coFactorTrue(t,top_var),coFactorTrue(e,top_var));
+    BDD_ID r_low = ite(coFactorFalse(i,top_var),coFactorFalse(t,top_var),coFactorFalse(e,top_var));
+
     if (r_high == r_low) {
         return r_high;
     }
