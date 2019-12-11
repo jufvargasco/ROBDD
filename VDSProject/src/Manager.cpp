@@ -130,7 +130,7 @@ BDD_ID Manager::coFactorFalse(const BDD_ID f) {
 }
 
 BDD_ID Manager::coFactorTrue(const BDD_ID f) {
-
+    return this->coFactorTrue(f, this->topVar(f));
 }
 
 
