@@ -136,7 +136,7 @@ BDD_ID Manager::coFactorTrue(const BDD_ID f) {
 }
 
 BDD_ID Manager::and2 (const BDD_ID a, const BDD_ID b){
-    return 0;
+    return this->ite(a,b,0);
 }
 
 Manager::~Manager() {
