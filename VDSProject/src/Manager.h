@@ -145,7 +145,7 @@ public:
     /**
      * \returns a BDD node that represents the correlating "nor" function
 	 */
-    //BDD_ID nor2 (const BDD_ID a, const BDD_ID b);
+    BDD_ID nor2 (const BDD_ID a, const BDD_ID b);
     /**
      * \returns the Name of top variable of the BDD node root
 	 */

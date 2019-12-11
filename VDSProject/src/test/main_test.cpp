@@ -398,3 +398,40 @@ TEST_F(ManagerTest,nand2_Test) {
     BDD_ID nand_op8 = mg1->nand2(a,neg_a);
     ASSERT_EQ(nand_op8,1);
 }
+
+/**
+* Test for OR2
+*/
+TEST_F(ManagerTest,nor2_Test) {
+    BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
+    BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
+    BDD_ID g = mg1->ite(a, 0, mg1->neg(b));          // BBB_ID= 5, HighV= 1, LowV= b, TopVar= a, Name = "nor" (a+b)'
+    // Previous line : neg(b) : BBB_ID= 4, HighV= 0, LowV= 1, TopVar= b, Name = "neg" c'
+    BDD_ID nor_op = mg1->nor2(a,b);           // BBB_ID= 6, HighV= c, LowV= 0, TopVar= b, Name = "nor2" (a+b)'
+    // After checking the computed table, the previous row should return 5
+    BDD_ID neg_a = mg1->neg(a); //Addition of neg (a)
+
+    uTableVal *result = mg1->getuTableVal(g);
+    uTableVal *result_or = mg1->getuTableVal(nor_op);
+
+    ASSERT_EQ(result->topVar, result_or->topVar);
+    ASSERT_EQ(result->highV, result_or->highV);
+    ASSERT_EQ(result->lowV, result_or->lowV);
+
+    BDD_ID nor_op1 = mg1->nor2(0,0);
+    ASSERT_EQ(nor_op1,1);
+    BDD_ID nor_op2 = mg1->nor2(0,1);
+    ASSERT_EQ(nor_op2,0);
+    BDD_ID nor_op3 = mg1->nor2(1,0);
+    ASSERT_EQ(nor_op3,0);
+    BDD_ID nor_op4 = mg1->nor2(1,1);
+    ASSERT_EQ(nor_op4,0);
+    BDD_ID nor_op5 = mg1->nor2(a,1);
+    ASSERT_EQ(nor_op5,0);
+    BDD_ID nor_op6 = mg1->nor2(a,0);
+    ASSERT_EQ(nor_op6,neg_a);
+    BDD_ID nor_op7 = mg1->nor2(a,a);
+    ASSERT_EQ(nor_op7,neg_a);
+    BDD_ID nor_op8 = mg1->nor2(a,neg_a);
+    ASSERT_EQ(nor_op8,0);
+}
