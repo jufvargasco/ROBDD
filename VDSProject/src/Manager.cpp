@@ -18,7 +18,10 @@ const BDD_ID &Manager::False() {
 }
 
 BDD_ID Manager::createVar (const std::string &label){
-
+    for(auto it : uniqTable) {
+        if (it.second->label == label )
+            throw std::runtime_error("This label already exists in the unique Table");
+    }
     BDD_ID  new_id = (uniqTable.rbegin()->first) + 1;
     auto *var = new uTableVal(label, 1, 0, new_id);
     uniqTable.insert(std::pair <BDD_ID, uTableVal*> (new_id, var));
