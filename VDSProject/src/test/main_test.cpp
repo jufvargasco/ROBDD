@@ -245,6 +245,22 @@ TEST_F(ManagerTest,and2_Test) {
     ASSERT_EQ(result->topVar, result_and->topVar);
     ASSERT_EQ(result->highV, result_and->highV);
     ASSERT_EQ(result->lowV, result_and->lowV);
+}
 
+/**
+* Test for OR2
+*/
+TEST_F(ManagerTest,or2_Test) {
+    BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
+    BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
+    BDD_ID g = mg1->ite(a, 1, b);          // BBB_ID= 4, HighV= 1, LowV= b, TopVar= a, Name = "or" a+b
+    BDD_ID or_op = mg1->or2(a,b);           // BBB_ID= 5, HighV= c, LowV= 0, TopVar= b, Name = "or2" a+b
+
+    uTableVal *result = mg1->getuTableVal(g);
+    uTableVal *result_and = mg1->getuTableVal(or_op);
+
+    ASSERT_EQ(result->topVar, result_and->topVar);
+    ASSERT_EQ(result->highV, result_and->highV);
+    ASSERT_EQ(result->lowV, result_and->lowV);
 }
 

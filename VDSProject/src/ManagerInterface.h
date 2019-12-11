@@ -71,7 +71,7 @@ public:
     /**
      * \returns a BDD node that represents the correlating "or" function
 	 */
-    //virtual BDD_ID or2 (const BDD_ID a, const BDD_ID b) = 0;
+    virtual BDD_ID or2 (const BDD_ID a, const BDD_ID b) = 0;
     /**
      * \returns a BDD node that represents the correlating "xor" function
 	 */
