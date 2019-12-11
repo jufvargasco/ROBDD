@@ -144,8 +144,7 @@ BDD_ID Manager::or2 (const BDD_ID a, const BDD_ID b){
 }
 
 BDD_ID Manager::xor2 (const BDD_ID a, const BDD_ID b){
-    return 0;
-    //return this->ite(a,neg(b),b);
+    return this->ite(a,neg(b),b);
 }
 
 BDD_ID Manager::neg (const BDD_ID a){
