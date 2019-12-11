@@ -96,10 +96,6 @@ BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_
 
 }
 
-BDD_ID Manager::coFactorFalse(const BDD_ID f) {
-    return this->coFactorFalse(f, this->topVar(f));
-}
-
 BDD_ID Manager::coFactorFalse(const BDD_ID f, BDD_ID x) {
 
     uTableVal *f_tableEntry = getuTableVal(f);
@@ -128,6 +124,16 @@ BDD_ID Manager::coFactorTrue(const BDD_ID f, BDD_ID x) {
     BDD_ID fal = coFactorTrue (f_tableEntry->lowV, x);
     return ite(f_tableEntry->topVar, tru, fal);
 }
+
+BDD_ID Manager::coFactorFalse(const BDD_ID f) {
+    return this->coFactorFalse(f, this->topVar(f));
+}
+
+BDD_ID Manager::coFactorTrue(const BDD_ID f) {
+
+}
+
+
 
 Manager::~Manager() {
     uniqTable.clear();

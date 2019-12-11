@@ -117,7 +117,7 @@ public:
     /**
      * \returns the positive cofactor of the function defined by node f.
 	 */
-    //BDD_ID coFactorTrue (const BDD_ID f) = 0;
+    BDD_ID coFactorTrue (const BDD_ID f);
     /**
      * \returns the negative cofactor of the function defined by node f.
 	 */

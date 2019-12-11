@@ -180,8 +180,26 @@ TEST_F(ManagerTest,coFactorFalsef_Test) {
 
     ASSERT_EQ(mg1->coFactorFalse(1), 1); /** Test terminal case: f is constant*/
 
-    ASSERT_EQ(mg1->coFactorFalse(f), 0); /** Test case of and function in reference with variable c (no top var)*/
-    ASSERT_EQ(mg1->coFactorFalse(g), b); /** Test case of or function in reference with variable b (no top var)*/
-    ASSERT_EQ(mg1->coFactorFalse(h), f); /** Test case of a+(b*c) function,  expected value a+b => BDD_ID = 6*/
+    ASSERT_EQ(mg1->coFactorFalse(f), 0); /** Test case of and function, expected value 0*/
+    ASSERT_EQ(mg1->coFactorFalse(g), b); /** Test case of or function, expected value: b */
+    ASSERT_EQ(mg1->coFactorFalse(h), f); /** Test case of a+(b*c) function,  expected value b*c = f => BDD_ID = 5 */
+}
+
+/**
+* Test for coFactorTrue(f)
+*/
+TEST_F(ManagerTest,coFactorTruef_Test) {
+    BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
+    BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
+    BDD_ID c = mg1->createVar("c");     // BBB_ID= 4, HighV= 1, LowV= 0, TopVar= c, Name = "c"
+    BDD_ID f = mg1->ite(b, c, 0);          // BBB_ID= 5, HighV= c, LowV= 0, TopVar= b, Name = "and" b*c
+    BDD_ID g = mg1->ite(a, 1, b);          // BBB_ID= 6, HighV= 1, LowV= b, TopVar= a, Name = "or" a+b
+    BDD_ID h = mg1->ite(a, 1, f);          // BBB_ID= 7, HighV= 1, LowV= f, TopVar= a, Name = "or / and" a+b*c
+
+    ASSERT_EQ(mg1->coFactorTrue(1), 1); /** Test terminal case: f is constant*/
+
+    ASSERT_EQ(mg1->coFactorTrue(f), c); /** Test case of and function, expected value: c*/
+    ASSERT_EQ(mg1->coFactorTrue(g), 1); /** Test case of or function, expected value: 1*/
+    ASSERT_EQ(mg1->coFactorTrue(h), 1); /** Test case of a+(b*c) function,  expected value 1*/
 }
 
