@@ -455,3 +455,35 @@ TEST_F(ManagerTest,uniqueTableSize_Test) {
 
     ASSERT_EQ(mg1->uniqueTableSize(),4);
 }
+
+TEST_F(ManagerTest, findNodes_Test) {
+    BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
+    BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
+    BDD_ID c = mg1->createVar("c");     // BBB_ID= 4, HighV= 1, LowV= 0, TopVar= c, Name = "c"
+    BDD_ID d = mg1->createVar("d");     // BBB_ID= 5, HighV= 1, LowV= 0, TopVar= d, Name = "d"
+
+    BDD_ID or_ab = mg1->or2(a,b);              // BBB_ID= 6, HighV= 1, LowV= b, TopVar= a, Name = "or"
+    BDD_ID and_cd = mg1->and2(c,d);            // BBB_ID= 7, HighV= d, LowV= 0, TopVar= c, Name = "and"
+    BDD_ID and_final = mg1->and2(or_ab,and_cd);    // BBB_ID= 8, HighV= and_cd, LowV= 0, TopVar= b, Name = "and or and"
+
+    std::set<BDD_ID> obtained_a;
+    std::set<BDD_ID> obtained_b;
+    std::set<BDD_ID> obtained_c;
+    std::set<BDD_ID> obtained_d;
+
+    std::set<BDD_ID> expected_a = {2, 3, 4, 5, 0, 1};
+    std::set<BDD_ID> expected_b = {3, 4, 5, 0, 1};
+    std::set<BDD_ID> expected_c = {4, 5, 0, 1};
+    std::set<BDD_ID> expected_d = {5, 0, 1};
+
+    mg1->findNodes(a, obtained_a);
+    mg1->findNodes(b, obtained_b);
+    mg1->findNodes(c, obtained_c);
+    mg1->findNodes(d, obtained_d);
+
+    ASSERT_EQ(obtained_a, expected_a);
+    ASSERT_EQ(obtained_b, expected_b);
+    ASSERT_EQ(obtained_c, expected_c);
+    ASSERT_EQ(obtained_d, expected_d);
+
+}
