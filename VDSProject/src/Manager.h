@@ -161,7 +161,7 @@ public:
     /**
      * \returns the number of the nodes currently exist in the unique table of the Manager class.
 	 */
-    //size_t uniqueTableSize();
+    size_t uniqueTableSize();
 
 
 

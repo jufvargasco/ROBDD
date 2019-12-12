@@ -44,11 +44,11 @@ BDD_ID Manager::topVar (const BDD_ID f){
 
 BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     // Terminal case
-    if(i==1){
+    if(i==1){  /** ite(1, f, g) = f*/
         return t;
-    } else if (i==0){
+    } else if (i==0){ /** ite(0, g, f) = f*/
         return e;
-    } else if (this->isVariable(i) && t==1 && e==0){
+    } else if (this->isConstant(i)==false && t==1 && e==0){ /** ite(f, 1, 0) = f */
         return i;
     }
     // Repeated case --> after being able of creating one
@@ -157,6 +157,10 @@ BDD_ID Manager::nand2 (const BDD_ID a, const BDD_ID b){
 
 BDD_ID Manager::nor2 (const BDD_ID a, const BDD_ID b){
     return this->ite(a, 0, neg(b));
+}
+
+size_t Manager::uniqueTableSize(){
+    return 0;
 }
 
 Manager::~Manager() {

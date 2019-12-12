@@ -75,7 +75,7 @@ public:
     /**
      * \returns a BDD node that represents the correlating "xor" function
 	 */
-    //virtual BDD_ID xor2 (const BDD_ID a, const BDD_ID b) = 0;
+    virtual BDD_ID xor2 (const BDD_ID a, const BDD_ID b) = 0;
     /**
      * \returns a BDD node that represents the correlating "neg" function
 	 */
@@ -83,11 +83,11 @@ public:
     /**
      * \returns a BDD node that represents the correlating "nand" function
 	 */
-    //virtual BDD_ID nand2 (const BDD_ID a, const BDD_ID b) = 0;
+    virtual BDD_ID nand2 (const BDD_ID a, const BDD_ID b) = 0;
     /**
      * \returns a BDD node that represents the correlating "nor" function
 	 */
-    //virtual BDD_ID nor2 (const BDD_ID a, const BDD_ID b) = 0;
+    virtual BDD_ID nor2 (const BDD_ID a, const BDD_ID b) = 0;
     /**
      * \returns the Name of top variable of the BDD node root
 	 */
@@ -103,7 +103,7 @@ public:
     /**
      * \returns the number of the nodes currently exist in the unique table of the Manager class.
 	 */
-    //virtual size_t uniqueTableSize() = 0;
+    virtual size_t uniqueTableSize() = 0;
 };
 #endif
 
