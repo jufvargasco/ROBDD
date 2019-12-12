@@ -107,6 +107,8 @@ BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_
 
 }
 
+
+
 BDD_ID Manager::coFactorFalse(const BDD_ID f, BDD_ID x) {
 
     uTableVal *f_tableEntry = getuTableVal(f);
@@ -121,6 +123,7 @@ BDD_ID Manager::coFactorFalse(const BDD_ID f, BDD_ID x) {
     return ite(f_tableEntry->topVar, tru, fal);
 
 }
+
 
 BDD_ID Manager::coFactorTrue(const BDD_ID f, BDD_ID x) {
 
@@ -175,6 +178,10 @@ size_t Manager::uniqueTableSize(){
 Manager::~Manager() {
     uniqTable.clear();
     compTable.clear();
+}
+
+void Manager::findNodes(const BDD_ID &root, std::set<BDD_ID> &nodes_of_root) {
+
 }
 
 

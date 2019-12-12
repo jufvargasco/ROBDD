@@ -153,7 +153,7 @@ public:
     /**
      * \returns the set of BDD nodes which are reachable from the BDD node root (including itself).
 	 */
-    //void findNodes (const BDD_ID & root, std::set<BDD_ID> & nodes_of_root);
+    void findNodes (const BDD_ID & root, std::set<BDD_ID> & nodes_of_root);
     /**
      * \returns the set of variables which are either top variable of the BDD node root or the reachable nodes from root.
 	 */
