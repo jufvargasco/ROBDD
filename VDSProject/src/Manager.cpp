@@ -94,12 +94,12 @@ bool Manager::ctableEmpty() {
 }
 
 BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_ID low){
-/*
+
     for(auto it : uniqTable) {
         if ((it.second->topVar == x) && (it.second->highV == high) && (it.second->lowV == low))
             return it.first;
     }
-*/
+
     auto *new_val = new uTableVal("", high, low, x);
     BDD_ID  new_id = (uniqTable.rbegin()->first) + 1;
     uniqTable.insert(std::pair <BDD_ID, uTableVal*> (new_id, new_val));
