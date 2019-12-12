@@ -120,10 +120,13 @@ TEST_F(ManagerTest,topVar_Test){
 TEST_F(ManagerTest,ite_terminal_Test){
     BDD_ID a = mg1->createVar("a");  // ID2
     BDD_ID b = mg1->createVar("b");  // ID3
-    ASSERT_EQ(mg1->ite(1,2,3),2); /** ITE(1,f,g) = f */
-    ASSERT_EQ(mg1->ite(2,1,0),2); /** ITE(f,1,0) = f */
-    ASSERT_EQ(mg1->ite(0,2,3),3); /** ITE(0,g,f) = f */
-    ASSERT_EQ(mg1->ite(3,2,2),2); /** ITE(g,f,f) = f */
+    BDD_ID neg_a = mg1->neg(a);            //Addition of neg (a)
+
+    ASSERT_EQ(mg1->ite(1,a,b),a); /** ITE(1,f,g) = f */
+    ASSERT_EQ(mg1->ite(a,1,0),a); /** ITE(f,1,0) = f */
+    ASSERT_EQ(mg1->ite(0,a,b),b); /** ITE(0,g,f) = f */
+    ASSERT_EQ(mg1->ite(b,a,a),a); /** ITE(g,f,f) = f */
+    ASSERT_EQ(mg1->ite(a,0,1),neg_a); /** ite(f, 0, 1) = neg(f) */
 }
 /**
  * Test for initial ITE (e.g.:and(b,c), or(a,b))
@@ -399,7 +402,7 @@ TEST_F(ManagerTest,nand2_Test) {
 }
 
 /**
-* Test for OR2
+* Test for NOR2
 */
 TEST_F(ManagerTest,nor2_Test) {
     BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
@@ -433,4 +436,22 @@ TEST_F(ManagerTest,nor2_Test) {
     ASSERT_EQ(nor_op7,neg_a);
     BDD_ID nor_op8 = mg1->nor2(a,neg_a);
     ASSERT_EQ(nor_op8,0);
+}
+
+TEST_F(ManagerTest,Example_Test) {
+    BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
+    BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
+    BDD_ID c = mg1->createVar("c");     // BBB_ID= 4, HighV= 1, LowV= 0, TopVar= c, Name = "c"
+    BDD_ID d = mg1->createVar("d");     // BBB_ID= 5, HighV= 1, LowV= 0, TopVar= d, Name = "d"
+
+    BDD_ID or_ab = mg1->or2(a,b);              // BBB_ID= 6, HighV= 1, LowV= b, TopVar= a, Name = "or"
+    BDD_ID and_cd = mg1->and2(c,d);            // BBB_ID= 7, HighV= d, LowV= 0, TopVar= c, Name = "and"
+    BDD_ID and_67 = mg1->and2(or_ab,and_cd);    // BBB_ID= 8, HighV= and_cd, LowV= 0, TopVar= b, Name = "and or and"
+}
+
+TEST_F(ManagerTest,uniqueTableSize_Test) {
+    BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
+    BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
+
+    ASSERT_EQ(mg1->uniqueTableSize(),4);
 }
