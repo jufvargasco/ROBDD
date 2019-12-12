@@ -189,7 +189,7 @@ public:
 private:
     std::map<BDD_ID ,uTableVal*> uniqTable;
     // Use of the ite values as key to use the find function with them
-    std::map<cTableKey* ,BDD_ID> compTable;
+    std::map<BDD_ID ,cTableKey*> compTable;
     const BDD_ID _true = 1;
     const BDD_ID _false = 0;
 };

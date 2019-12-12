@@ -51,7 +51,16 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     } else if (this->isConstant(i)==false && t==1 && e==0){ /** ite(f, 1, 0) = f */
         return i;
     }
-    // Repeated case --> after being able of creating one
+    // Repeated case
+    if(!(compTable.empty())){
+        auto it = compTable.begin();
+        while (it != compTable.end()) {
+            if (it->second->i == i && it->second->t == t && it->second->e == e) {
+                return it->first;
+            }
+            it++;
+        }
+    }
     // Get top variable
     BDD_ID top_var = this->topVar(i);
     if ((this->topVar(t) < top_var) && (this->topVar(t) > 1)){
@@ -68,7 +77,7 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     }
     BDD_ID r = find_or_add_uTable(top_var,r_high,r_low);
     auto *ite_key = new cTableKey(i,t,e);
-    compTable.insert(std::pair <cTableKey* ,BDD_ID> (ite_key, r));
+    compTable.insert(std::pair <BDD_ID ,cTableKey*> (r, ite_key));
     return r;
 }
 
