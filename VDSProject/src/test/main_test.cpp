@@ -235,12 +235,12 @@ TEST_F(ManagerTest,coFactorTruef_Test) {
 TEST_F(ManagerTest,and2_Test) {
     BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
     BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
-    BDD_ID c = mg1->createVar("c");     // BBB_ID= 4, HighV= 1, LowV= 0, TopVar= c, Name = "c"
-    BDD_ID f = mg1->ite(b, c, 0);          // BBB_ID= 5, HighV= c, LowV= 0, TopVar= b, Name = "and" b*c
-    BDD_ID and_op = mg1->and2(b,c);           // BBB_ID= 6, HighV= c, LowV= 0, TopVar= b, Name = "and2" b*c
-    BDD_ID neg_a = mg1->neg(a); //Addition of neg (a)
+    BDD_ID neg_a = mg1->neg(a);               // BDD_ID= 4, HighV= 0, LowV= 1, TopVar= a, Name = "a'"
+    BDD_ID r = mg1->ite(a, b, 0);          // BBB_ID= 5, HighV= b, LowV= 0, TopVar= b, Name = "and" a*b
+    BDD_ID and_op = mg1->and2(a,b);           // BBB_ID= 6, HighV= b, LowV= 0, TopVar= b, Name = "and2" a*b
+    // After looking in the computed table, the two previous lines should return the same ID
 
-    uTableVal *result = mg1->getuTableVal(f);
+    uTableVal *result = mg1->getuTableVal(r);
     uTableVal *result_and = mg1->getuTableVal(and_op);
 
     ASSERT_EQ(result->topVar, result_and->topVar);
@@ -271,11 +271,12 @@ TEST_F(ManagerTest,and2_Test) {
 TEST_F(ManagerTest,or2_Test) {
     BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
     BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
-    BDD_ID g = mg1->ite(a, 1, b);          // BBB_ID= 4, HighV= 1, LowV= b, TopVar= a, Name = "or" a+b
-    BDD_ID or_op = mg1->or2(a,b);           // BBB_ID= 5, HighV= c, LowV= 0, TopVar= b, Name = "or2" a+b
-    BDD_ID neg_a = mg1->neg(a); //Addition of neg (a)
+    BDD_ID neg_a = mg1->neg(a);               // BDD_ID= 4, HighV= 0, LowV= 1, TopVar= a, Name = "a'"
+    BDD_ID r = mg1->ite(a, 1, b);          // BBB_ID= 5, HighV= 1, LowV= b, TopVar= a, Name = "or" a+b
+    BDD_ID or_op = mg1->or2(a,b);             // BBB_ID= 6, HighV= c, LowV= 0, TopVar= b, Name = "or2" a+b
+    // After looking in the computed table, the two previous lines should return the same ID
 
-    uTableVal *result = mg1->getuTableVal(g);
+    uTableVal *result = mg1->getuTableVal(r);
     uTableVal *result_or = mg1->getuTableVal(or_op);
 
     ASSERT_EQ(result->topVar, result_or->topVar);
@@ -306,14 +307,13 @@ TEST_F(ManagerTest,or2_Test) {
 TEST_F(ManagerTest,xor_Test) {
     BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
     BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
-    BDD_ID g = mg1->ite(a, mg1->neg(b), b);          // BBB_ID= 5, HighV= 1, LowV= b, TopVar= a, Name = "xor" a+'b
-    // Previous line : neg(b) : BBB_ID= 4, HighV= 0, LowV= 1, TopVar= b, Name = "neg" b'
-    BDD_ID xor_op = mg1->xor2(a,b);           // BBB_ID= 5, HighV= c, LowV= 0, TopVar= b, Name = "xor2" a+'b
-    // After checking the computed table, the previous row should return 5
-    // Therefore, next line would be BDD_ID= 6 (important for error correction in xor_op5)
-    BDD_ID neg_a = mg1->neg(a); //Addition of neg (a)
+    BDD_ID neg_a = mg1->neg(a);               // BDD_ID= 4, HighV= 0, LowV= 1, TopVar= a, Name = "a'"
+    BDD_ID neg_b = mg1->neg(b);               // BDD_ID= 5, HighV= 0, LowV= 1, TopVar= a, Name = "b'"
+    BDD_ID r = mg1->ite(a, neg_b, b);         // BBB_ID= 6, HighV= 1, LowV= b, TopVar= a, Name = "xor" a+'b
+    BDD_ID xor_op = mg1->xor2(a,b);           // BBB_ID= 7, HighV= c, LowV= 0, TopVar= b, Name = "xor2" a+'b
+    // After looking in the computed table, the two previous lines should return the same ID
 
-    uTableVal *result = mg1->getuTableVal(g);
+    uTableVal *result = mg1->getuTableVal(r);
     uTableVal *result_or = mg1->getuTableVal(xor_op);
 
     ASSERT_EQ(result->topVar, result_or->topVar);
@@ -344,10 +344,10 @@ TEST_F(ManagerTest,xor_Test) {
 */
 TEST_F(ManagerTest,neg_Test) {
     BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
-    BDD_ID f = mg1->ite(a, 0, 1);
+    BDD_ID r = mg1->ite(a, 0, 1);
     BDD_ID neg_a = mg1->neg(a);
 
-    uTableVal *result = mg1->getuTableVal(f);
+    uTableVal *result = mg1->getuTableVal(r);
     uTableVal *result_neg = mg1->getuTableVal(neg_a);
 
     ASSERT_EQ(result->topVar, result_neg->topVar);
@@ -367,14 +367,13 @@ TEST_F(ManagerTest,neg_Test) {
 TEST_F(ManagerTest,nand2_Test) {
     BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
     BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
-    BDD_ID c = mg1->createVar("c");     // BBB_ID= 4, HighV= 1, LowV= 0, TopVar= c, Name = "c"
-    BDD_ID f = mg1->ite(b, mg1->neg(c), 1);          // BBB_ID= 6, HighV= c, LowV= 0, TopVar= b, Name = "nand" (b*c)'
-    // Previous line : neg(c) : BBB_ID= 5, HighV= 0, LowV= 1, TopVar= b, Name = "neg" c'
-    BDD_ID nand_op = mg1->nand2(b,c);           // BBB_ID= 7, HighV= c, LowV= 0, TopVar= b, Name = "nand2" (b*c)'
-    // After checking the computed table, the previous row should return 6
-    BDD_ID neg_a = mg1->neg(a); //Addition of neg (a)
+    BDD_ID neg_a = mg1->neg(a);               // BDD_ID= 4, HighV= 0, LowV= 1, TopVar= a, Name = "a'"
+    BDD_ID neg_b = mg1->neg(b);               // BDD_ID= 5, HighV= 0, LowV= 1, TopVar= a, Name = "b'"
+    BDD_ID r = mg1->ite(a, neg_b, 1);      // BBB_ID= 6, HighV= b, LowV= 0, TopVar= b, Name = "and" a*b
+    BDD_ID nand_op = mg1->nand2(a,b);         // BBB_ID= 7, HighV= b, LowV= 0, TopVar= b, Name = "and2" a*b
+    // After looking in the computed table, the previous lines should return the same ID
 
-    uTableVal *result = mg1->getuTableVal(f);
+    uTableVal *result = mg1->getuTableVal(r);
     uTableVal *result_nand = mg1->getuTableVal(nand_op);
 
     ASSERT_EQ(result->topVar, result_nand->topVar);
@@ -405,13 +404,13 @@ TEST_F(ManagerTest,nand2_Test) {
 TEST_F(ManagerTest,nor2_Test) {
     BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
     BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
-    BDD_ID g = mg1->ite(a, 0, mg1->neg(b));          // BBB_ID= 5, HighV= 1, LowV= b, TopVar= a, Name = "nor" (a+b)'
-    // Previous line : neg(b) : BBB_ID= 4, HighV= 0, LowV= 1, TopVar= b, Name = "neg" c'
-    BDD_ID nor_op = mg1->nor2(a,b);           // BBB_ID= 6, HighV= c, LowV= 0, TopVar= b, Name = "nor2" (a+b)'
-    // After checking the computed table, the previous row should return 5
-    BDD_ID neg_a = mg1->neg(a); //Addition of neg (a)
+    BDD_ID neg_a = mg1->neg(a);               // BDD_ID= 4, HighV= 0, LowV= 1, TopVar= a, Name = "a'"
+    BDD_ID neg_b = mg1->neg(b);               // BDD_ID= 5, HighV= 0, LowV= 1, TopVar= a, Name = "b'"
+    BDD_ID r = mg1->ite(a, 0, neg_b);      // BBB_ID= 6, HighV= 1, LowV= b, TopVar= a, Name = "nor" (a+b)'
+    BDD_ID nor_op = mg1->nor2(a,b);           // BBB_ID= 7, HighV= c, LowV= 0, TopVar= b, Name = "nor2" (a+b)'
+    // After looking in the computed table, the previous lines should return the same ID
 
-    uTableVal *result = mg1->getuTableVal(g);
+    uTableVal *result = mg1->getuTableVal(r);
     uTableVal *result_or = mg1->getuTableVal(nor_op);
 
     ASSERT_EQ(result->topVar, result_or->topVar);
