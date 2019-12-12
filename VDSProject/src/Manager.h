@@ -117,7 +117,7 @@ public:
     /**
      * \returns the positive cofactor of the function defined by node f.
 	 */
-    //virtual BDD_ID coFactorTrue (const BDD_ID f) = 0;
+    BDD_ID coFactorTrue (const BDD_ID f);
     /**
      * \returns the negative cofactor of the function defined by node f.
 	 */
@@ -125,43 +125,43 @@ public:
     /**
      * \returns a BDD node that represents the correlating "and" function
 	 */
-    //virtual BDD_ID and2 (const BDD_ID a, const BDD_ID b) = 0;
+    BDD_ID and2 (const BDD_ID a, const BDD_ID b);
     /**
      * \returns a BDD node that represents the correlating "or" function
 	 */
-    //virtual BDD_ID or2 (const BDD_ID a, const BDD_ID b) = 0;
+    BDD_ID or2 (const BDD_ID a, const BDD_ID b);
     /**
      * \returns a BDD node that represents the correlating "xor" function
 	 */
-    //virtual BDD_ID xor2 (const BDD_ID a, const BDD_ID b) = 0;
+    BDD_ID xor2 (const BDD_ID a, const BDD_ID b);
     /**
      * \returns a BDD node that represents the correlating "neg" function
 	 */
-    //virtual BDD_ID neg (const BDD_ID a) = 0;
+    BDD_ID neg (const BDD_ID a);
     /**
      * \returns a BDD node that represents the correlating "nand" function
 	 */
-    //virtual BDD_ID nand2 (const BDD_ID a, const BDD_ID b) = 0;
+    BDD_ID nand2 (const BDD_ID a, const BDD_ID b);
     /**
      * \returns a BDD node that represents the correlating "nor" function
 	 */
-    //virtual BDD_ID nor2 (const BDD_ID a, const BDD_ID b) = 0;
+    BDD_ID nor2 (const BDD_ID a, const BDD_ID b);
     /**
      * \returns the Name of top variable of the BDD node root
 	 */
-    //virtual std::string getTopVarName (const BDD_ID & root) = 0;
+    //std::string getTopVarName (const BDD_ID & root);
     /**
      * \returns the set of BDD nodes which are reachable from the BDD node root (including itself).
 	 */
-    //virtual void findNodes (const BDD_ID & root, std::set<BDD_ID> & nodes_of_root) = 0;
+    //void findNodes (const BDD_ID & root, std::set<BDD_ID> & nodes_of_root);
     /**
      * \returns the set of variables which are either top variable of the BDD node root or the reachable nodes from root.
 	 */
-    //virtual void findVars (const BDD_ID & root, std::set<BDD_ID> & vars_of_root) = 0;
+    //void findVars (const BDD_ID & root, std::set<BDD_ID> & vars_of_root);
     /**
      * \returns the number of the nodes currently exist in the unique table of the Manager class.
 	 */
-    //virtual size_t uniqueTableSize() = 0;
+    size_t uniqueTableSize();
 
 
 

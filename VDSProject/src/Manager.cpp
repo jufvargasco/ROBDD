@@ -18,6 +18,10 @@ const BDD_ID &Manager::False() {
 }
 
 BDD_ID Manager::createVar (const std::string &label){
+    for(auto it : uniqTable) {
+        if (it.second->label == label )
+            throw std::runtime_error("This label already exists in the unique Table");
+    }
     BDD_ID  new_id = (uniqTable.rbegin()->first) + 1;
     auto *var = new uTableVal(label, 1, 0, new_id);
     uniqTable.insert(std::pair <BDD_ID, uTableVal*> (new_id, var));
@@ -40,18 +44,15 @@ BDD_ID Manager::topVar (const BDD_ID f){
 
 BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     // Terminal case
-    if(i==1){
+    if(i==1){  /** ite(1, f, g) = f*/
         return t;
-    } else if (i==0){
+    } else if (i==0){ /** ite(0, g, f) = f*/
         return e;
-    } else if (this->isVariable(i) && t==1 && e==0){
+    } else if (this->isConstant(i)==false && t==1 && e==0){ /** ite(f, 1, 0) = f */
         return i;
     }
     // Repeated case --> after being able of creating one
     // Get top variable
-    uTableVal *f = getuTableVal(i);
-    uTableVal *g = getuTableVal(t);
-    uTableVal *h = getuTableVal(e);
     BDD_ID top_var = this->topVar(i);
     if ((this->topVar(t) < top_var) && (this->topVar(t) > 1)){
         top_var = this->topVar(t);
@@ -59,8 +60,9 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     if ((this->topVar(e) < top_var) && (this->topVar(e) > 1)){
         top_var = this->topVar(e);
     }
-    BDD_ID r_high = ite(f->highV,t,e);   // Change t,e after implementing cofactor functions
-    BDD_ID r_low = ite(f->lowV,t,e);     // Change t,e after implementing cofactor functions
+    BDD_ID r_high = ite(coFactorTrue(i,top_var),coFactorTrue(t,top_var),coFactorTrue(e,top_var));
+    BDD_ID r_low = ite(coFactorFalse(i,top_var),coFactorFalse(t,top_var),coFactorFalse(e,top_var));
+
     if (r_high == r_low) {
         return r_high;
     }
@@ -129,6 +131,42 @@ BDD_ID Manager::coFactorTrue(const BDD_ID f, BDD_ID x) {
     BDD_ID tru = coFactorTrue (f_tableEntry->highV, x);
     BDD_ID fal = coFactorTrue (f_tableEntry->lowV, x);
     return ite(f_tableEntry->topVar, tru, fal);
+}
+
+BDD_ID Manager::coFactorFalse(const BDD_ID f) {
+    return this->coFactorFalse(f, this->topVar(f));
+}
+
+BDD_ID Manager::coFactorTrue(const BDD_ID f) {
+    return this->coFactorTrue(f, this->topVar(f));
+}
+
+BDD_ID Manager::and2 (const BDD_ID a, const BDD_ID b){
+    return this->ite(a,b,0);
+}
+
+BDD_ID Manager::or2 (const BDD_ID a, const BDD_ID b){
+    return this->ite(a,1,b);
+}
+
+BDD_ID Manager::xor2 (const BDD_ID a, const BDD_ID b){
+    return this->ite(a,neg(b),b);
+}
+
+BDD_ID Manager::neg (const BDD_ID a){
+    return this->ite(a,0,1);
+}
+
+BDD_ID Manager::nand2 (const BDD_ID a, const BDD_ID b){
+    return this->ite(a,neg(b),1);
+}
+
+BDD_ID Manager::nor2 (const BDD_ID a, const BDD_ID b){
+    return this->ite(a, 0, neg(b));
+}
+
+size_t Manager::uniqueTableSize(){
+    return uniqTable.size();
 }
 
 Manager::~Manager() {

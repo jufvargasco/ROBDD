@@ -59,35 +59,35 @@ public:
     /**
      * \returns the positive cofactor of the function defined by node f.
 	 */
-    //virtual BDD_ID coFactorTrue (const BDD_ID f) = 0;
+    virtual BDD_ID coFactorTrue (const BDD_ID f) = 0;
     /**
      * \returns the negative cofactor of the function defined by node f.
 	 */
-    //virtual BDD_ID coFactorFalse (const BDD_ID f) = 0;
+    virtual BDD_ID coFactorFalse (const BDD_ID f) = 0;
     /**
      * \returns a BDD node that represents the correlating "and" function
 	 */
-    //virtual BDD_ID and2 (const BDD_ID a, const BDD_ID b) = 0;
+    virtual BDD_ID and2 (const BDD_ID a, const BDD_ID b) = 0;
     /**
      * \returns a BDD node that represents the correlating "or" function
 	 */
-    //virtual BDD_ID or2 (const BDD_ID a, const BDD_ID b) = 0;
+    virtual BDD_ID or2 (const BDD_ID a, const BDD_ID b) = 0;
     /**
      * \returns a BDD node that represents the correlating "xor" function
 	 */
-    //virtual BDD_ID xor2 (const BDD_ID a, const BDD_ID b) = 0;
+    virtual BDD_ID xor2 (const BDD_ID a, const BDD_ID b) = 0;
     /**
      * \returns a BDD node that represents the correlating "neg" function
 	 */
-    //virtual BDD_ID neg (const BDD_ID a) = 0;
+    virtual BDD_ID neg (const BDD_ID a) = 0;
     /**
      * \returns a BDD node that represents the correlating "nand" function
 	 */
-    //virtual BDD_ID nand2 (const BDD_ID a, const BDD_ID b) = 0;
+    virtual BDD_ID nand2 (const BDD_ID a, const BDD_ID b) = 0;
     /**
      * \returns a BDD node that represents the correlating "nor" function
 	 */
-    //virtual BDD_ID nor2 (const BDD_ID a, const BDD_ID b) = 0;
+    virtual BDD_ID nor2 (const BDD_ID a, const BDD_ID b) = 0;
     /**
      * \returns the Name of top variable of the BDD node root
 	 */
@@ -103,7 +103,7 @@ public:
     /**
      * \returns the number of the nodes currently exist in the unique table of the Manager class.
 	 */
-    //virtual size_t uniqueTableSize() = 0;
+    virtual size_t uniqueTableSize() = 0;
 };
 #endif
 
