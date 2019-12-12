@@ -160,7 +160,7 @@ BDD_ID Manager::nor2 (const BDD_ID a, const BDD_ID b){
 }
 
 size_t Manager::uniqueTableSize(){
-    return 0;
+    return uniqTable.size();
 }
 
 Manager::~Manager() {
