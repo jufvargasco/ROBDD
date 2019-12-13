@@ -157,7 +157,7 @@ public:
     /**
      * \returns the set of variables which are either top variable of the BDD node root or the reachable nodes from root.
 	 */
-    //void findVars (const BDD_ID & root, std::set<BDD_ID> & vars_of_root);
+    void findVars (const BDD_ID & root, std::set<BDD_ID> & vars_of_root);
     /**
      * \returns the number of the nodes currently exist in the unique table of the Manager class.
 	 */
