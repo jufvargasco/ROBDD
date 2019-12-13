@@ -485,15 +485,15 @@ TEST_F(ManagerTest, findNodes_Test) {
     std::set<BDD_ID> obtained_c;
     std::set<BDD_ID> obtained_d;
 
-    std::set<BDD_ID> expected_a = {2, 3, 4, 5, 0, 1};
-    std::set<BDD_ID> expected_b = {3, 4, 5, 0, 1};
-    std::set<BDD_ID> expected_c = {4, 5, 0, 1};
+    std::set<BDD_ID> expected_a = {9, 8, 7, 5, 0, 1};
+    std::set<BDD_ID> expected_b = {8, 7, 5, 0, 1};
+    std::set<BDD_ID> expected_c = {7, 5, 0, 1};
     std::set<BDD_ID> expected_d = {5, 0, 1};
 
-    mg1->findNodes(a, obtained_a);
-    mg1->findNodes(b, obtained_b);
-    mg1->findNodes(c, obtained_c);
-    mg1->findNodes(d, obtained_d);
+    mg1->findNodes(9, obtained_a);
+    mg1->findNodes(8, obtained_b);
+    mg1->findNodes(7, obtained_c);
+    mg1->findNodes(5, obtained_d);
 
     ASSERT_EQ(obtained_a, expected_a);
     ASSERT_EQ(obtained_b, expected_b);
