@@ -76,8 +76,8 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
         return r_high;
     }
     BDD_ID r = find_or_add_uTable(top_var,r_high,r_low);
-    auto *ite_key = new cTableKey(i,t,e);
-    compTable.insert(std::pair <BDD_ID ,cTableKey*> (r, ite_key));
+    auto *ite_key = new cTableVal(i,t,e);
+    compTable.insert(std::pair <BDD_ID ,cTableVal*> (r, ite_key));
     return r;
 }
 
@@ -175,11 +175,6 @@ size_t Manager::uniqueTableSize(){
     return uniqTable.size();
 }
 
-Manager::~Manager() {
-    uniqTable.clear();
-    compTable.clear();
-}
-
 void Manager::findNodes(const BDD_ID &root, std::set<BDD_ID> &nodes_of_root) {
     nodes_of_root.insert(root);
     uTableVal *table_entry = getuTableVal(root);
@@ -198,6 +193,7 @@ void Manager::findVars(const BDD_ID &root, std::set<BDD_ID> &vars_of_root) {
     }
 }
 
-
-
-
+Manager::~Manager() {
+    uniqTable.clear();
+    compTable.clear();
+}

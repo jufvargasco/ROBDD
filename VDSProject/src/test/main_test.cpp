@@ -463,6 +463,9 @@ TEST_F(ManagerTest,Example_Test) {
     BDD_ID and_67 = mg1->and2(or_ab,and_cd);    // BDD_ID= 8, HighV= and_cd, LowV= 0, TopVar= b, Name = "and or and"
 }
 
+/**
+* Test for Unique Table Size
+*/
 TEST_F(ManagerTest,uniqueTableSize_Test) {
     BDD_ID a = mg1->createVar("a");     // BDD_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
     BDD_ID b = mg1->createVar("b");     // BDD_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
@@ -470,6 +473,9 @@ TEST_F(ManagerTest,uniqueTableSize_Test) {
     ASSERT_EQ(mg1->uniqueTableSize(),4);
 }
 
+/**
+* Test for function findNodes()
+*/
 TEST_F(ManagerTest, findNodes_Test) {
     BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
     BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
@@ -502,6 +508,9 @@ TEST_F(ManagerTest, findNodes_Test) {
 
 }
 
+/**
+* Test for function findVars()
+*/
 TEST_F(ManagerTest, findVars_Test) {
     BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
     BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
