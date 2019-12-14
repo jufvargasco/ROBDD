@@ -94,7 +94,7 @@ public:
     /**
      * \returns the Name of top variable of the BDD node root
 	 */
-    //virtual std::string getTopVarName (const BDD_ID & root) = 0;
+    virtual std::string getTopVarName (const BDD_ID & root) = 0;
     /**
      * \returns the set of BDD nodes which are reachable from the BDD node root (including itself).
 	 */

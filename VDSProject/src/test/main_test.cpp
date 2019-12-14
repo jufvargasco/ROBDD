@@ -474,6 +474,22 @@ TEST_F(ManagerTest,uniqueTableSize_Test) {
 }
 
 /**
+* Test for getTopVarName()
+*/
+TEST_F(ManagerTest,getTopVarName_Test) {
+    BDD_ID a = mg1->createVar("a");     // BDD_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
+    BDD_ID b = mg1->createVar("b");     // BDD_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
+    BDD_ID c = mg1->createVar("c");     // BDD_ID= 4, HighV= 1, LowV= 0, TopVar= c, Name = "c"
+
+    BDD_ID top_a = mg1->and2(a,b);
+    ASSERT_EQ(mg1->getTopVarName(top_a),"a");
+    BDD_ID top_b = mg1->or2(c,b);
+    ASSERT_EQ(mg1->getTopVarName(top_b),"b");
+    BDD_ID top_c = mg1->neg(c);
+    ASSERT_EQ(mg1->getTopVarName(top_c),"c");
+}
+
+/**
 * Test for function findNodes()
 */
 TEST_F(ManagerTest, findNodes_Test) {
