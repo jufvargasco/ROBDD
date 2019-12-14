@@ -171,6 +171,9 @@ TEST_F(ManagerTest,ite_repeated_Test){
     ASSERT_EQ(or_2,5);
 }
 
+/********************************************************************//**
+    *  Tests for Cofactor functions
+    ************************************************************************/
 /**
  * Test for coFactorFalse(f,x)
  */
@@ -245,7 +248,9 @@ TEST_F(ManagerTest,coFactorTruef_Test) {
     ASSERT_EQ(mg1->coFactorTrue(g), 1); /** Test case of or function, expected value: 1*/
     ASSERT_EQ(mg1->coFactorTrue(h), 1); /** Test case of a+(b*c) function,  expected value 1*/
 }
-
+/********************************************************************//**
+    *  Tests for logical function
+    ************************************************************************/
 /**
 * Test for AND2
 */
@@ -452,16 +457,6 @@ TEST_F(ManagerTest,nor2_Test) {
     ASSERT_EQ(nor_op8,0);
 }
 
-TEST_F(ManagerTest,Example_Test) {
-    BDD_ID a = mg1->createVar("a");     // BDD_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
-    BDD_ID b = mg1->createVar("b");     // BDD_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
-    BDD_ID c = mg1->createVar("c");     // BDD_ID= 4, HighV= 1, LowV= 0, TopVar= c, Name = "c"
-    BDD_ID d = mg1->createVar("d");     // BDD_ID= 5, HighV= 1, LowV= 0, TopVar= d, Name = "d"
-
-    BDD_ID or_ab = mg1->or2(a,b);              // BDD_ID= 6, HighV= 1, LowV= b, TopVar= a, Name = "or"
-    BDD_ID and_cd = mg1->and2(c,d);            // BDD_ID= 7, HighV= d, LowV= 0, TopVar= c, Name = "and"
-    BDD_ID and_67 = mg1->and2(or_ab,and_cd);    // BDD_ID= 8, HighV= and_cd, LowV= 0, TopVar= b, Name = "and or and"
-}
 
 /**
 * Test for Unique Table Size
@@ -551,6 +546,47 @@ TEST_F(ManagerTest, findVars_Test) {
     mg1->findVars(5, obtained_d);
     mg1->findVars(7, obtained_c);
     mg1->findVars(8, obtained_b);
+
+    ASSERT_EQ(obtained_a, expected_a);
+    ASSERT_EQ(obtained_b, expected_b);
+    ASSERT_EQ(obtained_c, expected_c);
+    ASSERT_EQ(obtained_d, expected_d);
+}
+
+
+/**
+* Test for Class Example
+*/
+TEST_F(ManagerTest,Example_Test) {
+    BDD_ID a = mg1->createVar("a");     // BDD_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
+    BDD_ID b = mg1->createVar("b");     // BDD_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
+    BDD_ID c = mg1->createVar("c");     // BDD_ID= 4, HighV= 1, LowV= 0, TopVar= c, Name = "c"
+    BDD_ID d = mg1->createVar("d");     // BDD_ID= 5, HighV= 1, LowV= 0, TopVar= d, Name = "d"
+
+    BDD_ID and_1 = mg1->and2(a,b);              // BDD_ID= 6, HighV= 1, LowV= b, TopVar= a, Name = "and ab"
+    BDD_ID and_2 = mg1->and2(c,d);            // BDD_ID= 7, HighV= 1, LowV= d, TopVar= c, Name = "and cd"
+    BDD_ID or_1 = mg1->or2(and_1,and_2);    // BDD_ID= 8, HighV= 1, LowV= and_2, TopVar= b, Name = "or_1"
+                                            // BDD_ID= 9, HighV= or_1 (8), LowV=and_2 , TopVar= a, Name = "and or and"
+
+    ASSERT_EQ(mg1->getTopVarName(and_1),"a");
+    ASSERT_EQ(mg1->getTopVarName(and_2),"c");
+    ASSERT_EQ(mg1->getTopVarName(8),"b");
+    ASSERT_EQ(mg1->getTopVarName(or_1),"a");
+
+    std::set<BDD_ID> obtained_a;
+    std::set<BDD_ID> obtained_b;
+    std::set<BDD_ID> obtained_c;
+    std::set<BDD_ID> obtained_d;
+
+    std::set<BDD_ID> expected_a = {9, 8, 7, 5, 0, 1};
+    std::set<BDD_ID> expected_b = {8, 7, 5, 0, 1};
+    std::set<BDD_ID> expected_c = {7, 5, 0, 1};
+    std::set<BDD_ID> expected_d = {5, 0, 1};
+
+    mg1->findNodes(9, obtained_a);
+    mg1->findNodes(8, obtained_b);
+    mg1->findNodes(7, obtained_c);
+    mg1->findNodes(5, obtained_d);
 
     ASSERT_EQ(obtained_a, expected_a);
     ASSERT_EQ(obtained_b, expected_b);

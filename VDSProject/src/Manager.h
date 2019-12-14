@@ -105,7 +105,7 @@ public:
 	 */
     BDD_ID topVar (const BDD_ID f);
     /**
-	 * doCreates a new variable for the BDD.
+	 * Creates a new variable for the BDD.
 	 */
     BDD_ID createVar (const std::string &label);
     /**
