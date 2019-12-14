@@ -176,7 +176,8 @@ size_t Manager::uniqueTableSize(){
 }
 
 std::string Manager::getTopVarName (const BDD_ID & root){
-    return "not_implemented";
+    uTableVal *data = uniqTable[topVar(root)];
+    return data->label;
 }
 
 void Manager::findNodes(const BDD_ID &root, std::set<BDD_ID> &nodes_of_root) {
