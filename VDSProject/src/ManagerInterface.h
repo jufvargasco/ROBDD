@@ -13,6 +13,9 @@
 
 typedef int BDD_ID;
 
+/**
+ * \brief Defines the implemented interface
+ */
 class ManagerInterface{
 public:
     /**
@@ -91,15 +94,15 @@ public:
     /**
      * \returns the Name of top variable of the BDD node root
 	 */
-    //virtual std::string getTopVarName (const BDD_ID & root) = 0;
+    virtual std::string getTopVarName (const BDD_ID & root) = 0;
     /**
      * \returns the set of BDD nodes which are reachable from the BDD node root (including itself).
 	 */
-    //virtual void findNodes (const BDD_ID & root, std::set<BDD_ID> & nodes_of_root) = 0;
+    virtual void findNodes (const BDD_ID & root, std::set<BDD_ID> & nodes_of_root) = 0;
     /**
      * \returns the set of variables which are either top variable of the BDD node root or the reachable nodes from root.
 	 */
-    //virtual void findVars (const BDD_ID & root, std::set<BDD_ID> & vars_of_root) = 0;
+    virtual void findVars (const BDD_ID & root, std::set<BDD_ID> & vars_of_root) = 0;
     /**
      * \returns the number of the nodes currently exist in the unique table of the Manager class.
 	 */

@@ -18,10 +18,15 @@
 namespace ClassProject {
 }
 /**
-	 * \brief struct uTableVal
+	 * \brief Struct used as value in the unique table
 	 *
-	 * This data structure contains the values corresponding to the unique table of the BDD
-	 * including Label, High, Low, and top variable
+	 * This data structure contains the corresponding information of a node in the unique table of the BDD
+	 * (excluding its ID, which comes aside).
+	 * It includes the following elements:
+	 *  - Label: name assigned to the node for better human comprehension
+	 *  - High: ID of the node representing the positive cofactor.
+	 *  - Low: ID of the node representing the negative cofactor.
+	 *  - Top variable: ID of the top variable reachable from the node.
 	 */
 struct uTableVal {
 
@@ -40,18 +45,17 @@ struct uTableVal {
 };
 
 /**
-	 * \brief struct cTableKey
+	 * \brief Struct used as value in the computed table
 	 *
-	 * This data structure contains the values corresponding to the computed table of the BDD.
-	 * Includes the three parameters of the ite() function.
+	 * This data structure contains the arguments of previously calculated i-t-e combinations
 	 */
-struct cTableKey {
+struct cTableVal {
 
     BDD_ID i;
     BDD_ID t;
     BDD_ID e;
 
-    cTableKey(BDD_ID _i, BDD_ID _t, BDD_ID _e)
+    cTableVal(BDD_ID _i, BDD_ID _t, BDD_ID _e)
     {
         i = _i;
         t = _t;
@@ -59,6 +63,9 @@ struct cTableKey {
     }
 };
 
+/**
+ * \brief Implements the interface
+ */
 class Manager : public ManagerInterface {
 public:
     /**
@@ -189,7 +196,7 @@ public:
 private:
     std::map<BDD_ID ,uTableVal*> uniqTable;
     // Use of the ite values as key to use the find function with them
-    std::map<BDD_ID ,cTableKey*> compTable;
+    std::map<BDD_ID ,cTableVal*> compTable;
     const BDD_ID _true = 1;
     const BDD_ID _false = 0;
 };

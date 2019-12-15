@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['manager',['Manager',['../classManager.html',1,'']]],
-  ['managerinterface',['ManagerInterface',['../classManagerInterface.html',1,'']]]
+  ['ctableval',['cTableVal',['../structcTableVal.html',1,'']]]
 ];
