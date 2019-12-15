@@ -198,6 +198,10 @@ void Manager::findVars(const BDD_ID &root, std::set<BDD_ID> &vars_of_root) {
     }
 }
 
+std::string Manager::getTopVarName(const BDD_ID &root) {
+    return std::string("");
+}
+
 
 
 
