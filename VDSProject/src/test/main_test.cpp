@@ -83,34 +83,21 @@ TEST_F(ManagerTest,createVar_repeated_label)
  * Test for isConstant function
  * Checks the function with the leaf node "0", expected value= True
  * Checks the function with the variable "a", expected value= False
- * Checks the function with the "or" function node, expected value = False
  */
 TEST_F(ManagerTest,isConstant_Test){
-
-    BDD_ID a = mg1->createVar("a");     // BDD_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
-    BDD_ID b = mg1->createVar("b");     // BDD_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
-    BDD_ID f = mg1->ite(a, 1, b);          // BDD_ID= 4, HighV= 1, LowV= b, TopVar= a, Name = "or"
-
     ASSERT_EQ(mg1->isConstant(0),true);
-    ASSERT_EQ(mg1->isConstant(a),false);
-    ASSERT_EQ(mg1->isVariable(f),false);
+    BDD_ID id = mg1->createVar("a");
+    ASSERT_EQ(mg1->isConstant(id),false);
 }
 /**
  * Test for isVariable function
  * Checks the function with the leaf node "0", expected value= False
  * Checks the function with the variable "a", expected value= True
- * Checks the function with the "or" function node, expected value = False
  */
 TEST_F(ManagerTest,isVariable_Test){
-
-    BDD_ID a = mg1->createVar("a");     // BDD_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
-    BDD_ID b = mg1->createVar("b");     // BDD_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
-    BDD_ID f = mg1->ite(a, 1, b);          // BDD_ID= 4, HighV= 1, LowV= b, TopVar= a, Name = "or"
-
     ASSERT_EQ(mg1->isVariable(0),false);
-    ASSERT_EQ(mg1->isVariable(a),true);
-    ASSERT_EQ(mg1->isVariable(f),false);
-
+    BDD_ID id = mg1->createVar("a");
+    ASSERT_EQ(mg1->isVariable(id),true);
 }
 /**
  * Test for topVar function
@@ -121,23 +108,6 @@ TEST_F(ManagerTest,topVar_Test){
     ASSERT_EQ(mg1->topVar(1),1);
     BDD_ID id = mg1->createVar("a");
     ASSERT_EQ(mg1->topVar(id),2);
-}
-
-/** Test for getTopVarName function
- * Checks the the top variable of the leaf node "1", expected value = "1"
- * Creates the variable "a" and checks its top variable, expected value = "a"
- * Creates the function "or" and checks its top variable, expected value = "a"
-
- */
-TEST_F(ManagerTest,getTopVarName_Test){
-
-    BDD_ID a = mg1->createVar("a");
-    BDD_ID b = mg1->createVar("b");
-    BDD_ID _or = mg1->or2(b, a);
-    ASSERT_EQ(mg1->getTopVarName(1).compare("1"), 0);
-    ASSERT_EQ(mg1->getTopVarName(a).compare("a"),0);
-    ASSERT_EQ(mg1->getTopVarName(_or).compare("a"),0);
-
 }
 
 /********************************************************************//**
@@ -201,9 +171,6 @@ TEST_F(ManagerTest,ite_repeated_Test){
     ASSERT_EQ(or_2,5);
 }
 
-/********************************************************************//**
-    *  Tests for Cofactor functions
-    ************************************************************************/
 /**
  * Test for coFactorFalse(f,x)
  */
@@ -278,9 +245,7 @@ TEST_F(ManagerTest,coFactorTruef_Test) {
     ASSERT_EQ(mg1->coFactorTrue(g), 1); /** Test case of or function, expected value: 1*/
     ASSERT_EQ(mg1->coFactorTrue(h), 1); /** Test case of a+(b*c) function,  expected value 1*/
 }
-/********************************************************************//**
-    *  Tests for logical function
-    ************************************************************************/
+
 /**
 * Test for AND2
 */
@@ -414,7 +379,7 @@ TEST_F(ManagerTest,neg_Test) {
 }
 
 /**
-* Test for NAND2
+* Test for AND2
 */
 TEST_F(ManagerTest,nand2_Test) {
     BDD_ID a = mg1->createVar("a");     // BDD_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
@@ -487,42 +452,13 @@ TEST_F(ManagerTest,nor2_Test) {
     ASSERT_EQ(nor_op8,0);
 }
 
-
-/**
-* Test for Unique Table Size
-*/
 TEST_F(ManagerTest,uniqueTableSize_Test) {
     BDD_ID a = mg1->createVar("a");     // BDD_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
     BDD_ID b = mg1->createVar("b");     // BDD_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
+
     ASSERT_EQ(mg1->uniqueTableSize(),4);
-
-    BDD_ID _or = mg1->and2(a,b);              // BDD_ID= 4, HighV= 3, LowV= 0, TopVar= a, Name = "and"
-    ASSERT_EQ(mg1->uniqueTableSize(),5);
-
 }
 
-/**
- * Test for the findNodes function; the OBDD of the function f=(a+b)*c*d is made
- */
-/**
-* Test for getTopVarName()
-*/
-TEST_F(ManagerTest,getTopVarName_Test) {
-    BDD_ID a = mg1->createVar("a");     // BDD_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
-    BDD_ID b = mg1->createVar("b");     // BDD_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
-    BDD_ID c = mg1->createVar("c");     // BDD_ID= 4, HighV= 1, LowV= 0, TopVar= c, Name = "c"
-
-    BDD_ID top_a = mg1->and2(a,b);
-    ASSERT_EQ(mg1->getTopVarName(top_a),"a");
-    BDD_ID top_b = mg1->or2(c,b);
-    ASSERT_EQ(mg1->getTopVarName(top_b),"b");
-    BDD_ID top_c = mg1->neg(c);
-    ASSERT_EQ(mg1->getTopVarName(top_c),"c");
-}
-
-/**
-* Test for function findNodes()
-*/
 TEST_F(ManagerTest, findNodes_Test) {
     BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
     BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
@@ -555,9 +491,6 @@ TEST_F(ManagerTest, findNodes_Test) {
 
 }
 
-/**
- * Test for the findVars function; the OBDD of the function f=(a+b)*c*d is made
- */
 TEST_F(ManagerTest, findVars_Test) {
     BDD_ID a = mg1->createVar("a");     // BBB_ID= 2, HighV= 1, LowV= 0, TopVar= a, Name = "a"
     BDD_ID b = mg1->createVar("b");     // BBB_ID= 3, HighV= 1, LowV= 0, TopVar= b, Name = "b"
@@ -587,6 +520,7 @@ TEST_F(ManagerTest, findVars_Test) {
     ASSERT_EQ(obtained_b, expected_b);
     ASSERT_EQ(obtained_c, expected_c);
     ASSERT_EQ(obtained_d, expected_d);
+
 }
 
 
@@ -602,7 +536,7 @@ TEST_F(ManagerTest,Example_Test) {
     BDD_ID and_1 = mg1->and2(a,b);              // BDD_ID= 6, HighV= 1, LowV= b, TopVar= a, Name = "and ab"
     BDD_ID and_2 = mg1->and2(c,d);            // BDD_ID= 7, HighV= 1, LowV= d, TopVar= c, Name = "and cd"
     BDD_ID or_1 = mg1->or2(and_1,and_2);    // BDD_ID= 8, HighV= 1, LowV= and_2, TopVar= b, Name = "or_1"
-                                            // BDD_ID= 9, HighV= or_1 (8), LowV=and_2 , TopVar= a, Name = "and or and"
+    // BDD_ID= 9, HighV= or_1 (8), LowV=and_2 , TopVar= a, Name = "and or and"
 
     ASSERT_EQ(mg1->getTopVarName(and_1),"a");
     ASSERT_EQ(mg1->getTopVarName(and_2),"c");
@@ -628,5 +562,101 @@ TEST_F(ManagerTest,Example_Test) {
     ASSERT_EQ(obtained_b, expected_b);
     ASSERT_EQ(obtained_c, expected_c);
     ASSERT_EQ(obtained_d, expected_d);
+
+}
+
+/**
+ * General test on a slightly more complex function: f=ab xor ((!b+c) nor (d nand e))
+ */
+
+TEST_F(ManagerTest, general_Test) {
+    BDD_ID a = mg1->createVar("a");
+    BDD_ID b = mg1->createVar("b");
+    BDD_ID c = mg1->createVar("c");
+    BDD_ID d = mg1->createVar("d");
+    BDD_ID e = mg1->createVar("e");
+
+    BDD_ID _neg = mg1->neg(b);
+    BDD_ID _and = mg1->and2(a, b);
+    BDD_ID _nand = mg1->nand2(d, e);
+    BDD_ID _or = mg1->or2(_neg, c);
+    BDD_ID _nor = mg1->nor2(_or, _nand);
+    BDD_ID f = mg1->xor2(_and, _nor);
+
+    uTableVal entries[19] = {
+            {"0", 0, 0, 0},            //0
+            {"1", 1, 1, 1},             //1
+            {"a", 1, 0, 2},             //a
+            {"b", 1, 0, 3},             //b
+            {"c", 1, 0, 4},             //c
+            {"d", 1, 0, 5},             //d
+            {"e", 1, 0, 6},             //e
+
+            {"", 0, 1, 3},             //neg(b)
+            {"", 3, 0, 2},              //and(a,b)
+            {"", 0, 1, 6},              //neg(e), required for the following nand operation
+            {"", 9, 1, 5},             //nand(d,e)
+            {"", 4, 1, 3},             //or(neg(b),c)
+            {"", 6, 0, 5},             //neg(10), required for the following nor operation
+            {"", 0, 12, 4},            //ite(4,0,12) -> a non terminal case while resolving the nor
+            {"", 13, 0, 3},            //nor(or(neg(b),c)nand(d,e))
+            {"", 1, 10, 4},            //ite(4,1,10) required for the following neg operation; two entries ite(6, 0, 1) and ite(5, 9, 1) are needed before this step but are already created and should not repeat here
+            {"", 15, 1, 3},            //neg(14)
+            {"", 15, 0, 3},            //ite(3,16,14) reduced to the appropriate values when b=1 or 0
+            {"", 17, 14, 2}           //top node
+    };
+
+
+    for (int i =0; i < 19; ++i)  {
+        ASSERT_EQ(mg1->getuTableVal(i)->topVar, entries[i].topVar);
+        ASSERT_EQ(mg1->getuTableVal(i)->highV, entries[i].highV);
+        ASSERT_EQ(mg1->getuTableVal(i)->lowV, entries[i].lowV);
+    }
+
+    std::set<BDD_ID> nodes_of_a = {18, 17, 14, 13, 15, 12, 10, 6, 9, 0, 1};
+    std::set<BDD_ID> nodes_of_b_false = {14, 13, 12, 6, 0, 1};
+    std::set<BDD_ID> nodes_of_b_true = {17, 15, 10, 9, 0, 1};
+    std::set<BDD_ID> nodes_of_c_true = {15, 10, 9, 0, 1};
+    std::set<BDD_ID> nodes_of_d_false = {12, 6, 0, 1};
+    std::set<BDD_ID> nodes_of_e_true = {9, 0, 1};
+
+    /**
+     *                      a(18)
+     *                     / \
+     *                   /    \
+     *                 /       \
+     *               /          \
+     *             b(14)        b(17)
+     *            / \          / \
+     *          /    \        /   \
+     *         0  c(13)      0     c(15)
+     *           / \              / \
+     *         /    \           /    \
+     *      d(12)   0         d(10)   1
+     *      / \               / \
+     *    0    e(6)          1   e(9)
+     *        / \               / \
+     *       0  1              1  0
+     *
+     *       The ROBDD corresponds to the table in the array entries and should pass the following findNodes() tests
+     */
+
+    std::set<BDD_ID> result_a, result_b_false, result_b_true, result_c_true, result_d_false, result_e_true;
+    mg1->findNodes(18, result_a);
+    mg1->findNodes(14, result_b_false);
+    mg1->findNodes(17, result_b_true);
+    mg1->findNodes(15, result_c_true);
+    mg1->findNodes(12, result_d_false);
+    mg1->findNodes(9, result_e_true);
+
+    ASSERT_EQ(nodes_of_a, result_a);
+    ASSERT_EQ(nodes_of_b_false, result_b_false);
+    ASSERT_EQ(nodes_of_b_true, result_b_true);
+    ASSERT_EQ(nodes_of_c_true, result_c_true);
+    ASSERT_EQ(nodes_of_d_false, result_d_false);
+    ASSERT_EQ(nodes_of_e_true, result_e_true);
+
+
+
 
 }
