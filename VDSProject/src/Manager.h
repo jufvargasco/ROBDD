@@ -23,7 +23,7 @@ namespace ClassProject {
 	 * This data structure contains the corresponding information of a node in the unique table of the BDD
 	 * (excluding its ID, which comes aside).
 	 * It includes the following elements:
-	 *  - Label: name assigned to the node for better human comprehension
+	 *  - Label: name assigned to the node for better human comprehension. Non-empty only for constants and variables.
 	 *  - High: ID of the node representing the positive cofactor.
 	 *  - Low: ID of the node representing the negative cofactor.
 	 *  - Top variable: ID of the top variable reachable from the node.
@@ -48,6 +48,10 @@ struct uTableVal {
 	 * \brief Struct used as value in the computed table
 	 *
 	 * This data structure contains the arguments of previously calculated i-t-e combinations
+	 * It includes the following elements:
+	 *  - i: the top variable (if condition)
+	 *  - t: positive cofactor of the node (then)
+	 *  - e: negative cofactor of the node (else)
 	 */
 struct cTableVal {
 
@@ -106,11 +110,12 @@ public:
     BDD_ID topVar (const BDD_ID f);
     /**
 	 * Creates a new variable for the BDD.
+     * \returns the ID assigned to that variable
 	 */
     BDD_ID createVar (const std::string &label);
     /**
 	 * Implements the if-then-else algorithm.
-     * \returns the new node that represents the ITE.
+     * \returns the new node ID that represents the ITE.
 	 */
     BDD_ID ite (const BDD_ID i, const BDD_ID t, const BDD_ID e);
     /**
@@ -154,15 +159,15 @@ public:
 	 */
     BDD_ID nor2 (const BDD_ID a, const BDD_ID b);
     /**
-     * \returns the Name of top variable of the BDD node root
+     * \returns the name of top variable of the BDD node root
 	 */
     std::string getTopVarName (const BDD_ID & root);
     /**
-     * \returns the set of BDD nodes which are reachable from the BDD node root (including itself).
+     * Fills the set of BDD nodes which are reachable from the BDD node root (including itself).
 	 */
     void findNodes (const BDD_ID & root, std::set<BDD_ID> & nodes_of_root);
     /**
-     * \returns the set of variables which are either top variable of the BDD node root or the reachable nodes from root.
+     * Fills the set with variables which are either top variable of the BDD node root or the reachable nodes from root.
 	 */
     void findVars (const BDD_ID & root, std::set<BDD_ID> & vars_of_root);
     /**

@@ -22,7 +22,7 @@ void ManagerTest::TearDown()
  * Checks the addition of '0' and '1' as terminal nodes
  */
 TEST_F(ManagerTest, Constructor_Test) {
-    ASSERT_EQ(mg1->utableEmpty(), false);
+    ASSERT_EQ(mg1->uniqueTableSize(), 2);
     uTableVal *o = mg1->getuTableVal(0);
     uTableVal *i = mg1->getuTableVal(1);
     ASSERT_EQ(o->label, "0");
@@ -656,7 +656,7 @@ TEST_F(ManagerTest, general_Test) {
     ASSERT_EQ(nodes_of_d_false, result_d_false);
     ASSERT_EQ(nodes_of_e_true, result_e_true);
 
-
+    ASSERT_EQ(mg1->uniqueTableSize(), 19);
 
 
 }
