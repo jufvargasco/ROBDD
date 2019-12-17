@@ -66,18 +66,13 @@ TEST_F(ManagerTest,createVar_Test){
 }
 /**
  * Test for repeated label when creating a variable
- * Checks whether a runtime exception is thrown when the label already exists
+ * Checks whether the function will return the same id for the "clone" variable
  */
-TEST_F(ManagerTest,createVar_repeated_label)
-{
-    try {
-        BDD_ID id2 = mg1->createVar("a");
-        BDD_ID id3 = mg1->createVar("a");
-        FAIL() << "Expected std::runtime_error";
-    }
-    catch(std::runtime_error const & err) {
-        EXPECT_EQ(err.what(),std::string("This label already exists in the unique Table"));
-    }
+TEST_F(ManagerTest,createVar_repeated_label) {
+    BDD_ID id2 = mg1->createVar("a");
+    BDD_ID id3 = mg1->createVar("a");
+
+    ASSERT_EQ(id3, id2);
 }
 /**
  * Test for isConstant function
@@ -506,10 +501,10 @@ TEST_F(ManagerTest, findVars_Test) {
     std::set<BDD_ID> obtained_c;
     std::set<BDD_ID> obtained_d;
 
-    std::set<BDD_ID> expected_a = {2, 3, 4, 5, 0, 1};
-    std::set<BDD_ID> expected_b = {3, 4, 5, 0, 1};
-    std::set<BDD_ID> expected_c = {4, 5, 0, 1};
-    std::set<BDD_ID> expected_d = {5, 0, 1};
+    std::set<BDD_ID> expected_a = {2, 3, 4, 5};
+    std::set<BDD_ID> expected_b = {3, 4, 5};
+    std::set<BDD_ID> expected_c = {4, 5};
+    std::set<BDD_ID> expected_d = {5};
 
     mg1->findVars(9, obtained_a);
     mg1->findVars(5, obtained_d);

@@ -34,7 +34,7 @@ BDD_ID Manager::topVar (const BDD_ID f){
 BDD_ID Manager::createVar (const std::string &label){
     for(auto it : uniqTable) {
         if (it.second->label == label )
-            throw std::runtime_error("This label already exists in the unique Table");
+            return it.first;
     }
     BDD_ID  new_id = (uniqTable.rbegin()->first) + 1;
     auto *var = new uTableVal(label, 1, 0, new_id);
@@ -160,7 +160,8 @@ void Manager::findVars(const BDD_ID &root, std::set<BDD_ID> &vars_of_root) {
     std::set<BDD_ID> nodes_of_root;
     findNodes(root, nodes_of_root);
     for (auto element : nodes_of_root)  {
-        vars_of_root.insert(getuTableVal(element)->topVar);
+        if (element != 0 && element != 1)
+            vars_of_root.insert(getuTableVal(element)->topVar);
     }
 }
 
