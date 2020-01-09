@@ -1,2 +1,5 @@
-./VDSProject/build/
+.build/
 .idea/
+.benchmarks/
+.src/bench/
+
