@@ -221,9 +221,9 @@ namespace ClassProject {
         BDD_ID find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_ID low);
 
     private:
-        std::map<BDD_ID, uTableVal *> uniqTable;
+        std::unordered_map<BDD_ID, uTableVal *> uniqTable;
         // Use of the ite values as key to use the find function with them
-        std::map<BDD_ID, cTableVal *> compTable;
+        std::unordered_map<BDD_ID, cTableVal *> compTable;
         const BDD_ID _true = 1;
         const BDD_ID _false = 0;
     };

@@ -8,7 +8,6 @@ Manager::Manager(){
     auto *i = new uTableVal("", 1, 1, 1);
     uniqTable.insert(std::pair <BDD_ID, uTableVal*> (_false, o));
     uniqTable.insert(std::pair <BDD_ID, uTableVal*> (_true, i));
-
 }
 
 const BDD_ID &Manager::True() {
@@ -33,11 +32,17 @@ BDD_ID Manager::topVar (const BDD_ID f){
 }
 
 BDD_ID Manager::createVar (const std::string &label){
-    for(auto it : uniqTable) {
-        if (it.second->label == label )
-            return it.first;
+    // for(auto it : uniqTable) {
+    BDD_ID last_id = 0;
+    for(auto it=uniqTable.begin(); it!=uniqTable.end(); ++it){
+        // Check if it's possible to get the last_id other way
+        // Creating a general variable would imply modifying the tests
+        if(it->first > last_id)
+            last_id = it->first;
+        if (it->second->label == label )
+            return it->first;
     }
-    BDD_ID  new_id = (uniqTable.rbegin()->first) + 1;
+    BDD_ID  new_id = ++last_id;
     auto *var = new uTableVal(label, 1, 0, new_id);
     uniqTable.insert(std::pair <BDD_ID, uTableVal*> (new_id, var));
     return new_id;
@@ -171,7 +176,7 @@ size_t Manager::uniqueTableSize(){
 }
 
 uTableVal *Manager::getuTableVal(BDD_ID id) {
-    return uniqTable[id];
+    return uniqTable.at(id);
 }
 
 bool Manager::utableEmpty() {
@@ -184,32 +189,22 @@ bool Manager::ctableEmpty() {
 
 BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_ID low){
 
-    for(auto it : uniqTable) {
-        if ((it.second->topVar == x) && (it.second->highV == high) && (it.second->lowV == low))
-            return it.first;
+    // for(auto it : uniqTable) {
+    BDD_ID last_id = 0;
+    for(auto it=uniqTable.begin(); it!=uniqTable.end(); ++it){
+        // Check if it's possible to get the last_id other way
+        // Creating a general variable would imply modifying the tests
+        if(it->first > last_id)
+            last_id = it->first;
+        if ((it->second->topVar == x) && (it->second->highV == high) && (it->second->lowV == low))
+            return it->first;
     }
 
     auto *new_val = new uTableVal("", high, low, x);
-    BDD_ID  new_id = (uniqTable.rbegin()->first) + 1;
+    BDD_ID  new_id = ++last_id;
     uniqTable.insert(std::pair <BDD_ID, uTableVal*> (new_id, new_val));
     return new_id;
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Manager::~Manager() {
     uniqTable.clear();
