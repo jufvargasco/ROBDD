@@ -226,6 +226,7 @@ namespace ClassProject {
         std::unordered_map<unsigned int, BDD_ID> compTable;
         const BDD_ID _true = 1;
         const BDD_ID _false = 0;
+        BDD_ID last_id;
     };
 }
 #endif
