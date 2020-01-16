@@ -1,6 +1,7 @@
 #include <cassert>
 
 #include "Manager.h"
+#include "hash.h"
 using namespace ClassProject;
 
 Manager::Manager(){
@@ -50,22 +51,20 @@ BDD_ID Manager::createVar (const std::string &label){
 
 BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     // Terminal case
-    if(i==1){  /** ite(1, f, g) = f*/
+    if(i==_true){  /** ite(1, f, g) = f*/
         return t;
-    } else if (i==0){ /** ite(0, g, f) = f*/
+    } else if (i==_false){ /** ite(0, g, f) = f*/
         return e;
-    } else if (this->isConstant(i)==false && t==1 && e==0){ /** ite(f, 1, 0) = f */
+    } else if (t==_true && e==_false){ /** ite(f, 1, 0) = f */
         return i;
+    } else if (t == e){
+        return t;
     }
     // Repeated case
-    if(!(compTable.empty())){
-        auto it = compTable.begin();
-        while (it != compTable.end()) {
-            if (it->second->i == i && it->second->t == t && it->second->e == e) {
-                return it->first;
-            }
-            it++;
-        }
+    unsigned int hash = hash_func(i,t,e,4294967296); // 2^32
+    auto cSearch = compTable.find(hash);
+    if(cSearch != compTable.end()){
+        return cSearch->second;
     }
     // Get top variable
     BDD_ID top_var = this->topVar(i);
@@ -83,8 +82,7 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
         return r_high;
     }
     BDD_ID r = find_or_add_uTable(top_var,r_high,r_low);
-    auto *ite_key = new cTableVal(i,t,e);
-    compTable.insert(std::pair <BDD_ID ,cTableVal*> (r, ite_key));
+    compTable.insert(std::pair <unsigned int, BDD_ID> (hash,r));
     return r;
 }
 

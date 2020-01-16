@@ -52,13 +52,13 @@ namespace ClassProject {
 	 *  - t: positive cofactor of the node (then)
 	 *  - e: negative cofactor of the node (else)
 	 */
-    struct cTableVal {
+    struct cTableKey {
 
         BDD_ID i;
         BDD_ID t;
         BDD_ID e;
 
-        cTableVal(BDD_ID _i, BDD_ID _t, BDD_ID _e) {
+        cTableKey(BDD_ID _i, BDD_ID _t, BDD_ID _e) {
             i = _i;
             t = _t;
             e = _e;
@@ -223,7 +223,7 @@ namespace ClassProject {
     private:
         std::unordered_map<BDD_ID, uTableVal *> uniqTable;
         // Use of the ite values as key to use the find function with them
-        std::unordered_map<BDD_ID, cTableVal *> compTable;
+        std::unordered_map<unsigned int, BDD_ID> compTable;
         const BDD_ID _true = 1;
         const BDD_ID _false = 0;
     };

@@ -35,7 +35,7 @@ uint8_t return_word(const unsigned int &num, short byte){
 unsigned int hash_func(const unsigned int &key,const unsigned int &key2,const unsigned int &key3, const unsigned int size) {
 
     uint8_t  s1, s2, s3, s4;
-    const unsigned int keys[]={key2,key3};
+    const unsigned int keys[]={key,key2,key3};
 
     s1 = T[return_word(key,1) % 255];
     s2 = T[return_word(key,1) % 255];
