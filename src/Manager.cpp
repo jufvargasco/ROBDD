@@ -196,21 +196,6 @@ BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Manager::~Manager() {
     uniqTable.clear();
     compTable.clear();

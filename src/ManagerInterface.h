@@ -14,7 +14,7 @@
 namespace ClassProject {
 
 
-typedef int BDD_ID;
+typedef unsigned int BDD_ID;
 
 /**
  * \brief Defines the implemented interface
