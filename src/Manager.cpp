@@ -5,8 +5,8 @@
 using namespace ClassProject;
 
 Manager::Manager(){
-    auto *o = new uTableVal("", 0, 0, 0);
-    auto *i = new uTableVal("", 1, 1, 1);
+    auto *o = new uTableVal( 0, 0, 0);
+    auto *i = new uTableVal( 1, 1, 1);
     uniqTable.insert(std::pair <BDD_ID, uTableVal*> (_false, o));
     uniqTable.insert(std::pair <BDD_ID, uTableVal*> (_true, i));
     last_id = 1;
@@ -20,28 +20,34 @@ const BDD_ID &Manager::False() {
 }
 
 bool Manager::isConstant(const BDD_ID f) {
-    return (f == 0) || (f == 1);
+    return (f == _false) || (f == _true);
 }
 
 bool Manager::isVariable (const BDD_ID x){
-    uTableVal *data = uniqTable[x];
-    return (data->lowV == 0) && (data->highV == 1);
+    for(auto it : labelTable){
+        if(it.second == x){
+            return true;
+        }
+    }
+    return false;
 }
 
 BDD_ID Manager::topVar (const BDD_ID f){
-    uTableVal *data = uniqTable[f];
-    return data->topVar;
+    auto uSearch = uniqTable.find(f);
+    return uSearch->second->topVar;
 }
 
 BDD_ID Manager::createVar (const std::string &label){
-    // for(auto it : uniqTable) {
-    for(auto it=uniqTable.begin(); it!=uniqTable.end(); ++it){
-        if (it->second->label == label )
-            return it->first;
+    auto lSearch = labelTable.find(label);
+    if(lSearch != labelTable.end()){
+        return lSearch->second;
     }
 
     last_id = ++last_id;
-    auto *var = new uTableVal(label, 1, 0, last_id);
+    labelTable.insert(std::pair <std::string, BDD_ID > (label, last_id));
+    auto *var = new uTableVal(1, 0, last_id);
+    unsigned int hash = hash_func(last_id,_true,_false,4294967296); // 2^32
+    uniqTable_search.insert(std::pair <unsigned int, BDD_ID > (hash, last_id));
     uniqTable.insert(std::pair <BDD_ID, uTableVal*> (last_id, var));
     return last_id;
 }
@@ -144,8 +150,15 @@ BDD_ID Manager::nor2 (const BDD_ID a, const BDD_ID b){
 }
 
 std::string Manager::getTopVarName (const BDD_ID & root){
-    uTableVal *data = uniqTable[topVar(root)];
-    return data->label;
+    auto uSearch = uniqTable.find(root);
+    if(uSearch != uniqTable.end()){
+        for(auto it : labelTable){
+            if(it.second == uSearch->second->topVar){
+                return it.first;
+            }
+        }
+    }
+    return "Variable does not exist";
 }
 
 void Manager::findNodes(const BDD_ID &root, std::set<BDD_ID> &nodes_of_root) {
@@ -184,19 +197,22 @@ bool Manager::ctableEmpty() {
 
 BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_ID low){
 
-    // for(auto it : uniqTable) {
-    for(auto it=uniqTable.begin(); it!=uniqTable.end(); ++it){
-        if ((it->second->topVar == x) && (it->second->highV == high) && (it->second->lowV == low))
-            return it->first;
+    unsigned int hash = hash_func(x,high,low,4294967296); // 2^32
+    auto uSearch = uniqTable_search.find(hash);
+    if(uSearch != uniqTable_search.end()){
+        return uSearch->second;
     }
 
-    auto *new_val = new uTableVal("", high, low, x);
+    auto *new_val = new uTableVal(high, low, x);
     last_id = ++last_id;
+    uniqTable_search.insert(std::pair <unsigned int, BDD_ID > (hash, last_id));
     uniqTable.insert(std::pair <BDD_ID, uTableVal*> (last_id, new_val));
     return last_id;
 }
 
 Manager::~Manager() {
+    labelTable.clear();
     uniqTable.clear();
+    uniqTable_search.clear();
     compTable.clear();
 }

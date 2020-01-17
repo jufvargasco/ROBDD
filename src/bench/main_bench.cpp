@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
     std::cout << " BDD generated successfully!" << std::endl << std::endl;
     
     /* Print the BDDs to txt and dot files */
-    circuit2BDD->PrintBDD(parsed_circuit.GetListOfOutputLabels());
+//    circuit2BDD->PrintBDD(parsed_circuit.GetListOfOutputLabels());
 
     std::cout << "**** Performance ****" << std::endl;
     /* Time Measurements */
