@@ -7,8 +7,8 @@ using namespace ClassProject;
 Manager::Manager(){
     auto *o = new uTableVal( 0, 0, 0);
     auto *i = new uTableVal( 1, 1, 1);
-    uniqTable.insert(std::pair <BDD_ID, uTableVal*> (_false, o));
-    uniqTable.insert(std::pair <BDD_ID, uTableVal*> (_true, i));
+    uniqTable[_false] = o;
+    uniqTable[_true] = i;
     last_id = 1;
 }
 
@@ -44,11 +44,11 @@ BDD_ID Manager::createVar (const std::string &label){
     }
 
     last_id = ++last_id;
-    labelTable.insert(std::pair <std::string, BDD_ID > (label, last_id));
+    labelTable[label] = last_id;
     auto *var = new uTableVal(1, 0, last_id);
     unsigned int hash = hash_func(last_id,_true,_false,4294967296); // 2^32
-    uniqTable_search.insert(std::pair <unsigned int, BDD_ID > (hash, last_id));
-    uniqTable.insert(std::pair <BDD_ID, uTableVal*> (last_id, var));
+    uniqTable_search[hash] = last_id;
+    uniqTable[last_id] = var;
     return last_id;
 }
 
@@ -85,7 +85,7 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
         return r_high;
     }
     BDD_ID r = find_or_add_uTable(top_var,r_high,r_low);
-    compTable.insert(std::pair <unsigned int, BDD_ID> (hash,r));
+    compTable[hash] = r;
     return r;
 }
 
@@ -205,8 +205,8 @@ BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_
 
     auto *new_val = new uTableVal(high, low, x);
     last_id = ++last_id;
-    uniqTable_search.insert(std::pair <unsigned int, BDD_ID > (hash, last_id));
-    uniqTable.insert(std::pair <BDD_ID, uTableVal*> (last_id, new_val));
+    uniqTable_search[hash] = last_id;
+    uniqTable[last_id] = new_val;
     return last_id;
 }
 
