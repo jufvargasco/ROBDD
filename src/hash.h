@@ -8,7 +8,7 @@
 using namespace std;
 
 // T table for Pearson hashing from RFC 3074.
-unsigned char T[256] = {
+static unsigned char T[256] = {
         251, 175, 119, 215, 81, 14, 79, 191, 103, 49, 181, 143, 186, 157,  0,
         232, 31, 32, 55, 60, 152, 58, 17, 237, 174, 70, 160, 144, 220, 90, 57,
         223, 59,  3, 18, 140, 111, 166, 203, 196, 134, 243, 124, 95, 222, 179,
@@ -28,14 +28,14 @@ unsigned char T[256] = {
         149, 80, 170, 68, 6, 169, 234, 151
 };
 
-uint8_t return_word(const unsigned int &num, short byte){
+static uint8_t return_word(const uint32_t &num, const uint8_t byte){
     return (uint8_t) (num >> (8*byte -8) );
 }
 
-unsigned int hash_func(const unsigned int &key,const unsigned int &key2,const unsigned int &key3, const unsigned int size) {
+static uint32_t hash_func( const uint32_t  &key,const uint32_t &key2,const uint32_t &key3) {
 
     uint8_t  s1, s2, s3, s4;
-    const unsigned int keys[]={key,key2,key3};
+    const uint32_t keys[]={key,key2,key3};
 
     s1 = T[return_word(key,1) % 255];
     s2 = T[return_word(key,1) % 255];
@@ -64,7 +64,8 @@ unsigned int hash_func(const unsigned int &key,const unsigned int &key2,const un
     };
 
     unsigned int hash = ((s4 << 24) | (s3 << 16) | (s2 << 8) | (s1)) & 0xffffffffL;
-    return hash & (size-1);
+    return hash;
+//    return hash & (size-1);
 }
 
 
