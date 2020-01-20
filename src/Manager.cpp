@@ -47,8 +47,8 @@ BDD_ID Manager::createVar (const std::string &label){
     labelTable[label] = last_id;
     auto *var = new uTableVal(1, 0, last_id);
     size_t hash = hash2(last_id,_true,_false);
-    uniqTable_search[hash] = last_id;
-    uniqTable[last_id] = var;
+    uniqTable_search.insert(std::pair<size_t, BDD_ID >(hash,last_id));
+    uniqTable.insert(std::pair<BDD_ID,uTableVal*>(last_id,var));
     return last_id;
 }
 
@@ -221,8 +221,8 @@ BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_
     auto *new_val = new uTableVal(high, low, x);
     ++last_id;
 
-    uniqTable_search[hash] = last_id;
-    uniqTable[last_id] = new_val;
+    uniqTable_search.insert(std::pair<size_t, BDD_ID >(hash,last_id));
+    uniqTable.insert(std::pair<BDD_ID,uTableVal*>(last_id,new_val));
     return last_id;
 }
 
