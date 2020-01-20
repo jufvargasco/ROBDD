@@ -38,7 +38,7 @@ namespace ClassProject {
             topVar = _topVar;
         }
     };
-
+/*
 /**
 	 * \brief Struct used as value in the computed table
 	 *
@@ -47,7 +47,7 @@ namespace ClassProject {
 	 *  - i: the top variable (if condition)
 	 *  - t: positive cofactor of the node (then)
 	 *  - e: negative cofactor of the node (else)
-	 */
+	 *  /
     struct cTableKey {
 
         BDD_ID i;
@@ -60,7 +60,7 @@ namespace ClassProject {
             e = _e;
         }
     };
-
+*/
 /**
  * \brief Implements the interface
  */
@@ -225,9 +225,6 @@ namespace ClassProject {
         const BDD_ID _true = 1;
         const BDD_ID _false = 0;
         BDD_ID last_id;
-
-        //std::ofstream* outfile;
-        //std::ofstream* compfile;
     };
 }
 #endif

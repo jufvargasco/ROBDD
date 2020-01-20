@@ -10,8 +10,6 @@ Manager::Manager(){
     uniqTable[_false] = o;
     uniqTable[_true] = i;
     last_id = 1;
-   // outfile = new std::ofstream ("robdd.txt");
-   // compfile = new std::ofstream ("comptable.txt");
 }
 
 const BDD_ID &Manager::True() {
@@ -48,11 +46,9 @@ BDD_ID Manager::createVar (const std::string &label){
     ++last_id;
     labelTable[label] = last_id;
     auto *var = new uTableVal(1, 0, last_id);
-    //unsigned int hash = hash_func(last_id,_true,_false,1048576); // 2^32
     size_t hash = hash2(last_id,_true,_false);
     uniqTable_search[hash] = last_id;
     uniqTable[last_id] = var;
-    //*outfile << "Added VRBL: \t" << last_id << "\t" << var->topVar << "\t" << var->highV << "\t" << var->lowV << "\t" << label << std::endl;
     return last_id;
 }
 
@@ -67,6 +63,12 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     } else if (t == e){
         return t;
     }
+    // Standard triples
+    else if (i==t){
+        return ite(i,_true,e);
+    } else if (i==e){
+        return  ite(i,t,_false);
+    }
 
     // Get top variable
     BDD_ID top_var = this->topVar(i);
@@ -78,12 +80,11 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     }
 
     // Repeated case
-    //unsigned int hash = hash_func(i,t,e,1048576); // 2^32
     size_t hash = hash2(i,t,e);
     auto cSearch = compTable.find(hash);
     if(cSearch != compTable.end()){
         auto compValue = cSearch->second;
-        if (uniqTable[compValue]->topVar == top_var)
+        if (uniqTable[compValue]->topVar == top_var)    // Check it has not been overwritten
             return compValue;
     }
 
@@ -97,16 +98,15 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     BDD_ID r = find_or_add_uTable(top_var,r_high,r_low);
     compTable[hash] = r;
 
-    //*compfile << "Added a node:\t" << r << "\t" << top_var << "\t" << r_high << "\t" << r_low << "\t with hash " << hash << std::endl;
-
     return r;
 }
 
 BDD_ID Manager::coFactorTrue(const BDD_ID f, BDD_ID x) {
 
+    if (isConstant(f) || isConstant(x))
+        return f;
     uTableVal *f_tableEntry = getuTableVal(f);
-
-    if (isConstant(f) || isConstant(x) || f_tableEntry->topVar > x)
+    if (f_tableEntry->topVar > x)
         return f;
     if (f_tableEntry->topVar == x)
         return f_tableEntry->highV;
@@ -118,9 +118,10 @@ BDD_ID Manager::coFactorTrue(const BDD_ID f, BDD_ID x) {
 
 BDD_ID Manager::coFactorFalse(const BDD_ID f, BDD_ID x) {
 
+    if (isConstant(f) || isConstant(x))
+        return f;
     uTableVal *f_tableEntry = getuTableVal(f);
-
-    if (isConstant(f) || isConstant(x) || f_tableEntry->topVar > x)
+    if (f_tableEntry->topVar > x)
         return f;
     if (f_tableEntry->topVar == x)
         return f_tableEntry->lowV;
@@ -139,32 +140,26 @@ BDD_ID Manager::coFactorFalse(const BDD_ID f) {
 }
 
 BDD_ID Manager::and2 (const BDD_ID a, const BDD_ID b){
-    //*outfile << std::endl << "GONNA MAKE AN AND(" << a << ", " << b << ")" << std::endl << std::endl;
     return this->ite(a,b,0);
 }
 
 BDD_ID Manager::or2 (const BDD_ID a, const BDD_ID b){
-    //*outfile << std::endl << "GONNA MAKE AN OR(" << a << ", " << b << ")" << std::endl << std::endl;
     return this->ite(a,1,b);
 }
 
 BDD_ID Manager::xor2 (const BDD_ID a, const BDD_ID b){
-    //*outfile << std::endl << "GONNA MAKE AN XOR(" << a << ", " << b << ")" << std::endl << std::endl;
     return this->ite(a,neg(b),b);
 }
 
 BDD_ID Manager::neg (const BDD_ID a){
-    //*outfile << std::endl << "GONNA MAKE A NEG(" << a << ")" << std::endl << std::endl;
     return this->ite(a,0,1);
 }
 
 BDD_ID Manager::nand2 (const BDD_ID a, const BDD_ID b){
-    //*outfile << std::endl << "GONNA MAKE A NAND(" << a << ", " << b << ")" << std::endl << std::endl;
     return this->ite(a,neg(b),1);
 }
 
 BDD_ID Manager::nor2 (const BDD_ID a, const BDD_ID b){
-   // *outfile << std::endl << "GONNA MAKE A NOR(" << a << ", " << b << ")" << std::endl << std::endl;
     return this->ite(a, 0, neg(b));
 }
 
@@ -216,8 +211,7 @@ bool Manager::ctableEmpty() {
 
 BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_ID low){
 
-   // unsigned int hash = hash_func(x,high,low,1048576); // 2^32
-   size_t hash = hash2(x, high, low);
+    size_t hash = hash2(x, high, low);
     auto uSearch = uniqTable_search.find(hash);
     if(uSearch != uniqTable_search.end()){
         if (uniqTable[uSearch->second]->topVar == x && uniqTable[uSearch->second]->highV == high && uniqTable[uSearch->second]->lowV == low)
@@ -229,7 +223,6 @@ BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_
 
     uniqTable_search[hash] = last_id;
     uniqTable[last_id] = new_val;
-   // *outfile << "Added node: \t" << last_id << "\t" << x << "\t" << high << "\t" << low << std::endl;
     return last_id;
 }
 
@@ -238,6 +231,4 @@ Manager::~Manager() {
     uniqTable.clear();
     uniqTable_search.clear();
     compTable.clear();
-    //outfile->close();
-    //compfile->close();
 }
