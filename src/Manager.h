@@ -218,10 +218,10 @@ namespace ClassProject {
 
     private:
         std::unordered_map<std::string, BDD_ID> labelTable;
-        std::unordered_map<unsigned int, BDD_ID> uniqTable_search;
+        std::unordered_map<size_t, BDD_ID> uniqTable_search;
         std::unordered_map<BDD_ID, uTableVal*> uniqTable;
         // Use of the ite values as key to use the find function with them
-        std::unordered_map<unsigned int, BDD_ID> compTable;
+        std::unordered_map<size_t, BDD_ID> compTable;
         const BDD_ID _true = 1;
         const BDD_ID _false = 0;
         BDD_ID last_id;

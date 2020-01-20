@@ -67,5 +67,10 @@ unsigned int hash_func(const unsigned int &key,const unsigned int &key2,const un
     return hash & (size-1);
 }
 
+size_t hash2(const unsigned int &key1,const unsigned int &key2,const unsigned int &key3) {
+
+    string equiv_string = to_string(key1) + "." + to_string(key2) + "." + to_string(key3);
+    return hash <string> {} (equiv_string);
+}
 
 #endif //VDSPROJECT_HASH_H

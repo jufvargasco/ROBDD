@@ -48,7 +48,8 @@ BDD_ID Manager::createVar (const std::string &label){
     ++last_id;
     labelTable[label] = last_id;
     auto *var = new uTableVal(1, 0, last_id);
-    unsigned int hash = hash_func(last_id,_true,_false,1048576); // 2^32
+    //unsigned int hash = hash_func(last_id,_true,_false,1048576); // 2^32
+    size_t hash = hash2(last_id,_true,_false);
     uniqTable_search[hash] = last_id;
     uniqTable[last_id] = var;
     //*outfile << "Added VRBL: \t" << last_id << "\t" << var->topVar << "\t" << var->highV << "\t" << var->lowV << "\t" << label << std::endl;
@@ -77,7 +78,8 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     }
 
     // Repeated case
-    unsigned int hash = hash_func(i,t,e,1048576); // 2^32
+    //unsigned int hash = hash_func(i,t,e,1048576); // 2^32
+    size_t hash = hash2(i,t,e);
     auto cSearch = compTable.find(hash);
     if(cSearch != compTable.end()){
         auto compValue = cSearch->second;
@@ -214,7 +216,8 @@ bool Manager::ctableEmpty() {
 
 BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_ID low){
 
-    unsigned int hash = hash_func(x,high,low,1048576); // 2^32
+   // unsigned int hash = hash_func(x,high,low,1048576); // 2^32
+   size_t hash = hash2(x, high, low);
     auto uSearch = uniqTable_search.find(hash);
     if(uSearch != uniqTable_search.end()){
         if (uniqTable[uSearch->second]->topVar == x && uniqTable[uSearch->second]->highV == high && uniqTable[uSearch->second]->lowV == low)
