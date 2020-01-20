@@ -4,7 +4,6 @@
 
 #ifndef mwBDD_H
 #define mwBDD_H
-
 #include <cassert>
 #include <iostream>
 #include <list>
@@ -226,6 +225,9 @@ namespace ClassProject {
         const BDD_ID _true = 1;
         const BDD_ID _false = 0;
         BDD_ID last_id;
+
+        //std::ofstream* outfile;
+        //std::ofstream* compfile;
     };
 }
 #endif

@@ -1,5 +1,5 @@
 #include <cassert>
-
+//#include <fstream>
 #include "Manager.h"
 #include "hash.h"
 using namespace ClassProject;
@@ -10,6 +10,8 @@ Manager::Manager(){
     uniqTable[_false] = o;
     uniqTable[_true] = i;
     last_id = 1;
+   // outfile = new std::ofstream ("robdd.txt");
+   // compfile = new std::ofstream ("comptable.txt");
 }
 
 const BDD_ID &Manager::True() {
@@ -43,12 +45,13 @@ BDD_ID Manager::createVar (const std::string &label){
         return lSearch->second;
     }
 
-    last_id = ++last_id;
+    ++last_id;
     labelTable[label] = last_id;
     auto *var = new uTableVal(1, 0, last_id);
-    unsigned int hash = hash_func(last_id,_true,_false,4294967296); // 2^32
+    unsigned int hash = hash_func(last_id,_true,_false,1048576); // 2^32
     uniqTable_search[hash] = last_id;
     uniqTable[last_id] = var;
+    //*outfile << "Added VRBL: \t" << last_id << "\t" << var->topVar << "\t" << var->highV << "\t" << var->lowV << "\t" << label << std::endl;
     return last_id;
 }
 
@@ -63,12 +66,7 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     } else if (t == e){
         return t;
     }
-    // Repeated case
-    unsigned int hash = hash_func(i,t,e,4294967296); // 2^32
-    auto cSearch = compTable.find(hash);
-    if(cSearch != compTable.end()){
-        return cSearch->second;
-    }
+
     // Get top variable
     BDD_ID top_var = this->topVar(i);
     if ((this->topVar(t) < top_var) && (this->topVar(t) > 1)){
@@ -77,6 +75,16 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     if ((this->topVar(e) < top_var) && (this->topVar(e) > 1)){
         top_var = this->topVar(e);
     }
+
+    // Repeated case
+    unsigned int hash = hash_func(i,t,e,1048576); // 2^32
+    auto cSearch = compTable.find(hash);
+    if(cSearch != compTable.end()){
+        auto compValue = cSearch->second;
+        if (uniqTable[compValue]->topVar == top_var)
+            return compValue;
+    }
+
     // Calculate cofactors
     BDD_ID r_high = ite(coFactorTrue(i,top_var),coFactorTrue(t,top_var),coFactorTrue(e,top_var));
     BDD_ID r_low = ite(coFactorFalse(i,top_var),coFactorFalse(t,top_var),coFactorFalse(e,top_var));
@@ -86,6 +94,9 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     }
     BDD_ID r = find_or_add_uTable(top_var,r_high,r_low);
     compTable[hash] = r;
+
+    //*compfile << "Added a node:\t" << r << "\t" << top_var << "\t" << r_high << "\t" << r_low << "\t with hash " << hash << std::endl;
+
     return r;
 }
 
@@ -126,26 +137,32 @@ BDD_ID Manager::coFactorFalse(const BDD_ID f) {
 }
 
 BDD_ID Manager::and2 (const BDD_ID a, const BDD_ID b){
+    //*outfile << std::endl << "GONNA MAKE AN AND(" << a << ", " << b << ")" << std::endl << std::endl;
     return this->ite(a,b,0);
 }
 
 BDD_ID Manager::or2 (const BDD_ID a, const BDD_ID b){
+    //*outfile << std::endl << "GONNA MAKE AN OR(" << a << ", " << b << ")" << std::endl << std::endl;
     return this->ite(a,1,b);
 }
 
 BDD_ID Manager::xor2 (const BDD_ID a, const BDD_ID b){
+    //*outfile << std::endl << "GONNA MAKE AN XOR(" << a << ", " << b << ")" << std::endl << std::endl;
     return this->ite(a,neg(b),b);
 }
 
 BDD_ID Manager::neg (const BDD_ID a){
+    //*outfile << std::endl << "GONNA MAKE A NEG(" << a << ")" << std::endl << std::endl;
     return this->ite(a,0,1);
 }
 
 BDD_ID Manager::nand2 (const BDD_ID a, const BDD_ID b){
+    //*outfile << std::endl << "GONNA MAKE A NAND(" << a << ", " << b << ")" << std::endl << std::endl;
     return this->ite(a,neg(b),1);
 }
 
 BDD_ID Manager::nor2 (const BDD_ID a, const BDD_ID b){
+   // *outfile << std::endl << "GONNA MAKE A NOR(" << a << ", " << b << ")" << std::endl << std::endl;
     return this->ite(a, 0, neg(b));
 }
 
@@ -197,16 +214,19 @@ bool Manager::ctableEmpty() {
 
 BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_ID low){
 
-    unsigned int hash = hash_func(x,high,low,4294967296); // 2^32
+    unsigned int hash = hash_func(x,high,low,1048576); // 2^32
     auto uSearch = uniqTable_search.find(hash);
     if(uSearch != uniqTable_search.end()){
+        if (uniqTable[uSearch->second]->topVar == x && uniqTable[uSearch->second]->highV == high && uniqTable[uSearch->second]->lowV == low)
         return uSearch->second;
     }
 
     auto *new_val = new uTableVal(high, low, x);
-    last_id = ++last_id;
+    ++last_id;
+
     uniqTable_search[hash] = last_id;
     uniqTable[last_id] = new_val;
+   // *outfile << "Added node: \t" << last_id << "\t" << x << "\t" << high << "\t" << low << std::endl;
     return last_id;
 }
 
@@ -215,4 +235,6 @@ Manager::~Manager() {
     uniqTable.clear();
     uniqTable_search.clear();
     compTable.clear();
+    //outfile->close();
+    //compfile->close();
 }
