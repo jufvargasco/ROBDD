@@ -2,11 +2,15 @@
 //#include <fstream>
 #include "Manager.h"
 #include "hash.h"
+
 using namespace ClassProject;
+
+
 
 Manager::Manager(){
     auto *o = new uTableVal( 0, 0, 0);
     auto *i = new uTableVal( 1, 1, 1);
+    cout << hash4(*o) << endl;
     uniqTable[_false] = o;
     uniqTable[_true] = i;
     last_id = 1;
@@ -46,7 +50,7 @@ BDD_ID Manager::createVar (const std::string &label){
     ++last_id;
     labelTable[label] = last_id;
     auto *var = new uTableVal(1, 0, last_id);
-    size_t hash = hash2(last_id,_true,_false);
+    size_t hash = hash4(*var);
     uniqTable_search.insert(std::pair<size_t, BDD_ID >(hash,last_id));
     uniqTable.insert(std::pair<BDD_ID,uTableVal*>(last_id,var));
     return last_id;
@@ -80,7 +84,8 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
     }
 
     // Repeated case
-    size_t hash = hash2(i,t,e);
+    uTableVal value =  uTableVal(i,t,e);
+    size_t hash = hash4(value);
     auto cSearch = compTable.find(hash);
     if(cSearch != compTable.end()){
         auto compValue = cSearch->second;
@@ -211,14 +216,15 @@ bool Manager::ctableEmpty() {
 
 BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_ID low){
 
-    size_t hash = hash2(x, high, low);
+    auto *new_val = new uTableVal(high, low, x);
+    size_t hash = hash4(*new_val);
     auto uSearch = uniqTable_search.find(hash);
     if(uSearch != uniqTable_search.end()){
         if (uniqTable[uSearch->second]->topVar == x && uniqTable[uSearch->second]->highV == high && uniqTable[uSearch->second]->lowV == low)
         return uSearch->second;
     }
 
-    auto *new_val = new uTableVal(high, low, x);
+//    auto *new_val = new uTableVal(high, low, x);
     ++last_id;
 
     uniqTable_search.insert(std::pair<size_t, BDD_ID >(hash,last_id));

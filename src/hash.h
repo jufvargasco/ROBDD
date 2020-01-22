@@ -4,6 +4,9 @@
 
 #ifndef VDSPROJECT_HASH_H
 #define VDSPROJECT_HASH_H
+#include "const_fvn_hash.h"
+#include "murmurhash.h"
+#include "Manager.h"
 
 using namespace std;
 
@@ -71,6 +74,19 @@ size_t hash2(const unsigned int &key1,const unsigned int &key2,const unsigned in
 
     string equiv_string = to_string(key1) + "." + to_string(key2) + "." + to_string(key3);
     return hash <string> {} (equiv_string);
+}
+
+size_t hash3(const unsigned int &key1,const unsigned int &key2,const unsigned int &key3) {
+
+    std::string equiv_string = to_string(key1) + "." + to_string(key2) + "." + to_string(key3);
+    hash_function::fnv_1 hash;
+    return hash.operator()(equiv_string);
+//    return hardrock::FnvHash(equiv_string) ;
+}
+
+uint64_t hash4(const ClassProject::uTableVal& uTval ) {
+    return hash128(&uTval ,sizeof(ClassProject::uTableVal));
+//    return hardrock::FnvHash(equiv_string) ;
 }
 
 #endif //VDSPROJECT_HASH_H
