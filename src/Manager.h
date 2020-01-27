@@ -4,7 +4,6 @@
 
 #ifndef mwBDD_H
 #define mwBDD_H
-
 #include <cassert>
 #include <iostream>
 #include <list>
@@ -23,48 +22,22 @@ namespace ClassProject {
 	 * This data structure contains the corresponding information of a node in the unique table of the BDD
 	 * (excluding its ID, which comes aside).
 	 * It includes the following elements:
-	 *  - Label: name assigned to the node for better human comprehension. Non-empty only for constants and variables.
 	 *  - High: ID of the node representing the positive cofactor.
 	 *  - Low: ID of the node representing the negative cofactor.
 	 *  - Top variable: ID of the top variable reachable from the node.
 	 */
     struct uTableVal {
 
-        std::string label;
         BDD_ID highV;
         BDD_ID lowV;
         BDD_ID topVar;
 
-        uTableVal(std::string _label, BDD_ID _highV, BDD_ID _lowV, BDD_ID _topVar) {
-            label = _label;
+        uTableVal(BDD_ID _highV, BDD_ID _lowV, BDD_ID _topVar) {
             highV = _highV;
             lowV = _lowV;
             topVar = _topVar;
         }
     };
-
-/**
-	 * \brief Struct used as value in the computed table
-	 *
-	 * This data structure contains the arguments of previously calculated i-t-e combinations
-	 * It includes the following elements:
-	 *  - i: the top variable (if condition)
-	 *  - t: positive cofactor of the node (then)
-	 *  - e: negative cofactor of the node (else)
-	 */
-    struct cTableVal {
-
-        BDD_ID i;
-        BDD_ID t;
-        BDD_ID e;
-
-        cTableVal(BDD_ID _i, BDD_ID _t, BDD_ID _e) {
-            i = _i;
-            t = _t;
-            e = _e;
-        }
-    };
-
 /**
  * \brief Implements the interface
  */
@@ -206,11 +179,6 @@ namespace ClassProject {
         uTableVal *getuTableVal(BDD_ID id);
 
         /**
-         * \returns true if the unique table is completely empty
-         */
-        bool utableEmpty();
-
-        /**
          * \returns true if the computed table is completely empty
          */
         bool ctableEmpty();
@@ -221,11 +189,13 @@ namespace ClassProject {
         BDD_ID find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_ID low);
 
     private:
-        std::map<BDD_ID, uTableVal *> uniqTable;
-        // Use of the ite values as key to use the find function with them
-        std::map<BDD_ID, cTableVal *> compTable;
+        std::unordered_map<std::string, BDD_ID> labelTable;
+        std::unordered_map<size_t, BDD_ID> uniqTable_search;
+        std::unordered_map<BDD_ID, uTableVal*> uniqTable;
+        std::unordered_map<size_t, BDD_ID> compTable;
         const BDD_ID _true = 1;
         const BDD_ID _false = 0;
+        BDD_ID last_id;
     };
 }
 #endif

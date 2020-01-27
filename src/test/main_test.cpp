@@ -59,7 +59,6 @@ TEST_F(ManagerTest,createVar_Test){
     BDD_ID id = mg1->createVar("a");
     ASSERT_EQ(id, 2);
     uTableVal *a = mg1->getuTableVal(id);
-    ASSERT_EQ(a->label, "a");
     ASSERT_EQ(a->highV, 1);
     ASSERT_EQ(a->lowV, 0);
     ASSERT_EQ(a->topVar, 2);
@@ -579,26 +578,26 @@ TEST_F(ManagerTest, general_Test) {
     BDD_ID f = mg1->xor2(_and, _nor);
 
     uTableVal entries[19] = {
-            {"0", 0, 0, 0},            //0
-            {"1", 1, 1, 1},             //1
-            {"a", 1, 0, 2},             //a
-            {"b", 1, 0, 3},             //b
-            {"c", 1, 0, 4},             //c
-            {"d", 1, 0, 5},             //d
-            {"e", 1, 0, 6},             //e
+            {0, 0, 0},            //0
+            {1, 1, 1},             //1
+            {1, 0, 2},             //a
+            {1, 0, 3},             //b
+            {1, 0, 4},             //c
+            {1, 0, 5},             //d
+            {1, 0, 6},             //e
 
-            {"", 0, 1, 3},             //neg(b)
-            {"", 3, 0, 2},              //and(a,b)
-            {"", 0, 1, 6},              //neg(e), required for the following nand operation
-            {"", 9, 1, 5},             //nand(d,e)
-            {"", 4, 1, 3},             //or(neg(b),c)
-            {"", 6, 0, 5},             //neg(10), required for the following nor operation
-            {"", 0, 12, 4},            //ite(4,0,12) -> a non terminal case while resolving the nor
-            {"", 13, 0, 3},            //nor(or(neg(b),c)nand(d,e))
-            {"", 1, 10, 4},            //ite(4,1,10) required for the following neg operation; two entries ite(6, 0, 1) and ite(5, 9, 1) are needed before this step but are already created and should not repeat here
-            {"", 15, 1, 3},            //neg(14)
-            {"", 15, 0, 3},            //ite(3,16,14) reduced to the appropriate values when b=1 or 0
-            {"", 17, 14, 2}           //top node
+            {0, 1, 3},             //neg(b)
+            {3, 0, 2},              //and(a,b)
+            {0, 1, 6},              //neg(e), required for the following nand operation
+            {9, 1, 5},             //nand(d,e)
+            {4, 1, 3},             //or(neg(b),c)
+            {6, 0, 5},             //neg(10), required for the following nor operation
+            {0, 12, 4},            //ite(4,0,12) -> a non terminal case while resolving the nor
+            {13, 0, 3},            //nor(or(neg(b),c)nand(d,e))
+            {1, 10, 4},            //ite(4,1,10) required for the following neg operation; two entries ite(6, 0, 1) and ite(5, 9, 1) are needed before this step but are already created and should not repeat here
+            {15, 1, 3},            //neg(14)
+            {15, 0, 3},            //ite(3,16,14) reduced to the appropriate values when b=1 or 0
+            {17, 14, 2}           //top node
     };
 
 
