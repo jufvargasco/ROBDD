@@ -11,7 +11,7 @@ namespace ClassProject {
     }
 
     BDD_ID Reachable::xnor2(BDD_ID a, BDD_ID b) {
-        return 0;
+        return ite(a,b,neg(b));
     }
 
     const std::vector<BDD_ID> &Reachable::getStates() const {
