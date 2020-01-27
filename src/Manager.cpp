@@ -10,7 +10,6 @@ using namespace ClassProject;
 Manager::Manager(){
     auto *o = new uTableVal( 0, 0, 0);
     auto *i = new uTableVal( 1, 1, 1);
-    cout << hash4(*o) << endl;
     uniqTable[_false] = o;
     uniqTable[_true] = i;
     last_id = 1;
@@ -206,10 +205,6 @@ uTableVal *Manager::getuTableVal(BDD_ID id) {
     return uniqTable.at(id);
 }
 
-bool Manager::utableEmpty() {
-    return uniqTable.empty();
-}
-
 bool Manager::ctableEmpty() {
     return compTable.empty();
 }
@@ -224,7 +219,6 @@ BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_
         return uSearch->second;
     }
 
-//    auto *new_val = new uTableVal(high, low, x);
     ++last_id;
 
     uniqTable_search.insert(std::pair<size_t, BDD_ID >(hash,last_id));

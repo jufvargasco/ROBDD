@@ -38,29 +38,6 @@ namespace ClassProject {
             topVar = _topVar;
         }
     };
-/*
-/**
-	 * \brief Struct used as value in the computed table
-	 *
-	 * This data structure contains the arguments of previously calculated i-t-e combinations
-	 * It includes the following elements:
-	 *  - i: the top variable (if condition)
-	 *  - t: positive cofactor of the node (then)
-	 *  - e: negative cofactor of the node (else)
-	 *  /
-    struct cTableKey {
-
-        BDD_ID i;
-        BDD_ID t;
-        BDD_ID e;
-
-        cTableKey(BDD_ID _i, BDD_ID _t, BDD_ID _e) {
-            i = _i;
-            t = _t;
-            e = _e;
-        }
-    };
-*/
 /**
  * \brief Implements the interface
  */
@@ -202,11 +179,6 @@ namespace ClassProject {
         uTableVal *getuTableVal(BDD_ID id);
 
         /**
-         * \returns true if the unique table is completely empty
-         */
-        bool utableEmpty();
-
-        /**
          * \returns true if the computed table is completely empty
          */
         bool ctableEmpty();
@@ -220,7 +192,6 @@ namespace ClassProject {
         std::unordered_map<std::string, BDD_ID> labelTable;
         std::unordered_map<size_t, BDD_ID> uniqTable_search;
         std::unordered_map<BDD_ID, uTableVal*> uniqTable;
-        // Use of the ite values as key to use the find function with them
         std::unordered_map<size_t, BDD_ID> compTable;
         const BDD_ID _true = 1;
         const BDD_ID _false = 0;
