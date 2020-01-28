@@ -60,6 +60,13 @@ TEST(managerTest, XNOR2_Test) {
     ASSERT_EQ(xor_op8,0);
 }
 
+TEST(managerTest, getStates_Test) {
+    ClassProject::Reachable comp(2);
 
+    std::vector<BDD_ID> initStates = comp.getStates();
+
+    ASSERT_EQ(initStates[0],2);
+    ASSERT_EQ(initStates[1],3);
+}
 
 #endif //VDSPROJECT_TESTS_H
