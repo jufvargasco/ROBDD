@@ -7,6 +7,12 @@
 namespace ClassProject {
 
     Reachable::Reachable(unsigned int stateSize) : ReachableInterface(stateSize) {
+        std::string str;
+
+        for(int i=0; i<stateSize; i++){
+            str = "s" + std::to_string(i);
+            states.push_back(createVar(str));
+        }
     }
 
     BDD_ID Reachable::xnor2(BDD_ID a, BDD_ID b) {
@@ -14,7 +20,7 @@ namespace ClassProject {
     }
 
     const std::vector<BDD_ID> &Reachable::getStates() const {
-        //return <#initializer#>;
+        return states;
     }
 
     void Reachable::setDelta(const std::vector<BDD_ID> &transitionFunctions) {
