@@ -20,7 +20,7 @@ TEST(managerTest, HowTo_Example) {
     //s0' = not(s0)
     functions.push_back(comp.neg(s0));
     //s1' = not(s1)
-    functions.push_back(comp.neg(s0));
+    functions.push_back(comp.neg(s1));
     //Add transition functions
     comp.setDelta(functions);
     //Add init state
@@ -67,6 +67,18 @@ TEST(managerTest, getStates_Test) {
 
     ASSERT_EQ(initStates[0],2);
     ASSERT_EQ(initStates[1],3);
+}
+
+TEST(managerTest, setInitState_Test) {
+    ClassProject::Reachable comp(2);
+
+    std::vector<bool> initState = comp.getInitState();
+    ASSERT_EQ(initState[0],false);
+    ASSERT_EQ(initState[1],false);
+    comp.setInitState({true,true});
+    ASSERT_EQ(initState[0],true);
+    ASSERT_EQ(initState[1],true);
+
 }
 
 #endif //VDSPROJECT_TESTS_H

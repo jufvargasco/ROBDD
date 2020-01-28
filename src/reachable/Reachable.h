@@ -47,6 +47,14 @@ namespace ClassProject {
         void setInitState(const std::vector<bool>& stateVector)  override ;
 
         /**
+         * Each state machine has an inital state. The inital state is provided as a vector.
+         * The vector has to have an entry for each state bit. If the entry is "true" the state bit is high,
+         * otherwhise negated. E.g. initial state not(s0) and not(s1) is transformed into {false,false}.
+         * @param stateVector provide the assignemtn for each state bit
+         */
+        const std::vector<bool> &getInitState() const;
+
+        /**
          * Computes the symbolic representation of the reachable states.
          * Before this method is called it is important to set the transition function and the initial state.
          * @return BDD_ID of the reachable state space
@@ -63,6 +71,7 @@ namespace ClassProject {
 
     private:
         std::vector<BDD_ID> states;
+        std::vector<bool> initStates;
 
     };
 

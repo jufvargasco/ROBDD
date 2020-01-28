@@ -31,6 +31,10 @@ namespace ClassProject {
 
     }
 
+    const std::vector<bool> &Reachable::getInitState() const {
+        return initStates;
+    }
+
     BDD_ID Reachable::compute_reachable_states() {
         return 0;
     }
