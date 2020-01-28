@@ -16,9 +16,12 @@ namespace ClassProject{
          * Constructor creates stateSize state bits for the user
          * @param stateSize state size
          */
-        explicit ReachableInterface(unsigned int stateSize){};
+        explicit ReachableInterface(unsigned int stateSize):stateSize(stateSize){};
         virtual ~ReachableInterface() = default;
 
+        virtual unsigned int return_stateSize(){
+            return this->stateSize;
+        }
          //! @return returns the XNOR of BDD IDs
         virtual BDD_ID xnor2(BDD_ID a, BDD_ID b) = 0;
         /**

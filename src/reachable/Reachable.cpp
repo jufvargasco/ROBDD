@@ -7,7 +7,6 @@
 namespace ClassProject {
 
     Reachable::Reachable(unsigned int stateSize) : ReachableInterface(stateSize) {
-
     }
 
     BDD_ID Reachable::xnor2(BDD_ID a, BDD_ID b) {
