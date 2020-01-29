@@ -70,7 +70,7 @@ namespace ClassProject {
         bool is_reachable(const std::vector<bool>& stateVector) override;
 
     private:
-        std::vector<BDD_ID> states;
+        std::vector<BDD_ID> states, nextStates;
         std::vector<bool> initStates;
 
     };
