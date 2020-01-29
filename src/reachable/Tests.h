@@ -75,9 +75,21 @@ TEST(managerTest, setInitState_Test) {
     std::vector<bool> initState = comp.getInitState();
     ASSERT_EQ(initState[0],false);
     ASSERT_EQ(initState[1],false);
+
     comp.setInitState({true,true});
+    initState = comp.getInitState();
     ASSERT_EQ(initState[0],true);
     ASSERT_EQ(initState[1],true);
+
+    comp.setInitState({false,true});
+    initState = comp.getInitState();
+    ASSERT_EQ(initState[0],false);
+    ASSERT_EQ(initState[1],true);
+
+    comp.setInitState({true,false});
+    initState = comp.getInitState();
+    ASSERT_EQ(initState[0],true);
+    ASSERT_EQ(initState[1],false);
 
 }
 

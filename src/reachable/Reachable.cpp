@@ -12,6 +12,7 @@ namespace ClassProject {
         for(int i=0; i<stateSize; i++){
             str = "s" + std::to_string(i);
             states.push_back(createVar(str));
+            initStates.push_back(false);
         }
     }
 
@@ -28,7 +29,9 @@ namespace ClassProject {
     }
 
     void Reachable::setInitState(const std::vector<bool> &stateVector) {
-
+        for(int i=0; i<this->return_stateSize(); i++){
+            initStates[i] = stateVector[i];
+        }
     }
 
     const std::vector<bool> &Reachable::getInitState() const {
