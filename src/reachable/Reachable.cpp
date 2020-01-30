@@ -27,8 +27,7 @@ namespace ClassProject {
     }
 
     void Reachable::setDelta(const std::vector<BDD_ID> &transitionFunctions) {
-        for (int i=0; i<this->return_stateSize(); i++)
-        {delta[i] = 0;}
+        delta = transitionFunctions;
     }
 
     void Reachable::setInitState(const std::vector<bool> &stateVector) {
