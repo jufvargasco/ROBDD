@@ -45,29 +45,39 @@ namespace ClassProject {
     }
 
     BDD_ID Reachable::compute_reachable_states() {
-        // Check name given to function (delta) vector
-//        BDD_ID t_0 = or2(and2(nextStates[0],delta[0]),and2(neg(nextStates[0]),neg(delta[0])));
-//        BDD_ID t_1 = or2(and2(nextStates[1],delta[1]),and2(neg(nextStates[1]),neg(delta[1])));
-//        BDD_ID t = and2(t_0,t_1);
-//
-//        BDD_ID c_s_0 = and2(xnor2(states[0],initStates[0]),xnor2(states[1],initStates[1]));;
-//        BDD_ID c_r_it = c_s_0;
-//
-//        do {
-//            BDD_ID c_r = c_r_it;
-//
-//            BDD_ID temp = and2(c_s_0, t);
-//            temp = or2(coFactorTrue(temp, states[1]), coFactorFalse(temp, states[1]));
-//            BDD_ID img_next = or2(coFactorTrue(temp, states[0]), coFactorFalse(temp, states[0]));
-//
-//            BDD_ID temp = and2(xnor2(states[0], nextStates[0]), xnor2(states[1], nextStates[1]));
-//            temp = and2(temp, img_next);
-//            temp = or2(coFactorTrue(temp, nextStates[1]), coFactorFalse(temp, nextStates[1]));
-//            BDD_ID img = or2(coFactorTrue(temp, nextStates[0]), coFactorFalse(temp, nextStates[0]));
-//
-//            c_r_it = or2(c_r, img);
-//        } while(c_r != c_r_it);
-//        return 0;
+        //Compute transition relation
+        BDD_ID t_0 = xnor2(nextStates[0],delta[0]);
+        BDD_ID t_1 = xnor2(nextStates[1],delta[1]);
+        BDD_ID t = and2(t_0,t_1);
+
+//        std::cout << "T: " << t << std::endl;
+
+        BDD_ID c_s_0 = and2(xnor2(states[0],initStates[0]),xnor2(states[1],initStates[1]));
+//        std::cout << "CS0: " << c_s_0 << std::endl;
+        BDD_ID c_r_it = c_s_0;
+        BDD_ID c_r;
+
+        do {
+            c_r = c_r_it;
+
+            //Compute image of next states
+            BDD_ID temp = and2(c_s_0, t);
+            temp = or2(coFactorTrue(temp, states[1]), coFactorFalse(temp, states[1]));
+            BDD_ID img_next = or2(coFactorTrue(temp, states[0]), coFactorFalse(temp, states[0]));
+
+            //Compute image of state variables
+            temp = and2(xnor2(states[0], nextStates[0]), xnor2(states[1], nextStates[1]));
+            temp = and2(temp, img_next);
+            temp = or2(coFactorTrue(temp, nextStates[1]), coFactorFalse(temp, nextStates[1]));
+            BDD_ID img = or2(coFactorTrue(temp, nextStates[0]), coFactorFalse(temp, nextStates[0]));
+
+            c_r_it = or2(c_r, img);
+//            std::cout << "Crit: " << c_r_it << std::endl;
+//            std::cout << "Cr: " << c_r << std::endl;
+
+        } while(c_r != c_r_it);
+
+        return c_r;
     }
 
     bool Reachable::is_reachable(const std::vector<bool> &stateVector) {

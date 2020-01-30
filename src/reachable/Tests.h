@@ -112,6 +112,30 @@ TEST(managerTest, setInitState_Test) {
     initState = comp.getInitState();
     ASSERT_EQ(initState[0],true);
     ASSERT_EQ(initState[1],false);
+}
+
+TEST(managerTest, compute_reachable_states_Test) {
+    ClassProject::Reachable comp(2);
+
+    auto states = comp.getStates();
+    std::vector<BDD_ID> functions;
+
+    auto s0 = states.at(0);
+    auto s1 = states.at(1);
+    //s0' = not(s0)
+    functions.push_back(comp.neg(s0));
+    //s1' = not(s1)
+    functions.push_back(comp.neg(s1));
+    //Add transition functions
+    comp.setDelta(functions);
+    comp.setInitState({false,false});
+
+    BDD_ID CR = comp.compute_reachable_states();
+    std::set<BDD_ID> result;
+    comp.findNodes(4, result);
+
+    for (auto it = result.begin(); it != result.end(); ++it)
+        std::cout << *it << " " << std::endl;
 
 }
 
