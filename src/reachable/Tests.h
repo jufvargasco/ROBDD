@@ -66,8 +66,30 @@ TEST(managerTest, getStates_Test) {
     std::vector<BDD_ID> initStates = comp.getStates();
 
     ASSERT_EQ(initStates[0],2);
-    ASSERT_EQ(initStates[1],3);
+    ASSERT_EQ(initStates[1],4);
 }
+
+TEST(managerTest, setdelta_Test) {
+    ClassProject::Reachable comp(2);
+
+    auto states = comp.getStates();
+    std::vector<BDD_ID> functions;
+
+    auto s0 = states.at(0);
+    auto s1 = states.at(1);
+    //s0' = not(s0)
+    functions.push_back(comp.neg(s0));
+    //s1' = not(s1)
+    functions.push_back(comp.neg(s1));
+    //Add transition functions
+    comp.setDelta(functions);
+
+    auto delta = comp.getDelta();
+
+    ASSERT_EQ(delta[0],comp.neg(s0));
+    ASSERT_EQ(delta[1],comp.neg(s1));
+}
+
 
 TEST(managerTest, setInitState_Test) {
     ClassProject::Reachable comp(2);

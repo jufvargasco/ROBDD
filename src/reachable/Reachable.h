@@ -38,6 +38,8 @@ namespace ClassProject {
          */
         void setDelta(const std::vector<BDD_ID> &transitionFunctions)  override;
 
+        const std::vector<BDD_ID> &getDelta() const;
+
         /**
          * Each state machine has an inital state. The inital state is provided as a vector.
          * The vector has to have an entry for each state bit. If the entry is "true" the state bit is high,
@@ -70,7 +72,7 @@ namespace ClassProject {
         bool is_reachable(const std::vector<bool>& stateVector) override;
 
     private:
-        std::vector<BDD_ID> states, nextStates;
+        std::vector<BDD_ID> states, nextStates, delta;
         std::vector<bool> initStates;
 
     };
