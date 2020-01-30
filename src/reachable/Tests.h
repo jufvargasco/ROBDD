@@ -132,10 +132,16 @@ TEST(managerTest, compute_reachable_states_Test) {
 
     BDD_ID CR = comp.compute_reachable_states();
     std::set<BDD_ID> result;
-    comp.findNodes(4, result);
+    comp.findNodes(15, result);
 
     for (auto it = result.begin(); it != result.end(); ++it)
         std::cout << *it << " " << std::endl;
+
+    std::cout <<"ID\t"<< "High -\t" << "Low -\t" << "Topvar" <<std::endl;
+    for (int i= 0; i<= CR; i++){
+    ClassProject::uTableVal *res = comp.getuTableVal(i);
+        std::cout << i <<"\t"<< res->highV << " -\t" << res->lowV << " -\t" << res->topVar <<std::endl;
+    }
 
 }
 

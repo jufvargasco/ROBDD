@@ -81,7 +81,14 @@ namespace ClassProject {
     }
 
     bool Reachable::is_reachable(const std::vector<bool> &stateVector) {
-        return false;
+        // compute the reachable space
+        BDD_ID c_r =compute_reachable_states();
+        //assign to the states the values stored in the vector (s0= stateVector[0], s1= stateVector[1])
+        BDD_ID c_s = and2(xnor2(states[0],stateVector[0]),xnor2(states[1],stateVector[1]));
+        // since the reachable space was already calculated, the reachable states should already be within the OBDD
+        // if the calculated value when assigning the values of stateVector is higher than the reachable space, the
+        //state is not reachable
+        return (c_s < c_r);
     }
 
 
