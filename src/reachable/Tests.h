@@ -137,7 +137,7 @@ TEST(managerTest, compute_reachable_states_Test) {
 //        std::cout << *it << " " << std::endl;
 
 //    std::cout <<"ID\t"<< "High -\t" << "Low -\t" << "Topvar" <<std::endl;
-//    for (int i= 0; i<= CR; i++){
+//    for (int i= 0; i<= 32; i++){
 //    ClassProject::uTableVal *res = comp.getuTableVal(i);
 //        std::cout << i <<"\t"<< res->highV << " -\t" << res->lowV << " -\t" << res->topVar <<std::endl;
 //    }

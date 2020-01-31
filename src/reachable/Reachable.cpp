@@ -47,14 +47,14 @@ namespace ClassProject {
     }
 
     BDD_ID Reachable::compute_reachable_states() {
-        //Compute transition relation
-        BDD_ID t_0 = xnor2(nextStates[0],delta[0]);
-        BDD_ID t_1 = xnor2(nextStates[1],delta[1]);
-        BDD_ID t = and2(t_0,t_1);
+        BDD_ID t = true;
+        BDD_ID c_s_0 = true;
+//        Compute transition relation
+        for (int i = 0; i < return_stateSize();i++){
+            t = and2(t,xnor2(nextStates[i],delta[i]));
+            c_s_0 = and2(c_s_0,xnor2(states[i],initStates[i]));
+        }
 
-//        std::cout << "T: " << t << std::endl;
-
-        BDD_ID c_s_0 = and2(xnor2(states[0],initStates[0]),xnor2(states[1],initStates[1]));
 //        std::cout << "CS0: " << c_s_0 << std::endl;
         BDD_ID c_r_it = c_s_0;
         BDD_ID c_r;
@@ -64,15 +64,23 @@ namespace ClassProject {
 
             //Compute image of next states
             BDD_ID temp = and2(c_s_0, t);
-            temp = or2(coFactorTrue(temp, states[1]), coFactorFalse(temp, states[1]));
-            BDD_ID img_next = or2(coFactorTrue(temp, states[0]), coFactorFalse(temp, states[0]));
+            for (int i = return_stateSize() -1; i >= 0;i--){
+                temp = or2(coFactorTrue(temp, states[i]), coFactorFalse(temp, states[i]));
+            }
+            BDD_ID img_next = temp;
+//            std::cout << "Img next states: " << img_next << std::endl;
 
             //Compute image of state variables
-            temp = and2(xnor2(states[0], nextStates[0]), xnor2(states[1], nextStates[1]));
+           temp = true;
+            for (int i = 0; i < return_stateSize();i++){
+                temp = and2(temp,xnor2(states[i],nextStates[i]));
+            }
             temp = and2(temp, img_next);
-            temp = or2(coFactorTrue(temp, nextStates[1]), coFactorFalse(temp, nextStates[1]));
-            BDD_ID img = or2(coFactorTrue(temp, nextStates[0]), coFactorFalse(temp, nextStates[0]));
-
+            for (int i = return_stateSize() -1; i >= 0;i--){
+                temp = or2(coFactorTrue(temp, nextStates[i]), coFactorFalse(temp, nextStates[i]));
+            }
+            BDD_ID img = temp;
+//            std::cout << "Img  states: " << img << std::endl;
             c_r_it = or2(c_r, img);
 //            std::cout << "Crit: " << c_r_it << std::endl;
 //            std::cout << "Cr: " << c_r << std::endl;
@@ -83,14 +91,19 @@ namespace ClassProject {
     }
 
     bool Reachable::is_reachable(const std::vector<bool> &stateVector) {
+        check_size_array(stateVector);
         // compute the reachable space
         BDD_ID c_r =compute_reachable_states();
         //assign to the states the values stored in the vector (s0= stateVector[0], s1= stateVector[1])
-        BDD_ID c_s = and2(xnor2(states[0],stateVector[0]),xnor2(states[1],stateVector[1]));
+        BDD_ID c_s = true;
+        for (int i = 0; i < return_stateSize();i++){
+            c_s = and2(c_s,xnor2(states[i],stateVector[i]));
+        }
         // since the reachable space was already calculated, the reachable states should already be within the OBDD
         // if the calculated value when assigning the values of stateVector is higher than the reachable space, the
         //state is not reachable
-        return (c_s < c_r);
+        BDD_ID reach = and2(c_s,c_r);
+        return (reach == c_s);
     }
 
     void Reachable::check_size_array(const std::vector<BDD_ID> &array) {
