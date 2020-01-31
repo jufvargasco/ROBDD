@@ -92,7 +92,9 @@ namespace ClassProject {
     }
 
     void Reachable::check_size_array(const std::vector<BDD_ID> &array) {
-
+        if (array.size() > return_stateSize()){
+            throw std::runtime_error("The number of elements in the vector is higher than the number of state variables");
+        }
     }
 
 
