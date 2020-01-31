@@ -91,6 +91,9 @@ namespace ClassProject {
         return (c_s < c_r);
     }
 
+    void Reachable::check_size_array(const std::vector<BDD_ID> &array) {
+
+    }
 
 
 

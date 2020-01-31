@@ -131,17 +131,45 @@ TEST(managerTest, compute_reachable_states_Test) {
     comp.setInitState({false,false});
 
     BDD_ID CR = comp.compute_reachable_states();
-    std::set<BDD_ID> result;
-    comp.findNodes(15, result);
 
-    for (auto it = result.begin(); it != result.end(); ++it)
-        std::cout << *it << " " << std::endl;
 
-    std::cout <<"ID\t"<< "High -\t" << "Low -\t" << "Topvar" <<std::endl;
-    for (int i= 0; i<= CR; i++){
-    ClassProject::uTableVal *res = comp.getuTableVal(i);
-        std::cout << i <<"\t"<< res->highV << " -\t" << res->lowV << " -\t" << res->topVar <<std::endl;
+//    for (auto it = result.begin(); it != result.end(); ++it)
+//        std::cout << *it << " " << std::endl;
+
+//    std::cout <<"ID\t"<< "High -\t" << "Low -\t" << "Topvar" <<std::endl;
+//    for (int i= 0; i<= CR; i++){
+//    ClassProject::uTableVal *res = comp.getuTableVal(i);
+//        std::cout << i <<"\t"<< res->highV << " -\t" << res->lowV << " -\t" << res->topVar <<std::endl;
+//    }
+
+}
+
+TEST(managerTest, check_size_array_Test) {
+    ClassProject::Reachable comp(2);
+
+    auto states = comp.getStates();
+    std::vector<BDD_ID> functions;
+
+    auto s0 = states.at(0);
+    auto s1 = states.at(1);
+    //s0' = not(s0)
+    functions.push_back(comp.neg(s0));
+    //s1' = not(s1)
+    functions.push_back(comp.neg(s1));
+
+    try {
+        //Add transition functions
+        functions.push_back(comp.neg(s0));
+        comp.check_size_array(functions);
+        FAIL() << "Expected std::runtime_error";
     }
+
+    catch(std::runtime_error const & err) {
+        EXPECT_EQ(err.what(),std::string("The number of elements in the vector is higher than the number of state variables"));
+    }
+
+    //Add init state
+//    comp.setInitState({false,false});
 
 }
 

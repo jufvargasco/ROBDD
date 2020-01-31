@@ -18,6 +18,8 @@ namespace ClassProject {
 
         ~Reachable() override = default;
 
+        void check_size_array(const std::vector<BDD_ID> & array);
+
         //! @return returns the XNOR of BDD IDs
         BDD_ID xnor2(BDD_ID a, BDD_ID b) override;
         /**
