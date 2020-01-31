@@ -27,10 +27,12 @@ namespace ClassProject {
     }
 
     void Reachable::setDelta(const std::vector<BDD_ID> &transitionFunctions) {
+        check_size_array(transitionFunctions);
         delta = transitionFunctions;
     }
 
     void Reachable::setInitState(const std::vector<bool> &stateVector) {
+        check_size_array(stateVector);
         for(int i=0; i<this->return_stateSize(); i++){
             initStates[i] = stateVector[i];
         }
@@ -97,6 +99,9 @@ namespace ClassProject {
         }
     }
 
+    void Reachable::check_size_array(const std::vector<bool> &array) {
+
+    }
 
 
 }

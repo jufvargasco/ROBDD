@@ -173,4 +173,32 @@ TEST(managerTest, check_size_array_Test) {
 
 }
 
+TEST(managerTest, check_size_array_bool_Test) {
+    ClassProject::Reachable comp(2);
+
+    auto states = comp.getStates();
+    std::vector<BDD_ID> functions;
+
+    auto s0 = states.at(0);
+    auto s1 = states.at(1);
+    //s0' = not(s0)
+    functions.push_back(comp.neg(s0));
+    //s1' = not(s1)
+    functions.push_back(comp.neg(s1));
+
+    try {
+        //Add transition functions
+        comp.setInitState({false,false,false});
+        FAIL() << "Expected std::runtime_error";
+    }
+
+    catch(std::runtime_error const & err) {
+        EXPECT_EQ(err.what(),std::string("The number of elements in the vector is higher than the number of state variables"));
+    }
+
+    //Add init state
+//    comp.setInitState({false,false});
+
+}
+
 #endif //VDSPROJECT_TESTS_H
