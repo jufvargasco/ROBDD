@@ -11,17 +11,29 @@
 
 namespace ClassProject {
 
+    /**
+     * \brief Implements the interface  of the reachability extension
+     */
+
     class Reachable : public ReachableInterface {
     public:
 
+        /**
+          * \brief Constructor
+          *
+          * This constructor creates the data structures required for the reachability analysis.
+          * It also initializes them according to number of state bits.
+          */
         explicit Reachable(unsigned int stateSize);
-
+        /**
+         * Destructor
+         */
         ~Reachable() override = default;
 
         void check_size_array(const std::vector<BDD_ID> & array);
         void check_size_array(const std::vector<bool> & array);
 
-        //! @return returns the XNOR of BDD IDs
+        //! @return a BDD node that represents the correlating "xnor" function
         BDD_ID xnor2(BDD_ID a, BDD_ID b) override;
         /**
          * States are generated and stored in a vector.
@@ -41,6 +53,14 @@ namespace ClassProject {
          */
         void setDelta(const std::vector<BDD_ID> &transitionFunctions)  override;
 
+       /**
+        * Each state variable has a transition function.
+        * The transition function specifies the value of the state after the transition.
+        * The transition function are composed of only state variables.
+        * For example: s0' = s0 XOR s1
+        * The next state is defined as XOR of the current values of the state bit s0 and s1
+        * @return vector with the BDD_ID or the transition functions
+        */
         const std::vector<BDD_ID> &getDelta() const;
 
         /**
@@ -52,10 +72,10 @@ namespace ClassProject {
         void setInitState(const std::vector<bool>& stateVector)  override ;
 
         /**
-         * Each state machine has an inital state. The inital state is provided as a vector.
+         * Each state machine has an initial state. The initial state is provided as a vector.
          * The vector has to have an entry for each state bit. If the entry is "true" the state bit is high,
-         * otherwhise negated. E.g. initial state not(s0) and not(s1) is transformed into {false,false}.
-         * @param stateVector provide the assignemtn for each state bit
+         * otherwise negated. E.g. initial state not(s0) and not(s1) is transformed into {false,false}.
+         * @param stateVector provide the assignment for each state bit
          */
         const std::vector<bool> &getInitState() const;
 
@@ -68,9 +88,9 @@ namespace ClassProject {
 
         /**
          * This method decides whether a specific state is in the reachable state space or not.
-         * The inpute is provided as a vector of states. The value is true if the state bit is high in this state, false otherwise.
+         * The input is provided as a vector of states. The value is true if the state bit is high in this state, false otherwise.
          * @param stateVector
-         * @return
+         * @return Boolean indicating if the state is reachable
          */
         bool is_reachable(const std::vector<bool>& stateVector) override;
 

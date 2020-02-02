@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['uniquetablesize',['uniqueTableSize',['../classManager.html#a82b10a42ec726d42ea4d2e8bc72a3db9',1,'Manager::uniqueTableSize()'],['../classManagerInterface.html#a88f79dbba9be5dc2a4e0fb21ac627c98',1,'ManagerInterface::uniqueTableSize()']]],
-  ['utableempty',['utableEmpty',['../classManager.html#afc3f9c453c3afb8024d811edfeb0e7e5',1,'Manager']]],
-  ['utableval',['uTableVal',['../structuTableVal.html',1,'']]]
+  ['setdelta',['setDelta',['../classClassProject_1_1Reachable.html#a53fdcc94c37cd7f0e27881678189b5c5',1,'ClassProject::Reachable::setDelta()'],['../classClassProject_1_1ReachableInterface.html#a88f9a34f7272c3f971e757aa2b140746',1,'ClassProject::ReachableInterface::setDelta()']]],
+  ['setinitstate',['setInitState',['../classClassProject_1_1Reachable.html#ab3ddc3f569e280c3902a40ab8202f8c3',1,'ClassProject::Reachable::setInitState()'],['../classClassProject_1_1ReachableInterface.html#a005d8d8375b8d4e9f7c7d1a0ff01a97f',1,'ClassProject::ReachableInterface::setInitState()']]]
 ];

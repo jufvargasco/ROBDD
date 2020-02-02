@@ -17,7 +17,7 @@ namespace ClassProject {
 typedef unsigned int BDD_ID;
 
 /**
- * \brief Defines the implemented interface
+ * \brief Defines the implemented interface of the BDD package
  */
 class ManagerInterface{
 public:

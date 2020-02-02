@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['nand2',['nand2',['../classManager.html#abde082c99a3588ad7e25b620e901e6e0',1,'Manager::nand2()'],['../classManagerInterface.html#af51e4c180a25f80bdfd99ff7a9931477',1,'ManagerInterface::nand2()']]],
-  ['neg',['neg',['../classManager.html#ab53a25ffc83724427725347ed3f9e6ce',1,'Manager::neg()'],['../classManagerInterface.html#af7c4261f0ae260de651909790d505555',1,'ManagerInterface::neg()']]],
-  ['nor2',['nor2',['../classManager.html#a1cbba8dc08a8c1bbabce0b98a8fde3be',1,'Manager::nor2()'],['../classManagerInterface.html#ad7d0582df3df84dbb06930c6e3ac5d72',1,'ManagerInterface::nor2()']]]
+  ['nand2',['nand2',['../classClassProject_1_1Manager.html#abde082c99a3588ad7e25b620e901e6e0',1,'ClassProject::Manager::nand2()'],['../classClassProject_1_1ManagerInterface.html#aaf6e357d680613e449d3ea958c9abba1',1,'ClassProject::ManagerInterface::nand2()']]],
+  ['neg',['neg',['../classClassProject_1_1Manager.html#ab53a25ffc83724427725347ed3f9e6ce',1,'ClassProject::Manager::neg()'],['../classClassProject_1_1ManagerInterface.html#a57d34af3121dcf5366d22ecf792f05a0',1,'ClassProject::ManagerInterface::neg()']]],
+  ['nor2',['nor2',['../classClassProject_1_1Manager.html#a1cbba8dc08a8c1bbabce0b98a8fde3be',1,'ClassProject::Manager::nor2()'],['../classClassProject_1_1ManagerInterface.html#a312d9865eae2d6355e17855cba78bc78',1,'ClassProject::ManagerInterface::nor2()']]]
 ];

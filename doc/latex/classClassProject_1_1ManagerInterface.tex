@@ -1,0 +1,345 @@
+\hypertarget{classClassProject_1_1ManagerInterface}{}\section{Class\+Project\+:\+:Manager\+Interface Class Reference}
+\label{classClassProject_1_1ManagerInterface}\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+
+
+Defines the implemented interface of the B\+DD package.  
+
+
+
+
+{\ttfamily \#include $<$Manager\+Interface.\+h$>$}
+
+
+
+Inheritance diagram for Class\+Project\+:\+:Manager\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classClassProject_1_1ManagerInterface__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_ae2bf46167e81aa6c912bf8aff4202d17}\label{classClassProject_1_1ManagerInterface_ae2bf46167e81aa6c912bf8aff4202d17}} 
+\hyperlink{classClassProject_1_1ManagerInterface_ae2bf46167e81aa6c912bf8aff4202d17}{Manager\+Interface} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual const B\+D\+D\+\_\+\+ID \& \hyperlink{classClassProject_1_1ManagerInterface_a104d0e8bcbd81eb501b66db6e24d1f63}{True} ()=0
+\item 
+virtual const B\+D\+D\+\_\+\+ID \& \hyperlink{classClassProject_1_1ManagerInterface_a98d18e1bc840fd664af015facfdcf690}{False} ()=0
+\item 
+virtual bool \hyperlink{classClassProject_1_1ManagerInterface_a0edd879f6ecae7bc5f84a2d55373d977}{is\+Constant} (const B\+D\+D\+\_\+\+ID f)=0
+\item 
+virtual bool \hyperlink{classClassProject_1_1ManagerInterface_a6eaaec7cbf8826198e490313ccb8f22a}{is\+Variable} (const B\+D\+D\+\_\+\+ID x)=0
+\item 
+virtual B\+D\+D\+\_\+\+ID \hyperlink{classClassProject_1_1ManagerInterface_ae2c645f859bcc7be3376d478f01eb045}{top\+Var} (const B\+D\+D\+\_\+\+ID f)=0
+\item 
+virtual B\+D\+D\+\_\+\+ID \hyperlink{classClassProject_1_1ManagerInterface_ab101acd3fbe6a5e29973d88f9862b8b4}{create\+Var} (const std\+::string \&label)=0
+\item 
+virtual B\+D\+D\+\_\+\+ID \hyperlink{classClassProject_1_1ManagerInterface_a6ea8f9482d86afb4128c52328d9ec11c}{ite} (const B\+D\+D\+\_\+\+ID i, const B\+D\+D\+\_\+\+ID t, const B\+D\+D\+\_\+\+ID e)=0
+\item 
+virtual B\+D\+D\+\_\+\+ID \hyperlink{classClassProject_1_1ManagerInterface_aab8496a0e551abdad99160e152199f4b}{co\+Factor\+True} (const B\+D\+D\+\_\+\+ID f, B\+D\+D\+\_\+\+ID x)=0
+\item 
+virtual B\+D\+D\+\_\+\+ID \hyperlink{classClassProject_1_1ManagerInterface_ad749ef1542c5b23bbbce628d6f666fe4}{co\+Factor\+False} (const B\+D\+D\+\_\+\+ID f, B\+D\+D\+\_\+\+ID x)=0
+\item 
+virtual B\+D\+D\+\_\+\+ID \hyperlink{classClassProject_1_1ManagerInterface_a4a1880d2245af9130646232551940949}{co\+Factor\+True} (const B\+D\+D\+\_\+\+ID f)=0
+\item 
+virtual B\+D\+D\+\_\+\+ID \hyperlink{classClassProject_1_1ManagerInterface_a308c99661ad02f407d6f2b0af6230e80}{co\+Factor\+False} (const B\+D\+D\+\_\+\+ID f)=0
+\item 
+virtual B\+D\+D\+\_\+\+ID \hyperlink{classClassProject_1_1ManagerInterface_af914326d34a1ed42710f7b11e5baf010}{and2} (const B\+D\+D\+\_\+\+ID a, const B\+D\+D\+\_\+\+ID b)=0
+\item 
+virtual B\+D\+D\+\_\+\+ID \hyperlink{classClassProject_1_1ManagerInterface_a8dbfde761b1e94d1f222b4d27f3c6fbc}{or2} (const B\+D\+D\+\_\+\+ID a, const B\+D\+D\+\_\+\+ID b)=0
+\item 
+virtual B\+D\+D\+\_\+\+ID \hyperlink{classClassProject_1_1ManagerInterface_a2b2c4948ef41ddb1036289cd07dac156}{xor2} (const B\+D\+D\+\_\+\+ID a, const B\+D\+D\+\_\+\+ID b)=0
+\item 
+virtual B\+D\+D\+\_\+\+ID \hyperlink{classClassProject_1_1ManagerInterface_a57d34af3121dcf5366d22ecf792f05a0}{neg} (const B\+D\+D\+\_\+\+ID a)=0
+\item 
+virtual B\+D\+D\+\_\+\+ID \hyperlink{classClassProject_1_1ManagerInterface_aaf6e357d680613e449d3ea958c9abba1}{nand2} (const B\+D\+D\+\_\+\+ID a, const B\+D\+D\+\_\+\+ID b)=0
+\item 
+virtual B\+D\+D\+\_\+\+ID \hyperlink{classClassProject_1_1ManagerInterface_a312d9865eae2d6355e17855cba78bc78}{nor2} (const B\+D\+D\+\_\+\+ID a, const B\+D\+D\+\_\+\+ID b)=0
+\item 
+virtual std\+::string \hyperlink{classClassProject_1_1ManagerInterface_afde45b2065361dfa6e61c1c7bc3fc1b4}{get\+Top\+Var\+Name} (const B\+D\+D\+\_\+\+ID \&root)=0
+\item 
+virtual void \hyperlink{classClassProject_1_1ManagerInterface_ab460e331ffdb85d4128574b3aae72c1e}{find\+Nodes} (const B\+D\+D\+\_\+\+ID \&root, std\+::set$<$ B\+D\+D\+\_\+\+ID $>$ \&nodes\+\_\+of\+\_\+root)=0
+\item 
+virtual void \hyperlink{classClassProject_1_1ManagerInterface_ab94feabca2125d334e542e502ae0186d}{find\+Vars} (const B\+D\+D\+\_\+\+ID \&root, std\+::set$<$ B\+D\+D\+\_\+\+ID $>$ \&vars\+\_\+of\+\_\+root)=0
+\item 
+virtual size\+\_\+t \hyperlink{classClassProject_1_1ManagerInterface_a85cac80444b26e5b80eb96b9f1231c0e}{unique\+Table\+Size} ()=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Defines the implemented interface of the B\+DD package. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_af914326d34a1ed42710f7b11e5baf010}\label{classClassProject_1_1ManagerInterface_af914326d34a1ed42710f7b11e5baf010}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!and2@{and2}}
+\index{and2@{and2}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{and2()}{and2()}}
+{\footnotesize\ttfamily virtual B\+D\+D\+\_\+\+ID Class\+Project\+::\+Manager\+Interface\+::and2 (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID}]{a,  }\item[{const B\+D\+D\+\_\+\+ID}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+a B\+DD node that represents the correlating \char`\"{}and\char`\"{} function 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_a029fff4ef6650e4fd1f0ff37a69252de}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_ad749ef1542c5b23bbbce628d6f666fe4}\label{classClassProject_1_1ManagerInterface_ad749ef1542c5b23bbbce628d6f666fe4}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!co\+Factor\+False@{co\+Factor\+False}}
+\index{co\+Factor\+False@{co\+Factor\+False}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{co\+Factor\+False()}{coFactorFalse()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual B\+D\+D\+\_\+\+ID Class\+Project\+::\+Manager\+Interface\+::co\+Factor\+False (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID}]{f,  }\item[{B\+D\+D\+\_\+\+ID}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+the negative cofactor of the function defined by f with respect to function x. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_aea635ff0e0ec0cc8b43799f2d18de598}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_a308c99661ad02f407d6f2b0af6230e80}\label{classClassProject_1_1ManagerInterface_a308c99661ad02f407d6f2b0af6230e80}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!co\+Factor\+False@{co\+Factor\+False}}
+\index{co\+Factor\+False@{co\+Factor\+False}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{co\+Factor\+False()}{coFactorFalse()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual B\+D\+D\+\_\+\+ID Class\+Project\+::\+Manager\+Interface\+::co\+Factor\+False (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+the negative cofactor of the function defined by node f. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_a3e3d13bac159441b8682338fe6a8bcb2}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_aab8496a0e551abdad99160e152199f4b}\label{classClassProject_1_1ManagerInterface_aab8496a0e551abdad99160e152199f4b}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!co\+Factor\+True@{co\+Factor\+True}}
+\index{co\+Factor\+True@{co\+Factor\+True}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{co\+Factor\+True()}{coFactorTrue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual B\+D\+D\+\_\+\+ID Class\+Project\+::\+Manager\+Interface\+::co\+Factor\+True (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID}]{f,  }\item[{B\+D\+D\+\_\+\+ID}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+the positive cofactor of the function defined by f with respect to function x. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_aa2bfdbb0fae8e09b2b766336cdf7ce94}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_a4a1880d2245af9130646232551940949}\label{classClassProject_1_1ManagerInterface_a4a1880d2245af9130646232551940949}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!co\+Factor\+True@{co\+Factor\+True}}
+\index{co\+Factor\+True@{co\+Factor\+True}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{co\+Factor\+True()}{coFactorTrue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual B\+D\+D\+\_\+\+ID Class\+Project\+::\+Manager\+Interface\+::co\+Factor\+True (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+the positive cofactor of the function defined by node f. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_ab2b73e9169e978c45a4ebf9aa3bddef8}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_ab101acd3fbe6a5e29973d88f9862b8b4}\label{classClassProject_1_1ManagerInterface_ab101acd3fbe6a5e29973d88f9862b8b4}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!create\+Var@{create\+Var}}
+\index{create\+Var@{create\+Var}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{create\+Var()}{createVar()}}
+{\footnotesize\ttfamily virtual B\+D\+D\+\_\+\+ID Class\+Project\+::\+Manager\+Interface\+::create\+Var (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{label }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Creates a new variable for the B\+DD. 
+
+Implemented in \hyperlink{classClassProject_1_1Manager_a9fb480d8af44c75ee2b35b85f7038e68}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_a98d18e1bc840fd664af015facfdcf690}\label{classClassProject_1_1ManagerInterface_a98d18e1bc840fd664af015facfdcf690}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!False@{False}}
+\index{False@{False}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{False()}{False()}}
+{\footnotesize\ttfamily virtual const B\+D\+D\+\_\+\+ID\& Class\+Project\+::\+Manager\+Interface\+::\+False (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+the ID of the node representing False. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_ae9bae01509e6063313024cd85a8eb569}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_ab460e331ffdb85d4128574b3aae72c1e}\label{classClassProject_1_1ManagerInterface_ab460e331ffdb85d4128574b3aae72c1e}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!find\+Nodes@{find\+Nodes}}
+\index{find\+Nodes@{find\+Nodes}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{find\+Nodes()}{findNodes()}}
+{\footnotesize\ttfamily virtual void Class\+Project\+::\+Manager\+Interface\+::find\+Nodes (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID \&}]{root,  }\item[{std\+::set$<$ B\+D\+D\+\_\+\+ID $>$ \&}]{nodes\+\_\+of\+\_\+root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+the set of B\+DD nodes which are reachable from the B\+DD node root (including itself). 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_a2aefec8f025f8d7417eff8493bcd7f04}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_ab94feabca2125d334e542e502ae0186d}\label{classClassProject_1_1ManagerInterface_ab94feabca2125d334e542e502ae0186d}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!find\+Vars@{find\+Vars}}
+\index{find\+Vars@{find\+Vars}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{find\+Vars()}{findVars()}}
+{\footnotesize\ttfamily virtual void Class\+Project\+::\+Manager\+Interface\+::find\+Vars (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID \&}]{root,  }\item[{std\+::set$<$ B\+D\+D\+\_\+\+ID $>$ \&}]{vars\+\_\+of\+\_\+root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+the set of variables which are either top variable of the B\+DD node root or the reachable nodes from root. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_abf869470f4d1baffca8a140d3196c2ad}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_afde45b2065361dfa6e61c1c7bc3fc1b4}\label{classClassProject_1_1ManagerInterface_afde45b2065361dfa6e61c1c7bc3fc1b4}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!get\+Top\+Var\+Name@{get\+Top\+Var\+Name}}
+\index{get\+Top\+Var\+Name@{get\+Top\+Var\+Name}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{get\+Top\+Var\+Name()}{getTopVarName()}}
+{\footnotesize\ttfamily virtual std\+::string Class\+Project\+::\+Manager\+Interface\+::get\+Top\+Var\+Name (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID \&}]{root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+the Name of top variable of the B\+DD node root 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_a72e49c79e186bfce423eb554cca28ff2}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_a0edd879f6ecae7bc5f84a2d55373d977}\label{classClassProject_1_1ManagerInterface_a0edd879f6ecae7bc5f84a2d55373d977}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!is\+Constant@{is\+Constant}}
+\index{is\+Constant@{is\+Constant}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{is\+Constant()}{isConstant()}}
+{\footnotesize\ttfamily virtual bool Class\+Project\+::\+Manager\+Interface\+::is\+Constant (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+true if x is a leaf node. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_a98fe06b67d8114f1404a7b19dddc935b}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_a6eaaec7cbf8826198e490313ccb8f22a}\label{classClassProject_1_1ManagerInterface_a6eaaec7cbf8826198e490313ccb8f22a}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!is\+Variable@{is\+Variable}}
+\index{is\+Variable@{is\+Variable}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{is\+Variable()}{isVariable()}}
+{\footnotesize\ttfamily virtual bool Class\+Project\+::\+Manager\+Interface\+::is\+Variable (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+true if x is a variable. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_af026f76f68823bb9083f161b5db9e58b}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_a6ea8f9482d86afb4128c52328d9ec11c}\label{classClassProject_1_1ManagerInterface_a6ea8f9482d86afb4128c52328d9ec11c}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!ite@{ite}}
+\index{ite@{ite}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{ite()}{ite()}}
+{\footnotesize\ttfamily virtual B\+D\+D\+\_\+\+ID Class\+Project\+::\+Manager\+Interface\+::ite (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID}]{i,  }\item[{const B\+D\+D\+\_\+\+ID}]{t,  }\item[{const B\+D\+D\+\_\+\+ID}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Implements the if-\/then-\/else algorithm. \begin{DoxyReturn}{Returns}
+the new node that represents the I\+TE. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_ab6b8135aadc0a5b91b5c651c4046da05}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_aaf6e357d680613e449d3ea958c9abba1}\label{classClassProject_1_1ManagerInterface_aaf6e357d680613e449d3ea958c9abba1}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!nand2@{nand2}}
+\index{nand2@{nand2}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{nand2()}{nand2()}}
+{\footnotesize\ttfamily virtual B\+D\+D\+\_\+\+ID Class\+Project\+::\+Manager\+Interface\+::nand2 (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID}]{a,  }\item[{const B\+D\+D\+\_\+\+ID}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+a B\+DD node that represents the correlating \char`\"{}nand\char`\"{} function 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_abde082c99a3588ad7e25b620e901e6e0}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_a57d34af3121dcf5366d22ecf792f05a0}\label{classClassProject_1_1ManagerInterface_a57d34af3121dcf5366d22ecf792f05a0}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!neg@{neg}}
+\index{neg@{neg}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{neg()}{neg()}}
+{\footnotesize\ttfamily virtual B\+D\+D\+\_\+\+ID Class\+Project\+::\+Manager\+Interface\+::neg (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+a B\+DD node that represents the correlating \char`\"{}neg\char`\"{} function 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_ab53a25ffc83724427725347ed3f9e6ce}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_a312d9865eae2d6355e17855cba78bc78}\label{classClassProject_1_1ManagerInterface_a312d9865eae2d6355e17855cba78bc78}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!nor2@{nor2}}
+\index{nor2@{nor2}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{nor2()}{nor2()}}
+{\footnotesize\ttfamily virtual B\+D\+D\+\_\+\+ID Class\+Project\+::\+Manager\+Interface\+::nor2 (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID}]{a,  }\item[{const B\+D\+D\+\_\+\+ID}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+a B\+DD node that represents the correlating \char`\"{}nor\char`\"{} function 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_a1cbba8dc08a8c1bbabce0b98a8fde3be}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_a8dbfde761b1e94d1f222b4d27f3c6fbc}\label{classClassProject_1_1ManagerInterface_a8dbfde761b1e94d1f222b4d27f3c6fbc}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!or2@{or2}}
+\index{or2@{or2}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{or2()}{or2()}}
+{\footnotesize\ttfamily virtual B\+D\+D\+\_\+\+ID Class\+Project\+::\+Manager\+Interface\+::or2 (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID}]{a,  }\item[{const B\+D\+D\+\_\+\+ID}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+a B\+DD node that represents the correlating \char`\"{}or\char`\"{} function 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_a0f415b7af83a3efb6f7020650e68f1c3}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_ae2c645f859bcc7be3376d478f01eb045}\label{classClassProject_1_1ManagerInterface_ae2c645f859bcc7be3376d478f01eb045}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!top\+Var@{top\+Var}}
+\index{top\+Var@{top\+Var}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{top\+Var()}{topVar()}}
+{\footnotesize\ttfamily virtual B\+D\+D\+\_\+\+ID Class\+Project\+::\+Manager\+Interface\+::top\+Var (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+the ID of top variable of the B\+DD node f 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_a8ddf48759e4e3a5c9e92b07470372b7e}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_a104d0e8bcbd81eb501b66db6e24d1f63}\label{classClassProject_1_1ManagerInterface_a104d0e8bcbd81eb501b66db6e24d1f63}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!True@{True}}
+\index{True@{True}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{True()}{True()}}
+{\footnotesize\ttfamily virtual const B\+D\+D\+\_\+\+ID\& Class\+Project\+::\+Manager\+Interface\+::\+True (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+the ID of the node representing True. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_a0c15aff167a7019502b66100c4ec0a33}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_a85cac80444b26e5b80eb96b9f1231c0e}\label{classClassProject_1_1ManagerInterface_a85cac80444b26e5b80eb96b9f1231c0e}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!unique\+Table\+Size@{unique\+Table\+Size}}
+\index{unique\+Table\+Size@{unique\+Table\+Size}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{unique\+Table\+Size()}{uniqueTableSize()}}
+{\footnotesize\ttfamily virtual size\+\_\+t Class\+Project\+::\+Manager\+Interface\+::unique\+Table\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+the number of the nodes currently exist in the unique table of the \hyperlink{classClassProject_1_1Manager}{Manager} class. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_a82b10a42ec726d42ea4d2e8bc72a3db9}{Class\+Project\+::\+Manager}.
+
+\mbox{\Hypertarget{classClassProject_1_1ManagerInterface_a2b2c4948ef41ddb1036289cd07dac156}\label{classClassProject_1_1ManagerInterface_a2b2c4948ef41ddb1036289cd07dac156}} 
+\index{Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}!xor2@{xor2}}
+\index{xor2@{xor2}!Class\+Project\+::\+Manager\+Interface@{Class\+Project\+::\+Manager\+Interface}}
+\subsubsection{\texorpdfstring{xor2()}{xor2()}}
+{\footnotesize\ttfamily virtual B\+D\+D\+\_\+\+ID Class\+Project\+::\+Manager\+Interface\+::xor2 (\begin{DoxyParamCaption}\item[{const B\+D\+D\+\_\+\+ID}]{a,  }\item[{const B\+D\+D\+\_\+\+ID}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+a B\+DD node that represents the correlating \char`\"{}xor\char`\"{} function 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classClassProject_1_1Manager_a2582e9a9474189a2710c551548c20c19}{Class\+Project\+::\+Manager}.
+

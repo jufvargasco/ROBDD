@@ -49,7 +49,7 @@ BDD_ID Manager::createVar (const std::string &label){
     ++last_id;
     labelTable[label] = last_id;
     auto *var = new uTableVal(1, 0, last_id);
-    size_t hash = hash4(*var);
+    size_t hash = hash_uTableVal(*var);
     uniqTable_search.insert(std::pair<size_t, BDD_ID >(hash,last_id));
     uniqTable.insert(std::pair<BDD_ID,uTableVal*>(last_id,var));
     return last_id;
@@ -84,7 +84,7 @@ BDD_ID Manager::ite (const BDD_ID i, const BDD_ID t, const BDD_ID e){
 
     // Repeated case
     uTableVal value =  uTableVal(i,t,e);
-    size_t hash = hash4(value);
+    size_t hash = hash_uTableVal(value);
     auto cSearch = compTable.find(hash);
     if(cSearch != compTable.end()){
         auto compValue = cSearch->second;
@@ -212,7 +212,7 @@ bool Manager::ctableEmpty() {
 BDD_ID Manager::find_or_add_uTable(const BDD_ID x, const BDD_ID high, const BDD_ID low){
 
     auto *new_val = new uTableVal(high, low, x);
-    size_t hash = hash4(*new_val);
+    size_t hash = hash_uTableVal(*new_val);
     auto uSearch = uniqTable_search.find(hash);
     if(uSearch != uniqTable_search.end()){
         if (uniqTable[uSearch->second]->topVar == x && uniqTable[uSearch->second]->highV == high && uniqTable[uSearch->second]->lowV == low)

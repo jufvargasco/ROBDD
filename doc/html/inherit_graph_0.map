@@ -1,4 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classManagerInterface.html" title="ManagerInterface" alt="" coords="5,5,128,32"/>
-<area shape="rect" id="node2" href="$classManager.html" title="Manager" alt="" coords="176,5,248,32"/>
+<area shape="rect" id="node1" href="$classClassProject_1_1ManagerInterface.html" title="Defines the implemented interface of the BDD package. " alt="" coords="5,5,212,32"/>
+<area shape="rect" id="node2" href="$classClassProject_1_1Manager.html" title="Implements the interface of the BDD package. " alt="" coords="260,5,415,32"/>
+<area shape="rect" id="node3" href="$classClassProject_1_1ReachableInterface.html" title="Defines the implemented interface of the reachability extension. " alt="" coords="463,5,681,32"/>
+<area shape="rect" id="node4" href="$classClassProject_1_1Reachable.html" title="Implements the interface of the reachability extension. " alt="" coords="729,5,896,32"/>
 </map>

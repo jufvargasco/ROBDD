@@ -67,6 +67,11 @@ $(function() {
 Introduction</h1>
 <p>A package for working with Ordered Binary Decision Diagrams (OBDDs) is provided.</p>
 <p>This package allows to reduce said data structures, obtaining equivalent ROBDDs. In order to do so, the if-then-else (ITE) algorithm is used, together with the corresponding unique and computed tables.</p>
+<p>This package was tested against the standard benchmarks for OBDDs.</p>
+<h1><a class="anchor" id="ext_sec"></a>
+Reachability</h1>
+<p>With this OBDD package also comes an extension for reachability analysis.</p>
+<p>Given a set of state bits, their corresponding initial value and their transition function, it is possible to analyze if the given state is reachable from the initial one.</p>
 <h1><a class="anchor" id="used_sec"></a>
 Techniques and tools used</h1>
 <p>This package has been implemented in C++ using CLion as IDE. Also, this has been done using Test Driven Develpment (TDD), with the tests being implemented using Gtest. Finally, this documentation has been generated using Doxygen.</p>

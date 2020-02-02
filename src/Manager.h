@@ -39,7 +39,7 @@ namespace ClassProject {
         }
     };
 /**
- * \brief Implements the interface
+ * \brief Implements the interface of the BDD package
  */
     class Manager : public ManagerInterface {
     public:

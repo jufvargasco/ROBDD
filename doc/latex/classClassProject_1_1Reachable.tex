@@ -1,0 +1,192 @@
+\hypertarget{classClassProject_1_1Reachable}{}\section{Class\+Project\+:\+:Reachable Class Reference}
+\label{classClassProject_1_1Reachable}\index{Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}}
+
+
+Implements the interface of the reachability extension.  
+
+
+
+
+{\ttfamily \#include $<$Reachable.\+h$>$}
+
+
+
+Inheritance diagram for Class\+Project\+:\+:Reachable\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classClassProject_1_1Reachable__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Class\+Project\+:\+:Reachable\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classClassProject_1_1Reachable__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classClassProject_1_1Reachable_ab5198f10bf77a813a7547bb5cbf72fc9}{Reachable} (unsigned int state\+Size)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{classClassProject_1_1Reachable_a1f39c60e57237bf1af65657f41a58c2f}{$\sim$\+Reachable} () override=default
+\item 
+\mbox{\Hypertarget{classClassProject_1_1Reachable_aef184d12beb7264228104f04d4aef63e}\label{classClassProject_1_1Reachable_aef184d12beb7264228104f04d4aef63e}} 
+void {\bfseries check\+\_\+size\+\_\+array} (const std\+::vector$<$ B\+D\+D\+\_\+\+ID $>$ \&array)
+\item 
+\mbox{\Hypertarget{classClassProject_1_1Reachable_ab1112c527e5a944129b61d9566ca6186}\label{classClassProject_1_1Reachable_ab1112c527e5a944129b61d9566ca6186}} 
+void {\bfseries check\+\_\+size\+\_\+array} (const std\+::vector$<$ bool $>$ \&array)
+\item 
+B\+D\+D\+\_\+\+ID \hyperlink{classClassProject_1_1Reachable_a7f97f9868c825b64f333c4bc8eb7632b}{xnor2} (B\+D\+D\+\_\+\+ID a, B\+D\+D\+\_\+\+ID b) override
+\item 
+const std\+::vector$<$ B\+D\+D\+\_\+\+ID $>$ \& \hyperlink{classClassProject_1_1Reachable_a46b6aab8ea4dac374af4e2e97b5321dd}{get\+States} () const override
+\item 
+void \hyperlink{classClassProject_1_1Reachable_a53fdcc94c37cd7f0e27881678189b5c5}{set\+Delta} (const std\+::vector$<$ B\+D\+D\+\_\+\+ID $>$ \&transition\+Functions) override
+\item 
+const std\+::vector$<$ B\+D\+D\+\_\+\+ID $>$ \& \hyperlink{classClassProject_1_1Reachable_a52a7381b5237c686f47496b8c63ac37f}{get\+Delta} () const
+\item 
+void \hyperlink{classClassProject_1_1Reachable_ab3ddc3f569e280c3902a40ab8202f8c3}{set\+Init\+State} (const std\+::vector$<$ bool $>$ \&state\+Vector) override
+\item 
+const std\+::vector$<$ bool $>$ \& \hyperlink{classClassProject_1_1Reachable_a713e76e60c325f459c4561517fd832b6}{get\+Init\+State} () const
+\item 
+B\+D\+D\+\_\+\+ID \hyperlink{classClassProject_1_1Reachable_ab382d204af0fe91f027026b6dad6142f}{compute\+\_\+reachable\+\_\+states} () override
+\item 
+bool \hyperlink{classClassProject_1_1Reachable_a19a40b477fc119690e0a9f1f7ffc4843}{is\+\_\+reachable} (const std\+::vector$<$ bool $>$ \&state\+Vector) override
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implements the interface of the reachability extension. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classClassProject_1_1Reachable_ab5198f10bf77a813a7547bb5cbf72fc9}\label{classClassProject_1_1Reachable_ab5198f10bf77a813a7547bb5cbf72fc9}} 
+\index{Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}!Reachable@{Reachable}}
+\index{Reachable@{Reachable}!Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}}
+\subsubsection{\texorpdfstring{Reachable()}{Reachable()}}
+{\footnotesize\ttfamily Class\+Project\+::\+Reachable\+::\+Reachable (\begin{DoxyParamCaption}\item[{unsigned int}]{state\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor. 
+
+This constructor creates the data structures required for the reachability analysis. It also initializes them according to number of state bits. \mbox{\Hypertarget{classClassProject_1_1Reachable_a1f39c60e57237bf1af65657f41a58c2f}\label{classClassProject_1_1Reachable_a1f39c60e57237bf1af65657f41a58c2f}} 
+\index{Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}!````~Reachable@{$\sim$\+Reachable}}
+\index{````~Reachable@{$\sim$\+Reachable}!Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}}
+\subsubsection{\texorpdfstring{$\sim$\+Reachable()}{~Reachable()}}
+{\footnotesize\ttfamily Class\+Project\+::\+Reachable\+::$\sim$\+Reachable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+Destructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classClassProject_1_1Reachable_ab382d204af0fe91f027026b6dad6142f}\label{classClassProject_1_1Reachable_ab382d204af0fe91f027026b6dad6142f}} 
+\index{Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}!compute\+\_\+reachable\+\_\+states@{compute\+\_\+reachable\+\_\+states}}
+\index{compute\+\_\+reachable\+\_\+states@{compute\+\_\+reachable\+\_\+states}!Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}}
+\subsubsection{\texorpdfstring{compute\+\_\+reachable\+\_\+states()}{compute\_reachable\_states()}}
+{\footnotesize\ttfamily B\+D\+D\+\_\+\+ID Class\+Project\+::\+Reachable\+::compute\+\_\+reachable\+\_\+states (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Computes the symbolic representation of the reachable states. Before this method is called it is important to set the transition function and the initial state. \begin{DoxyReturn}{Returns}
+B\+D\+D\+\_\+\+ID of the reachable state space 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classClassProject_1_1ReachableInterface_a84a2fe53f724c184266fc22f17204499}{Class\+Project\+::\+Reachable\+Interface}.
+
+\mbox{\Hypertarget{classClassProject_1_1Reachable_a52a7381b5237c686f47496b8c63ac37f}\label{classClassProject_1_1Reachable_a52a7381b5237c686f47496b8c63ac37f}} 
+\index{Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}!get\+Delta@{get\+Delta}}
+\index{get\+Delta@{get\+Delta}!Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}}
+\subsubsection{\texorpdfstring{get\+Delta()}{getDelta()}}
+{\footnotesize\ttfamily const std\+::vector$<$ B\+D\+D\+\_\+\+ID $>$ \& Class\+Project\+::\+Reachable\+::get\+Delta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Each state variable has a transition function. The transition function specifies the value of the state after the transition. The transition function are composed of only state variables. For example\+: s0\textquotesingle{} = s0 X\+OR s1 The next state is defined as X\+OR of the current values of the state bit s0 and s1 \begin{DoxyReturn}{Returns}
+vector with the B\+D\+D\+\_\+\+ID or the transition functions 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classClassProject_1_1Reachable_a713e76e60c325f459c4561517fd832b6}\label{classClassProject_1_1Reachable_a713e76e60c325f459c4561517fd832b6}} 
+\index{Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}!get\+Init\+State@{get\+Init\+State}}
+\index{get\+Init\+State@{get\+Init\+State}!Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}}
+\subsubsection{\texorpdfstring{get\+Init\+State()}{getInitState()}}
+{\footnotesize\ttfamily const std\+::vector$<$ bool $>$ \& Class\+Project\+::\+Reachable\+::get\+Init\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Each state machine has an initial state. The initial state is provided as a vector. The vector has to have an entry for each state bit. If the entry is \char`\"{}true\char`\"{} the state bit is high, otherwise negated. E.\+g. initial state not(s0) and not(s1) is transformed into \{false,false\}. 
+\begin{DoxyParams}{Parameters}
+{\em state\+Vector} & provide the assignment for each state bit \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classClassProject_1_1Reachable_a46b6aab8ea4dac374af4e2e97b5321dd}\label{classClassProject_1_1Reachable_a46b6aab8ea4dac374af4e2e97b5321dd}} 
+\index{Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}!get\+States@{get\+States}}
+\index{get\+States@{get\+States}!Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}}
+\subsubsection{\texorpdfstring{get\+States()}{getStates()}}
+{\footnotesize\ttfamily const std\+::vector$<$ B\+D\+D\+\_\+\+ID $>$ \& Class\+Project\+::\+Reachable\+::get\+States (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+States are generated and stored in a vector. These lsb (e.\+g. \char`\"{}s0\char`\"{}) is stored at location 0. The msb(e.\+g. \char`\"{}s3\char`\"{}) is stored at location size-\/1. \begin{DoxyReturn}{Returns}
+vector with the B\+D\+D\+\_\+\+ID of each state bit 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classClassProject_1_1ReachableInterface_a8546499fbc6d0da61b6b21f8db8e4621}{Class\+Project\+::\+Reachable\+Interface}.
+
+\mbox{\Hypertarget{classClassProject_1_1Reachable_a19a40b477fc119690e0a9f1f7ffc4843}\label{classClassProject_1_1Reachable_a19a40b477fc119690e0a9f1f7ffc4843}} 
+\index{Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}!is\+\_\+reachable@{is\+\_\+reachable}}
+\index{is\+\_\+reachable@{is\+\_\+reachable}!Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}}
+\subsubsection{\texorpdfstring{is\+\_\+reachable()}{is\_reachable()}}
+{\footnotesize\ttfamily bool Class\+Project\+::\+Reachable\+::is\+\_\+reachable (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ bool $>$ \&}]{state\+Vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+This method decides whether a specific state is in the reachable state space or not. The input is provided as a vector of states. The value is true if the state bit is high in this state, false otherwise. 
+\begin{DoxyParams}{Parameters}
+{\em state\+Vector} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Boolean indicating if the state is reachable 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classClassProject_1_1ReachableInterface_aa3011f06562431832cf563b77fb36c13}{Class\+Project\+::\+Reachable\+Interface}.
+
+\mbox{\Hypertarget{classClassProject_1_1Reachable_a53fdcc94c37cd7f0e27881678189b5c5}\label{classClassProject_1_1Reachable_a53fdcc94c37cd7f0e27881678189b5c5}} 
+\index{Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}!set\+Delta@{set\+Delta}}
+\index{set\+Delta@{set\+Delta}!Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}}
+\subsubsection{\texorpdfstring{set\+Delta()}{setDelta()}}
+{\footnotesize\ttfamily void Class\+Project\+::\+Reachable\+::set\+Delta (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ B\+D\+D\+\_\+\+ID $>$ \&}]{transition\+Functions }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Each state variable has a transition function. The transition function specifies the value of the state after the transition. The transition function are composed of only state variables. For example\+: s0\textquotesingle{} = s0 X\+OR s1 The next state is defined as X\+OR of the current values of the state bit s0 and s1 
+\begin{DoxyParams}{Parameters}
+{\em transition\+Functions} & provide a transition function exactly for each state bit \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classClassProject_1_1ReachableInterface_a88f9a34f7272c3f971e757aa2b140746}{Class\+Project\+::\+Reachable\+Interface}.
+
+\mbox{\Hypertarget{classClassProject_1_1Reachable_ab3ddc3f569e280c3902a40ab8202f8c3}\label{classClassProject_1_1Reachable_ab3ddc3f569e280c3902a40ab8202f8c3}} 
+\index{Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}!set\+Init\+State@{set\+Init\+State}}
+\index{set\+Init\+State@{set\+Init\+State}!Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}}
+\subsubsection{\texorpdfstring{set\+Init\+State()}{setInitState()}}
+{\footnotesize\ttfamily void Class\+Project\+::\+Reachable\+::set\+Init\+State (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ bool $>$ \&}]{state\+Vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Each state machine has an inital state. The inital state is provided as a vector. The vector has to have an entry for each state bit. If the entry is \char`\"{}true\char`\"{} the state bit is high, otherwhise negated. E.\+g. initial state not(s0) and not(s1) is transformed into \{false,false\}. 
+\begin{DoxyParams}{Parameters}
+{\em state\+Vector} & provide the assignemtn for each state bit \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classClassProject_1_1ReachableInterface_a005d8d8375b8d4e9f7c7d1a0ff01a97f}{Class\+Project\+::\+Reachable\+Interface}.
+
+\mbox{\Hypertarget{classClassProject_1_1Reachable_a7f97f9868c825b64f333c4bc8eb7632b}\label{classClassProject_1_1Reachable_a7f97f9868c825b64f333c4bc8eb7632b}} 
+\index{Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}!xnor2@{xnor2}}
+\index{xnor2@{xnor2}!Class\+Project\+::\+Reachable@{Class\+Project\+::\+Reachable}}
+\subsubsection{\texorpdfstring{xnor2()}{xnor2()}}
+{\footnotesize\ttfamily B\+D\+D\+\_\+\+ID Class\+Project\+::\+Reachable\+::xnor2 (\begin{DoxyParamCaption}\item[{B\+D\+D\+\_\+\+ID}]{a,  }\item[{B\+D\+D\+\_\+\+ID}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\begin{DoxyReturn}{Returns}
+a B\+DD node that represents the correlating \char`\"{}xnor\char`\"{} function 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classClassProject_1_1ReachableInterface_a80163dcb8b1d982b4fb7f8614808dece}{Class\+Project\+::\+Reachable\+Interface}.
+

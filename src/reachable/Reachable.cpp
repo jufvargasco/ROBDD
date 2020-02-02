@@ -49,13 +49,13 @@ namespace ClassProject {
     BDD_ID Reachable::compute_reachable_states() {
         BDD_ID t = true;
         BDD_ID c_s_0 = true;
-//        Compute transition relation
+        //Compute transition relation
         for (int i = 0; i < return_stateSize();i++){
             t = and2(t,xnor2(nextStates[i],delta[i]));
             c_s_0 = and2(c_s_0,xnor2(states[i],initStates[i]));
         }
 
-//        std::cout << "CS0: " << c_s_0 << std::endl;
+
         BDD_ID c_r_it = c_s_0;
         BDD_ID c_r;
 
@@ -68,7 +68,6 @@ namespace ClassProject {
                 temp = or2(coFactorTrue(temp, states[i]), coFactorFalse(temp, states[i]));
             }
             BDD_ID img_next = temp;
-//            std::cout << "Img next states: " << img_next << std::endl;
 
             //Compute image of state variables
            temp = true;
@@ -80,11 +79,7 @@ namespace ClassProject {
                 temp = or2(coFactorTrue(temp, nextStates[i]), coFactorFalse(temp, nextStates[i]));
             }
             BDD_ID img = temp;
-//            std::cout << "Img  states: " << img << std::endl;
             c_r_it = or2(c_r, img);
-//            std::cout << "Crit: " << c_r_it << std::endl;
-//            std::cout << "Cr: " << c_r << std::endl;
-
         } while(c_r != c_r_it);
 
         return c_r;
@@ -101,7 +96,7 @@ namespace ClassProject {
         }
         // since the reachable space was already calculated, the reachable states should already be within the OBDD
         // if the calculated value when assigning the values of stateVector is higher than the reachable space, the
-        //state is not reachable
+        // state is not reachable
         BDD_ID reach = and2(c_s,c_r);
         return (reach == c_s);
     }
@@ -118,6 +113,4 @@ namespace ClassProject {
         }
     }
 
-
 }
-

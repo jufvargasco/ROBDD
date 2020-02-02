@@ -8,6 +8,10 @@
 #include "../Manager.h"
 
 namespace ClassProject{
+
+    /**
+     * \brief Defines the implemented interface of the reachability extension
+     */
     class ReachableInterface: public Manager{
     public:
         ReachableInterface() = delete;
@@ -68,6 +72,5 @@ namespace ClassProject{
         unsigned int stateSize;
     };
 }
-
 
 #endif //PROJECT_REACHABLEINTERFACE_H
