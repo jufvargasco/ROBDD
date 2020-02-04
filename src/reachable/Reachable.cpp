@@ -51,6 +51,7 @@ namespace ClassProject {
         BDD_ID c_s_0 = true;
         //Compute transition relation
         for (int i = 0; i < return_stateSize();i++){
+//            t = and2(t,or2(and2(nextStates[i],delta[i]),and2(neg(nextStates[i]),neg(delta[i])));
             t = and2(t,xnor2(nextStates[i],delta[i]));
             c_s_0 = and2(c_s_0,xnor2(states[i],initStates[i]));
         }
@@ -63,7 +64,7 @@ namespace ClassProject {
             c_r = c_r_it;
 
             //Compute image of next states
-            BDD_ID temp = and2(c_s_0, t);
+            BDD_ID temp = and2(c_r, t);
             for (int i = return_stateSize() -1; i >= 0;i--){
                 temp = or2(coFactorTrue(temp, states[i]), coFactorFalse(temp, states[i]));
             }
