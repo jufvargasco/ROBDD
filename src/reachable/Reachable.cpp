@@ -51,7 +51,6 @@ namespace ClassProject {
         BDD_ID c_s_0 = true;
         //Compute transition relation
         for (int i = 0; i < return_stateSize();i++){
-//            t = and2(t,or2(and2(nextStates[i],delta[i]),and2(neg(nextStates[i]),neg(delta[i])));
             t = and2(t,xnor2(nextStates[i],delta[i]));
             c_s_0 = and2(c_s_0,xnor2(states[i],initStates[i]));
         }
@@ -95,9 +94,6 @@ namespace ClassProject {
         for (int i = 0; i < return_stateSize();i++){
             c_s = and2(c_s,xnor2(states[i],stateVector[i]));
         }
-        // since the reachable space was already calculated, the reachable states should already be within the OBDD
-        // if the calculated value when assigning the values of stateVector is higher than the reachable space, the
-        // state is not reachable
         BDD_ID reach = and2(c_s,c_r);
         return (reach == c_s);
     }

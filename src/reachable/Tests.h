@@ -114,36 +114,6 @@ TEST(managerTest, setInitState_Test) {
     ASSERT_EQ(initState[1],false);
 }
 
-TEST(managerTest, compute_reachable_states_Test) {
-    ClassProject::Reachable comp(2);
-
-    auto states = comp.getStates();
-    std::vector<BDD_ID> functions;
-
-    auto s0 = states.at(0);
-    auto s1 = states.at(1);
-    //s0' = not(s0)
-    functions.push_back(comp.neg(s0));
-    //s1' = not(s1)
-    functions.push_back(comp.neg(s1));
-    //Add transition functions
-    comp.setDelta(functions);
-    comp.setInitState({false,false});
-
-    BDD_ID CR = comp.compute_reachable_states();
-
-
-//    for (auto it = result.begin(); it != result.end(); ++it)
-//        std::cout << *it << " " << std::endl;
-
-//    std::cout <<"ID\t"<< "High -\t" << "Low -\t" << "Topvar" <<std::endl;
-//    for (int i= 0; i<= 32; i++){
-//    ClassProject::uTableVal *res = comp.getuTableVal(i);
-//        std::cout << i <<"\t"<< res->highV << " -\t" << res->lowV << " -\t" << res->topVar <<std::endl;
-//    }
-
-}
-
 TEST(managerTest, check_size_array_Test) {
     ClassProject::Reachable comp(2);
 
@@ -167,9 +137,6 @@ TEST(managerTest, check_size_array_Test) {
     catch(std::runtime_error const & err) {
         EXPECT_EQ(err.what(),std::string("The number of elements in the vector is higher than the number of state variables"));
     }
-
-    //Add init state
-//    comp.setInitState({false,false});
 
 }
 

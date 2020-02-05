@@ -12,7 +12,7 @@ void ManagerTest::SetUp()
 }
 void ManagerTest::TearDown()
 {
-    // delete objectsA<
+    // delete objects
     delete mg1;
 }
 
