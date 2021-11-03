@@ -3,7 +3,7 @@
  A package for working with Ordered Binary Decision Diagrams (OBDDs) is provided.
  
  This package allows to reduce said data structures, obtaining equivalent ROBDDs. In order to do so, the if-then-else (ITE) algorithm is used,
- together with the corresponding unique and computed tables.One Paragraph of project description goes here
+ together with the corresponding unique and computed tables.
 
 ## Getting Started
 
